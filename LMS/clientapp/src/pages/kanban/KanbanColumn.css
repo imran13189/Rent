@@ -1,0 +1,50 @@
+.KanbanColumn {
+    width: 100%;
+    max-width: 265px;
+    text-align: center;
+    /* border-radius: 15px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    min-height: 700px;
+}
+
+.KanbanColumns-tasks-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    flex-grow: 1;
+   /* padding: 10px;*/
+}
+
+.KanbanColumn-name {
+    color: #808080;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    letter-spacing: 0.1rem;
+}
+
+.KanbanColumn-numbers {
+    color: white;
+    font-size: 0.8rem;
+}
+
+.KanbanColumn-footer {
+    padding: 1rem 0;
+}
+
+.KanbanColumn-btn-add {
+    background-color: white;
+    opacity: 0.8;
+    padding: 0.3rem;
+    border: 1px solid white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.KanbanColumn-btn-add:hover {
+    opacity: 1;
+}

@@ -1,0 +1,14 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/LMS/bin/Debug/net6.0
+/LMS/obj
+/LMS.Core/bin/Debug/net6.0
+/LMS.Core/obj
+/LMS.Repository/bin/Debug/net6.0
+/LMS.Repository/obj
+/LMS/bin/Release/net6.0
+/LMS.Core/bin/Release/net6.0
+/LMS.Repository/bin/Release/net6.0
+/LMS/.vs/LMS/FileContentIndex

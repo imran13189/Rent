@@ -1,0 +1,29 @@
+.Kanban {
+    height: min-content;
+    /* width: 90vw;
+    padding: 1rem 2rem; */
+    
+    width: 100%;
+    overflow-x: scroll !important;
+    position: relative;
+}
+
+.Kanban-columns-container {
+    min-height: min-content;
+    height: 100%;
+    margin: 2rem 0;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: stretch;
+}
+
+.kanban-div {
+    flex-direction: row;
+    margin-top: -16px;
+    width: max-content;
+    
+    background-color: #fafafb;
+    flex-wrap: wrap;
+    display: flex;
+    box-sizing: border-box;
+}

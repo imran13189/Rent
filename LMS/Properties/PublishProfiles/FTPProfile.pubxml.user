@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAwO1Dm51rhk2ipenwFIvg9QAAAAACAAAAAAAQZgAAAAEAACAAAAB4+0Vw7x2soCUxucYkknFU7it+sytRu1Suq9g5CB6AFgAAAAAOgAAAAAIAACAAAACbbbnJyAuTDkS8hE9JIqdXZaylhw4+NgWe2fwAesONnCAAAACNsZpFfjQuSBWCuKhyChlOizl1471w3w4ayWELbJ38I0AAAADeDfwIi7V+DBqteN66zyPJYG6HM+h+QslnjW8h10GUrlcX6a6yEkklzzl/kiV7D0t5Lp7yvzH2dYfJ2KGEnn7s</EncryptedPassword>
+    <_PublishTargetUrl>ftp://103.235.104.199/services.trustcab.in</_PublishTargetUrl>
+    <History>True|2023-01-31T06:31:59.2883518Z;False|2023-01-31T11:54:49.1916832+05:30;True|2023-01-30T01:10:24.7749023+05:30;True|2023-01-29T17:29:50.0842620+05:30;True|2023-01-29T17:22:10.6885522+05:30;False|2023-01-29T17:16:59.1235217+05:30;False|2023-01-29T17:12:42.8504457+05:30;False|2023-01-29T17:12:16.7582394+05:30;False|2023-01-29T17:07:36.6794411+05:30;True|2023-01-27T01:58:30.8303515+05:30;False|2023-01-27T01:54:34.0978860+05:30;True|2023-01-25T01:34:04.9556670+05:30;False|2023-01-25T01:29:30.7225450+05:30;True|2023-01-23T21:10:25.4768672+05:30;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="appsettings.Development.json">
+      <publishTime>01/22/2023 12:10:52</publishTime>
+    </File>
+    <File Include="appsettings.json">
+      <publishTime>01/31/2023 11:50:32</publishTime>
+    </File>
+    <File Include="Dapper.dll">
+      <publishTime>03/11/2021 19:37:40</publishTime>
+    </File>
+    <File Include="LMS.Core.dll">
+      <publishTime>01/31/2023 11:51:11</publishTime>
+    </File>
+    <File Include="LMS.Core.pdb">
+      <publishTime>01/31/2023 11:51:11</publishTime>
+    </File>
+    <File Include="LMS.deps.json">
+      <publishTime>01/31/2023 11:59:32</publishTime>
+    </File>
+    <File Include="LMS.dll">
+      <publishTime>01/31/2023 11:59:32</publishTime>
+    </File>
+    <File Include="LMS.exe">
+      <publishTime>01/31/2023 11:59:32</publishTime>
+    </File>
+    <File Include="LMS.pdb">
+      <publishTime>01/31/2023 11:59:32</publishTime>
+    </File>
+    <File Include="LMS.Repository.dll">
+      <publishTime>01/31/2023 11:51:12</publishTime>
+    </File>
+    <File Include="LMS.Repository.pdb">
+      <publishTime>01/31/2023 11:51:12</publishTime>
+    </File>
+    <File Include="LMS.runtimeconfig.json">
+      <publishTime>01/29/2023 17:04:03</publishTime>
+    </File>
+    <File Include="Microsoft.AspNetCore.SpaProxy.dll">
+      <publishTime>05/18/2022 23:46:58</publishTime>
+    </File>
+    <File Include="Microsoft.OpenApi.dll">
+      <publishTime>08/30/2020 01:44:12</publishTime>
+    </File>
+    <File Include="Newtonsoft.Json.dll">
+      <publishTime>11/24/2022 07:40:26</publishTime>
+    </File>
+    <File Include="runtimes/unix/lib/netcoreapp2.1/System.Data.SqlClient.dll">
+      <publishTime>10/18/2022 04:56:02</publishTime>
+    </File>
+    <File Include="runtimes/win-arm64/native/sni.dll">
+      <publishTime>12/07/2017 16:54:24</publishTime>
+    </File>
+    <File Include="runtimes/win-x64/native/sni.dll">
+      <publishTime>12/07/2017 16:54:22</publishTime>
+    </File>
+    <File Include="runtimes/win-x86/native/sni.dll">
+      <publishTime>12/07/2017 16:54:22</publishTime>
+    </File>
+    <File Include="runtimes/win/lib/netcoreapp2.1/System.Data.SqlClient.dll">
+      <publishTime>10/18/2022 04:56:08</publishTime>
+    </File>
+    <File Include="Swashbuckle.AspNetCore.Swagger.dll">
+      <publishTime>10/16/2021 18:24:10</publishTime>
+    </File>
+    <File Include="Swashbuckle.AspNetCore.SwaggerGen.dll">
+      <publishTime>10/16/2021 18:24:36</publishTime>
+    </File>
+    <File Include="Swashbuckle.AspNetCore.SwaggerUI.dll">
+      <publishTime>10/16/2021 18:24:30</publishTime>
+    </File>
+    <File Include="System.Data.SqlClient.dll">
+      <publishTime>10/18/2022 04:46:04</publishTime>
+    </File>
+    <File Include="web.config">
+      <publishTime>01/31/2023 12:00:49</publishTime>
+    </File>
+    <File Include="wwwroot/asset-manifest.json">
+      <publishTime>01/31/2023 12:00:48</publishTime>
+    </File>
+    <File Include="wwwroot/favicon.ico">
+      <publishTime>01/22/2023 12:45:01</publishTime>
+    </File>
+    <File Include="wwwroot/index.html">
+      <publishTime>01/31/2023 12:00:48</publishTime>
+    </File>
+    <File Include="wwwroot/logo192.png">
+      <publishTime>01/22/2023 12:33:06</publishTime>
+    </File>
+    <File Include="wwwroot/logo512.png">
+      <publishTime>01/22/2023 12:33:07</publishTime>
+    </File>
+    <File Include="wwwroot/manifest.json">
+      <publishTime>01/22/2023 12:33:01</publishTime>
+    </File>
+    <File Include="wwwroot/robots.txt">
+      <publishTime>01/22/2023 12:33:10</publishTime>
+    </File>
+    <File Include="wwwroot/static/css/main.331d7063.css">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="wwwroot/static/css/main.f4cc4b5f.css">
+      <publishTime>01/31/2023 12:00:48</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/108.3060bb68.chunk.js">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/122.9872bdff.chunk.js">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/150.2ff0705a.chunk.js">
+      <publishTime>01/31/2023 12:00:48</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/165.014864b4.chunk.js">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/165.7b3f28a7.chunk.js">
+      <publishTime>01/31/2023 12:00:48</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/180.3e37ff73.chunk.js">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/180.729ecc39.chunk.js">
+      <publishTime>01/29/2023 17:28:20</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/180.9aa40c1c.chunk.js">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/180.b54041d2.chunk.js">
+      <publishTime>01/31/2023 12:00:48</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/180.ce8d85f0.chunk.js">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/185.1315339d.chunk.js">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/243.11079352.chunk.js">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/243.9e5d796d.chunk.js">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/27.81749ab5.chunk.js">
+      <publishTime>01/31/2023 12:00:48</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/346.9c2f37f6.chunk.js">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/346.b5299104.chunk.js">
+      <publishTime>01/31/2023 12:00:48</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/357.026521aa.chunk.js">
+      <publishTime>01/29/2023 17:28:20</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/357.3b1181b1.chunk.js">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/357.ce497f1f.chunk.js">
+      <publishTime>01/31/2023 12:00:48</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/361.991496d5.chunk.js">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/365.a3561752.chunk.js">
+      <publishTime>01/31/2023 12:00:48</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/389.f34aebca.chunk.js">
+      <publishTime>01/31/2023 12:00:48</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/389.f34aebca.chunk.js.LICENSE.txt">
+      <publishTime>01/31/2023 12:00:48</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/4.b6a4fff2.chunk.js">
+      <publishTime>01/31/2023 12:00:48</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/405.7a214a7b.chunk.js">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/405.7a214a7b.chunk.js.LICENSE.txt">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/409.191489d3.chunk.js">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/409.ca2207d2.chunk.js">
+      <publishTime>01/29/2023 17:28:20</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/409.f4d5c36d.chunk.js">
+      <publishTime>01/30/2023 01:09:15</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/437.2cf8dea9.chunk.js">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/437.b1b1cbab.chunk.js">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/455.6446c211.chunk.js">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/487.59449aab.chunk.js">
+      <publishTime>01/31/2023 12:00:48</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/502.e4ce1088.chunk.js">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/525.4b0b3720.chunk.js">
+      <publishTime>01/31/2023 12:00:48</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/525.fff5e541.chunk.js">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/526.6a85236d.chunk.js">
+      <publishTime>01/31/2023 12:00:48</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/534.85766c6e.chunk.js">
+      <publishTime>01/29/2023 17:28:20</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/54.165a0e20.chunk.js">
+      <publishTime>01/29/2023 17:28:20</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/54.3ec29dd8.chunk.js">
+      <publishTime>01/30/2023 01:09:15</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/54.88a20de2.chunk.js">
+      <publishTime>01/31/2023 12:00:48</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/600.f6680fc0.chunk.js">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/609.acbb4b5b.chunk.js">
+      <publishTime>01/30/2023 01:09:15</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/636.5f8925ad.chunk.js">
+      <publishTime>01/31/2023 12:00:48</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/651.a973fe15.chunk.js">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/66.3dd8ccb9.chunk.js">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/668.619b1cac.chunk.js">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/694.b7990354.chunk.js">
+      <publishTime>01/30/2023 01:09:15</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/740.a61b3075.chunk.js">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/791.0720e957.chunk.js">
+      <publishTime>01/31/2023 12:00:48</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/791.16709372.chunk.js">
+      <publishTime>01/29/2023 17:28:20</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/791.51691993.chunk.js">
+      <publishTime>01/30/2023 01:09:15</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/796.4b7bb7d2.chunk.js">
+      <publishTime>01/30/2023 01:09:15</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/796.fa54ac49.chunk.js">
+      <publishTime>01/29/2023 17:28:20</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/819.01005356.chunk.js">
+      <publishTime>01/31/2023 12:00:48</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/819.c549f56c.chunk.js">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/86.6381da4e.chunk.js">
+      <publishTime>01/31/2023 12:00:48</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/86.6381da4e.chunk.js.LICENSE.txt">
+      <publishTime>01/31/2023 12:00:48</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/893.99dc542c.chunk.js">
+      <publishTime>01/29/2023 17:28:20</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/893.b44524a1.chunk.js">
+      <publishTime>01/31/2023 12:00:48</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/893.f4b5d9c2.chunk.js">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/926.812ab3cc.chunk.js">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/956.0fa5d45a.chunk.js">
+      <publishTime>01/29/2023 17:28:20</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/main.0034bbf9.js">
+      <publishTime>01/30/2023 01:09:15</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/main.0034bbf9.js.LICENSE.txt">
+      <publishTime>01/30/2023 01:09:15</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/main.43defbe9.js">
+      <publishTime>01/31/2023 12:00:48</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/main.43defbe9.js.LICENSE.txt">
+      <publishTime>01/31/2023 12:00:48</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/main.88b197ee.js">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/main.88b197ee.js.LICENSE.txt">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/main.ae00a65f.js">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/main.ae00a65f.js.LICENSE.txt">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/main.d6abd450.js">
+      <publishTime>01/29/2023 17:28:20</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/main.d6abd450.js.LICENSE.txt">
+      <publishTime>01/29/2023 17:28:20</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/main.f4a74e6b.js">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/main.f4a74e6b.js.LICENSE.txt">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="wwwroot/static/media/facebook.5b823a6232805871728da1033d817609.svg">
+      <publishTime>01/31/2023 12:00:48</publishTime>
+    </File>
+    <File Include="wwwroot/static/media/google.b7da2ce748745374ee27eb11dd475b9c.svg">
+      <publishTime>01/31/2023 12:00:48</publishTime>
+    </File>
+    <File Include="wwwroot/static/media/twitter.5b9c9738bc8e86846c91f27886cebacf.svg">
+      <publishTime>01/31/2023 12:00:48</publishTime>
+    </File>
+  </ItemGroup>
+</Project>
