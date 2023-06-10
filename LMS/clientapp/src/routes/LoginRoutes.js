@@ -1,13 +1,13 @@
 import { lazy } from 'react';
 
 // project import
-import Loadable from './../components/Loadable';
-import MinimalLayout from './../layout/MinimalLayout';
+import Loadable from 'components/Loadable';
+import MinimalLayout from 'layout/MinimalLayout';
 
 // render - login
-const AuthLogin = Loadable(lazy(() => import('./../pages/authentication/Login')));
-const AuthRegister = Loadable(lazy(() => import('./../pages/authentication/Register')));
-// const PasswordReset = Loadable(lazy(() => import('./../pages/users/PasswordReset')));
+const AuthLogin = Loadable(lazy(() => import('pages/authentication/Login')));
+const AuthRegister = Loadable(lazy(() => import('pages/authentication/Register')));
+const PropertyForm = Loadable(lazy(() => import('pages/property/Index')));
 
 // ==============================|| AUTH ROUTING ||============================== //
 
@@ -24,8 +24,8 @@ const LoginRoutes = {
             element: <AuthRegister />
         },
         {
-            path: 'password/:token',
-            element: <AuthLogin />
+            path: 'property',
+            element: <PropertyForm />
         }
     ]
 };
