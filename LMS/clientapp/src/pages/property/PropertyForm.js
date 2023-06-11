@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import LocationOnOutlined from '@mui/icons-material/LocationOnOutlined';
@@ -36,12 +37,14 @@ import AnimateButton from 'components/@extended/AnimateButton';
 // assets
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 import PropertyFiles from './PropertyFiles';
-
+import MapModal from './MapModal';
 // ============================|| FIREBASE - REGISTER ||============================ //
 
 const PropertyForm = () => {
    // const [level, setLevel] = useState();
     const [showPassword, setShowPassword] = useState(false);
+    const [open, setOpen] = React.useState(false);
+
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword);
     };
@@ -54,6 +57,10 @@ const PropertyForm = () => {
         //const temp = strengthIndicator(value);
         //setLevel(strengthColor(temp));
     };
+
+ 
+    const handleOpen = () => setOpen(true);
+    
 
     useEffect(() => {
         changePassword('');
@@ -110,7 +117,7 @@ const PropertyForm = () => {
                                                     < InputAdornment position="end" >
                                                     <LocationOnOutlined
                                                         aria-label="toggle password visibility"
-                                                        onClick={handleClickShowPassword}
+                                                        onClick={handleOpen}
                                                         onMouseDown={handleMouseDownPassword}
                                                         edge="end"
                                                         size="large"
@@ -126,6 +133,7 @@ const PropertyForm = () => {
 
                                        
                                     />
+                                   
                                     {touched.firstname && errors.firstname && (
                                         <FormHelperText error id="helper-text-firstname-signup">
                                             {errors.firstname}
@@ -277,6 +285,7 @@ const PropertyForm = () => {
                                 </Stack>
 
                             </Grid>
+                           
                             <Grid item xs={12}>
                                 <Typography variant="body2">
                                     By Signing up, you agree to our &nbsp;
@@ -311,6 +320,7 @@ const PropertyForm = () => {
                     </form>
                 )}
             </Formik>
+            <MapModal open={open} setOpen={setOpen}></MapModal>
         </>
     );
 };

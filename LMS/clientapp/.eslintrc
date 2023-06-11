@@ -61,10 +61,12 @@
     "import/no-named-as-default": "off",
     "import/no-extraneous-dependencies": "off",
     "jsx-a11y/no-autofocus": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "no-debugger": "off",
     "no-restricted-imports": [
       "error",
       {
-        "patterns": ["@mui/*/*/*", "!@mui/material/test-utils/*"]
+        "patterns": [ "@mui/*/*/*", "!@mui/material/test-utils/*" ]
       }
     ],
     "no-unused-vars": [

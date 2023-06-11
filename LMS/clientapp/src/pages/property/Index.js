@@ -1,5 +1,3 @@
-
-
 // material-ui
 import { Grid, Stack, Typography } from '@mui/material';
 

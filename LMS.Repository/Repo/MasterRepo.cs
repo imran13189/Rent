@@ -3,6 +3,7 @@ using LMS.Core.Entities;
 using LMS.Core.Interfaces;
 using LMS.Repo.Repository;
 using LMS.Repository.Utilities;
+using System.Linq.Expressions;
 
 namespace LMS.Repository.Repo
 {
@@ -55,6 +56,26 @@ namespace LMS.Repository.Repo
         public async Task<Result> SaveBrand(BrandViewModel brand)
         {
             return await QueryFirstOrDefaultAsync<Result>("SP_SaveBrand", brand);
+
+        }
+
+        public async Task<IEnumerable<States>> GetStates()
+        {
+            try
+            {
+                return await Query<States>("SP_GetAllStates");
+            }
+            catch(Exception ex) 
+            {
+                return null;
+            
+            }
+
+        }
+
+        public async Task<Result> SaveLocation(Location location)
+        {
+            return await QueryFirstOrDefaultAsync<Result>("SP_SaveLocation", location);
 
         }
     }

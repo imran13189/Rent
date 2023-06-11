@@ -32,8 +32,14 @@ namespace LMS.Repo.Repository
                     conn.Close();
                     conn.Open();
                 }
-
-                return await conn.QueryAsync<T>(sql, param, commandType: commandType);
+                try
+                {
+                    return await conn.QueryAsync<T>(sql, param, commandType: commandType);
+                }
+                catch(Exception ex)
+                {
+                    throw;
+                }
             }
         }
 
