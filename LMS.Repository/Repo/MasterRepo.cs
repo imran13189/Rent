@@ -78,5 +78,10 @@ namespace LMS.Repository.Repo
             return await QueryFirstOrDefaultAsync<Result>("SP_SaveLocation", location);
 
         }
+
+        public async Task<string> GetLocations(string Search)
+        {
+            return await QueryFirstOrDefaultAsync<string>("SP_GetLocations",new {Search=Search});
+        }
     }
 }

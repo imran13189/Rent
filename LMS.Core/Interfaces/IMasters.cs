@@ -14,6 +14,7 @@ namespace LMS.Core.Interfaces
         Task<string> GetIndustryType();
         Task<string> GetBusinessType();
         Task<string> GetBrands();
+        Task<string> GetLocations(string Search);
         public Task<Result> SaveBrand(BrandViewModel brand);
     }
 

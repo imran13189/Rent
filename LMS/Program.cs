@@ -22,6 +22,7 @@ builder.Services.AddCors(options =>
 });
 
 // Add services to the container.
+builder.Services.AddScoped<IMasters, MasterRepo>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

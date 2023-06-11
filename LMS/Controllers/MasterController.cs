@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LMS.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [ApiController]
     public class MasterController : ControllerBase
     {
@@ -43,6 +43,13 @@ namespace LMS.Controllers
         public async Task<string> GetBrands()
         {
             return await _masters.GetBrands();
+        }
+
+        [HttpGet]
+        [Route("api/GetLocations")]
+        public async Task<string> GetLocations(string Search)
+        {
+            return await _masters.GetLocations(Search);
         }
 
 
