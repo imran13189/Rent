@@ -10,7 +10,7 @@ import { useEffect } from "react";
 
 
 function MapMarker() {
-    const [draggable, setDraggable] = useState(false)
+    const [draggable, setDraggable] = useState(true)
     const markerRef = useRef(null)
 
     const dispatch = useDispatch();
@@ -21,7 +21,7 @@ function MapMarker() {
             dragend() {
                 const marker = markerRef.current
                 if (marker != null) {
-                    dispatch(setSelectedPosition({ positionDetails: marker.getLatLng() }))
+                    dispatch(setSelectedPosition({ positionDetails: marker.getLatLng(),showLocation:true}))
                 }
             },
         }),
@@ -46,7 +46,7 @@ function MapMarker() {
             <Popup minWidth={90}>
                 <span alt="no" role="button" tabIndex={0}  onClick={toggleDraggable}>
                     {draggable
-                        ? 'Marker is draggable'
+                        ? 'Drag to choose your location'
                         : 'Click here to make marker draggable'}
                 </span>
             </Popup>

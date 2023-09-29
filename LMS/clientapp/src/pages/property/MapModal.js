@@ -18,12 +18,13 @@ import {
 import { useDispatch } from "react-redux";
 import { setSelectedPosition } from "./../../store/reducers/property";
 
+
 const style = {
     position: 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 800,
+    width: '100%',
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
@@ -55,14 +56,13 @@ export default function MapModal({ open, setOpen }) {
     }
 
     const handleLocation = (event,value) => {
-        dispatch(setSelectedPosition({ positionDetails: { lat: value.Lat, lng: value.Long } }))
+        dispatch(setSelectedPosition({ positionDetails: { lat: value.Lat, lng: value.Long } }));
     }
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
     return (
         <div>
-            
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -87,7 +87,6 @@ export default function MapModal({ open, setOpen }) {
                     <Grid container spacing={3}>
                         <Grid item xs={12} >
                             <Stack spacing={1}>
-                                <InputLabel htmlFor="firstname-signup">Location*</InputLabel>
                                 <Autocomplete
                                     autoComplete
                                     includeInputInList
@@ -104,7 +103,7 @@ export default function MapModal({ open, setOpen }) {
                                     renderInput={(params) => (
                                         <TextField
                                             {...params}
-                                            label="Search input"
+                                            placeholder="Search location"
                                             onChange={handleLocations}
                                             InputProps={{
                                                 ...params.InputProps,
@@ -133,12 +132,14 @@ export default function MapModal({ open, setOpen }) {
                               
                             </Stack>
                         </Grid>
+                        <Grid item xs={12} >
+                            <DraggableMarker ></DraggableMarker>
+                        </Grid>
                     </Grid>
-                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        <DraggableMarker ></DraggableMarker>
-                    </Typography>
+                  
                 </Box>
             </Modal>
+          
         </div>
     );
 }

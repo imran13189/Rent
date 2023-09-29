@@ -10,6 +10,11 @@ class UserService {
         const res = await axios.get(`${url}GetLocations?Search=${event.target.value}`);
         return res.data;
     };
+
+    getCities = async () => {
+        const res = await axios.get(`${url}GetCities`);
+        return res.data;
+    };
     
 }
 

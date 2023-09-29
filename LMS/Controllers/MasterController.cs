@@ -19,7 +19,6 @@ namespace LMS.Controllers
         [Route("api/GetStatus")]
         public async Task<string> GetStatus()
         {
-
             return await _masters.GetStatus();
         }
 
@@ -50,6 +49,14 @@ namespace LMS.Controllers
         public async Task<string> GetLocations(string Search)
         {
             return await _masters.GetLocations(Search);
+        }
+
+
+        [HttpGet]
+        [Route("api/GetCities")]
+        public async Task<string> GetCities()
+        {
+            return await _masters.GetCities();
         }
 
 

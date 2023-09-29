@@ -1,14 +1,12 @@
 import { MapContainer, TileLayer } from "react-leaflet";
 import { useMapEvents } from 'react-leaflet/hooks'
-//import { createRoot } from "react-dom/client";
 import MapMarker from './MapMarker';
 import { useRef } from "react";
 import 'leaflet/dist/leaflet.css';
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 
-//const rootElement = document.getElementById("root");
-//const root = createRoot(rootElement);
+
 
 const center = {
     lat: 30.2938312,
@@ -28,7 +26,7 @@ function MyComponent() {
 
     useEffect(() => {
         if (positionDetails) {
-          
+            debugger;
             map.flyTo([positionDetails.lat, positionDetails.lng], 14, {
                 duration: 2
             });
@@ -50,28 +48,11 @@ function MyComponent() {
 
 function DraggableMarker() {
     const mapRef = useRef();
-   
-   
     return (
         <MapContainer ref={mapRef} center={center} zoom={13}>
             <MyComponent />
         </MapContainer>
     )
 }
-
-//function DraggableMarker() {
-
-//    const mapRef = useRef();
-//    return(
-//        <MapContainer ref={mapRef} center={center} zoom={13} scrollWheelZoom={false}>
-//            <TileLayer
-//                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-//                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-//            />
-//            <Markerwhatever />
-//        </MapContainer>
-//    )
-
-//}
 
 export default DraggableMarker;

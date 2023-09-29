@@ -7,7 +7,9 @@ const initialState = {
     positionDetails: {
         lat: 30.2938312,
         lng: 78.06298795850616,
+        locationName:""
     },
+    showLocation:false,
     search: ''
 };
 
@@ -21,7 +23,10 @@ const property = createSlice({
     reducers: {
         setSelectedPosition(state, action) {
             debugger;
-            state.positionDetails = action.payload.positionDetails;
+            if (action.payload.positionDetails)
+                state.positionDetails = action.payload.positionDetails;
+
+            state.showLocation = action.payload.showLocation;
         },
         
         setSearch(state, action) {

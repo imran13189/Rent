@@ -37,16 +37,14 @@ import AnimateButton from 'components/@extended/AnimateButton';
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 import PropertyFiles from './PropertyFiles';
 import MapModal from './MapModal';
-
+import NewLocationModal from './NewLocationModal';
+import { useDispatch, useSelector } from "react-redux";
 // ============================|| FIREBASE - REGISTER ||============================ //
 
 const PropertyForm = () => {
     
     const [showPassword, setShowPassword] = useState(false);
     const [open, setOpen] = React.useState(false);
-  
-
-
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword);
     };
@@ -60,6 +58,7 @@ const PropertyForm = () => {
         //setLevel(strengthColor(temp));
     };
 
+    const { positionDetails } = useSelector((state) => state.property);
    
 
  
@@ -67,23 +66,20 @@ const PropertyForm = () => {
     
 
     useEffect(() => {
+        debugger;
         changePassword('');
-    }, []);
+    }, [positionDetails]);
 
     return (
         <>
             <Formik
                 initialValues={{
-                    firstname: '',
-                    lastname: '',
-                    email: '',
-                    company: '',
-                    password: '',
+                    Bathrooms:1,
                     submit: null
                 }}
                 validationSchema={Yup.object().shape({
-                    firstname: Yup.string().max(255).required('First Name is required'),
-                    lastname: Yup.string().max(255).required('Last Name is required'),
+                    LocationName: Yup.string().max(255).required('Location name is required'),
+                    PropertyType: Yup.string().max(255).required('Last Name is required'),
                     email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
                     password: Yup.string().max(255).required('Password is required')
                 })}
@@ -99,21 +95,20 @@ const PropertyForm = () => {
                     }
                 }}
             >
-                {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
+                {({ errors, handleBlur, handleChange, handleSubmit, setFieldValue, isSubmitting, touched, values }) => (
                     <form noValidate onSubmit={handleSubmit}>
                         <Grid container spacing={3}>
                             <Grid item xs={12} >
                                 <Stack spacing={1}>
                                     <InputLabel htmlFor="firstname-signup">Location*</InputLabel>
                                     <TextField
-                                        
-                                        label="Search input"
-                                       
+                                        label=""
+                                        value={positionDetails.LocationName}
+                                        name="LocationName"
                                         InputProps={{
-                                           
                                             type: 'search',
                                             endAdornment: (
-                                                < InputAdornment position="end" >
+                                                <InputAdornment position="end" >
                                                     <LocationOnOutlined
                                                         aria-label="toggle password visibility"
                                                         onClick={handleOpen}
@@ -143,8 +138,9 @@ const PropertyForm = () => {
                                     <Select
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
-                                        value={values.propertyType}
+                                        value={values.PropertyType}
                                         label="Age"
+                                        name="PropertyType"
                                         onChange={handleChange}
                                     >
                                         <MenuItem value={10}>1 BHK</MenuItem>
@@ -198,7 +194,7 @@ const PropertyForm = () => {
                                             <InputAdornment position="end">
                                                 <RemoveOutlinedIcon
                                                     aria-label="toggle password visibility"
-                                                    onClick={handleClickShowPassword}
+                                                    onClick={() => { parseInt(values.Bathrooms)>=1?setFieldValue("Bathrooms", parseInt(values.Bathrooms) -1):0; }}
                                                     onMouseDown={handleMouseDownPassword}
                                                     edge="end"
                                                     size="large"
@@ -211,7 +207,7 @@ const PropertyForm = () => {
                                             <InputAdornment position="end">
                                                 <AddOutlinedIcon
                                                     aria-label="toggle password visibility"
-                                                    onClick={handleClickShowPassword}
+                                                    onClick={() => { setFieldValue("Bathrooms", parseInt(values.Bathrooms)+1); } }
                                                     onMouseDown={handleMouseDownPassword}
                                                     edge="end"
                                                     size="large"
@@ -316,6 +312,7 @@ const PropertyForm = () => {
                 )}
             </Formik>
             <MapModal open={open} setOpen={setOpen}></MapModal>
+            <NewLocationModal></NewLocationModal>
         </>
     );
 };

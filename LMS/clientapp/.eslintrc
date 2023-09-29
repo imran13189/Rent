@@ -63,16 +63,11 @@
     "jsx-a11y/no-autofocus": "off",
     "jsx-a11y/click-events-have-key-events": "off",
     "no-debugger": "off",
+    "no-unused-vars": "off",
     "no-restricted-imports": [
       "error",
       {
         "patterns": [ "@mui/*/*/*", "!@mui/material/test-utils/*" ]
-      }
-    ],
-    "no-unused-vars": [
-      "error",
-      {
-        "ignoreRestSiblings": false
       }
     ],
     "prettier/prettier": [

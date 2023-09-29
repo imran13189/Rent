@@ -1,6 +1,6 @@
 const Env = {
-    baseurl: "http://localhost:5295/api/",
-    appUrl: "http://localhost:3000",
+    baseurl: "http://localhost/api/",
+    appUrl: "http://localhost",
 
     //appUrl: "http://20.244.48.5",
     //"baseurl": "http://20.244.48.5",
