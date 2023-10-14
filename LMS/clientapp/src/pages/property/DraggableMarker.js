@@ -26,7 +26,7 @@ function MyComponent() {
 
     useEffect(() => {
         if (positionDetails) {
-            debugger;
+         
             map.flyTo([positionDetails.lat, positionDetails.lng], 14, {
                 duration: 2
             });

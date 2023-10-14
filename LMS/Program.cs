@@ -1,3 +1,5 @@
+using Amazon.Runtime;
+using Amazon.S3;
 using LMS.Core.Entities;
 using LMS.Core.Interfaces;
 using LMS.Repo.Repository;
@@ -21,6 +23,10 @@ builder.Services.AddCors(options =>
         });
 });
 
+var aWSOptions = builder.Configuration.GetAWSOptions();
+aWSOptions.Credentials= new BasicAWSCredentials("AKIA4M4QDXIPX7QZMRE4", "Y1yREodYw9OtiQQu0UKhT1E8pbVXLF7ZB1Xpf1f+");
+aWSOptions.DefaultConfigurationMode = DefaultConfigurationMode.Standard;
+
 // Add services to the container.
 builder.Services.AddScoped<IMasters, MasterRepo>();
 builder.Services.AddScoped<IProperty, PropertyRepo>();
@@ -31,6 +37,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IUser, UserRepo>();
 builder.Services.AddScoped<IContact, ContactRepo>();
 builder.Services.AddScoped<IAccounts, AccountsRepo>();
+builder.Services.AddDefaultAWSOptions(aWSOptions);
+builder.Services.AddAWSService<IAmazonS3>();
 var appSettingsSection = builder.Configuration.GetSection("AppSettings");
 var appSettings = appSettingsSection.Get<AppSettings>();
 builder.Services.AddSingleton(appSettings);

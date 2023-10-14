@@ -2,11 +2,11 @@ const Env = {
     baseurl: "http://localhost/api/",
     appUrl: "http://localhost",
 
-    //appUrl: "http://20.244.48.5",
-    //"baseurl": "http://20.244.48.5",
+    //baseurl: "https://services.trustcab.in/api/",
+    //appUrl: "https://services.trustcab.in",
 
-    //baseurl: "https://localhost",
-    //appUrl: "https://localhost",
+    //baseurl: "https://services.trustcab.in",
+    //appUrl: "https://services.trustcab.in",
     THEME_COLORS: {
         PRIMARY: "#007bff",
         SECONDARY: "#fc3",

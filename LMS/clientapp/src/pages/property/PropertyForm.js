@@ -31,20 +31,23 @@ import { Formik } from 'formik';
 // project import
 
 import AnimateButton from 'components/@extended/AnimateButton';
-//import { strengthColor, strengthIndicator } from 'utils/password-strength';
-
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import Checkbox from '@mui/material/Checkbox';
 // assets
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 import PropertyFiles from './PropertyFiles';
 import MapModal from './MapModal';
 import NewLocationModal from './NewLocationModal';
 import { useDispatch, useSelector } from "react-redux";
+import PropertyService from './../../services/PropertyService';
 // ============================|| FIREBASE - REGISTER ||============================ //
 
 const PropertyForm = () => {
     
     const [showPassword, setShowPassword] = useState(false);
     const [open, setOpen] = React.useState(false);
+    const [files, setFormFiles] = React.useState([]);
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword);
     };
@@ -53,38 +56,44 @@ const PropertyForm = () => {
         event.preventDefault();
     };
 
-    const changePassword = () => {
-        //const temp = strengthIndicator(value);
-        //setLevel(strengthColor(temp));
-    };
 
     const { positionDetails } = useSelector((state) => state.property);
    
-
  
     const handleOpen = () => setOpen(true);
     
 
     useEffect(() => {
         debugger;
-        changePassword('');
+        var data = positionDetails;
     }, [positionDetails]);
 
     return (
         <>
             <Formik
                 initialValues={{
-                    Bathrooms:1,
+                    Bathrooms: 1,
+                    termcondition:false,
                     submit: null
+                    
                 }}
-                validationSchema={Yup.object().shape({
-                    LocationName: Yup.string().max(255).required('Location name is required'),
-                    PropertyType: Yup.string().max(255).required('Last Name is required'),
-                    email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
-                    password: Yup.string().max(255).required('Password is required')
-                })}
+               
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
                     try {
+                        
+                        const formData = new FormData();
+                        for (var key in values) {
+                            formData.append(key, values[key]);
+                        }
+
+                        for (let i = 0; i < files.length; i++) {
+                            let image = files[i];
+                            formData.append('formFiles', image);
+                        }
+                        
+                        
+                        debugger;
+                        const result = await PropertyService.SaveProperty(formData);
                         setStatus({ success: false });
                         setSubmitting(false);
                     } catch (err) {
@@ -95,7 +104,7 @@ const PropertyForm = () => {
                     }
                 }}
             >
-                {({ errors, handleBlur, handleChange, handleSubmit, setFieldValue, isSubmitting, touched, values }) => (
+                {({ errors, handleBlur, handleChange, handleSubmit, setFieldValue, isSubmitting, setSubmitting , touched, values }) => (
                     <form noValidate onSubmit={handleSubmit}>
                         <Grid container spacing={3}>
                             <Grid item xs={12} >
@@ -105,6 +114,8 @@ const PropertyForm = () => {
                                         label=""
                                         value={positionDetails.LocationName}
                                         name="LocationName"
+                                        onMouseDown={handleOpen}
+                                        onChange={handleChange}
                                         InputProps={{
                                             type: 'search',
                                             endAdornment: (
@@ -230,21 +241,35 @@ const PropertyForm = () => {
                             <Grid item xs={12} lg={6}>
                                 <Stack spacing={1} >
                                     <InputLabel htmlFor="email-signup">Parking</InputLabel>
-                                    <ButtonGroup variant="outlined" aria-label="outlined button group">
-                                        <Button>Car</Button>
-                                        <Button>Bike</Button>
-                                    </ButtonGroup>
-                                   
+                                    <ToggleButtonGroup
+                                        color="primary"
+                                        value={`${values.Parking}`}
+                                        exclusive
+                                        onChange={handleChange}
+                                        aria-label="Platform"
+                                        name="Parking"
+                                    >
+                                        <ToggleButton size="small" name="Parking" color="info" value="1">Car</ToggleButton>
+                                        <ToggleButton size="small" name="Parking" color="success" value="2">Bike</ToggleButton>
+                                    </ToggleButtonGroup>
                                 </Stack>
                                
                             </Grid>
                             <Grid item xs={12} lg={12}>
                                 <Stack spacing={1} direction="row">
-                                    <ButtonGroup variant="outlined" aria-label="outlined button group">
-                                        <Button>Furnished</Button>
-                                        <Button>Semi-Furnished</Button>
-                                        <Button>Non-Furnished</Button>
-                                    </ButtonGroup>
+                                    <ToggleButtonGroup
+                                        color="primary"
+                                        value={`${values.IsFurnished}`}
+                                        exclusive
+                                        onChange={handleChange}
+                                        aria-label="Platform"
+                                        name="IsFurnished"
+                                    >
+                                        <ToggleButton size="small" name="IsFurnished" color="info" value="1">Furnished</ToggleButton>
+                                        <ToggleButton size="small" name="IsFurnished" color="success" value="2">Semi-Furnished</ToggleButton>
+                                        <ToggleButton size="small" name="IsFurnished" color="secondary" value="3">Non-Furnished</ToggleButton>
+                                    </ToggleButtonGroup>
+                                  
                                     {touched.Bathrooms && errors.Bathrooms && (
                                         <FormHelperText error id="helper-text-password-signup">
                                             {errors.password}
@@ -272,14 +297,14 @@ const PropertyForm = () => {
                             </Grid>
                             <Grid item xs={12} lg={12}>
                                 <Stack spacing={1} direction="row">
-                                    <PropertyFiles></PropertyFiles>
+                                    <PropertyFiles setFormFiles={setFormFiles }></PropertyFiles>
                                 </Stack>
 
                             </Grid>
                            
                             <Grid item xs={12}>
                                 <Typography variant="body2">
-                                    By Signing up, you agree to our &nbsp;
+                                    <Checkbox name="termcondition" onChange={handleChange}  size="small" /> By Publishing, you agree to our &nbsp;
                                     <Link variant="subtitle2" component={RouterLink} to="#">
                                         Terms of Service
                                     </Link>
@@ -296,8 +321,8 @@ const PropertyForm = () => {
                             )}
                             <Grid item xs={12}>
                                 <AnimateButton>
-                                    <Button disableElevation disabled={isSubmitting} fullWidth size="large" type="submit" variant="contained" color="primary">
-                                        Create Account
+                                    <Button disabled={!values.termcondition} fullWidth size="large" type="submit" variant="contained" color="primary">
+                                        Publish 
                                     </Button>
                                 </AnimateButton>
                             </Grid>

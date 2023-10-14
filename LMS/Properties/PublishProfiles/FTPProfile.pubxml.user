@@ -6,56 +6,77 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project>
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAwO1Dm51rhk2ipenwFIvg9QAAAAACAAAAAAAQZgAAAAEAACAAAAB4+0Vw7x2soCUxucYkknFU7it+sytRu1Suq9g5CB6AFgAAAAAOgAAAAAIAACAAAACbbbnJyAuTDkS8hE9JIqdXZaylhw4+NgWe2fwAesONnCAAAACNsZpFfjQuSBWCuKhyChlOizl1471w3w4ayWELbJ38I0AAAADeDfwIi7V+DBqteN66zyPJYG6HM+h+QslnjW8h10GUrlcX6a6yEkklzzl/kiV7D0t5Lp7yvzH2dYfJ2KGEnn7s</EncryptedPassword>
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAp1biZDRUbEiUef6Pczu32gAAAAACAAAAAAAQZgAAAAEAACAAAABLnxcLQacyqHQCQdsHT5qwatdQgE5ncwZR6DqYHERw4AAAAAAOgAAAAAIAACAAAAAwQdubxW02LGC/wJWNoxOxnm8vpKTleNDGIHsLdSNsCSAAAACBgLi0pNVrvWG5f2RGpQX2kgU25x3o8Af5fJgGO/3pXUAAAAA9VkxsAtM3AnsE8AHWIxm7QwI5pN1Lc6iJotARTXHSRVzgTB6QqmRp8yMvs3wMtkWoUZvE61bKJwbcK+v1kxS0</EncryptedPassword>
     <_PublishTargetUrl>ftp://103.235.104.199/services.trustcab.in</_PublishTargetUrl>
-    <History>True|2023-01-31T06:31:59.2883518Z;False|2023-01-31T11:54:49.1916832+05:30;True|2023-01-30T01:10:24.7749023+05:30;True|2023-01-29T17:29:50.0842620+05:30;True|2023-01-29T17:22:10.6885522+05:30;False|2023-01-29T17:16:59.1235217+05:30;False|2023-01-29T17:12:42.8504457+05:30;False|2023-01-29T17:12:16.7582394+05:30;False|2023-01-29T17:07:36.6794411+05:30;True|2023-01-27T01:58:30.8303515+05:30;False|2023-01-27T01:54:34.0978860+05:30;True|2023-01-25T01:34:04.9556670+05:30;False|2023-01-25T01:29:30.7225450+05:30;True|2023-01-23T21:10:25.4768672+05:30;</History>
+    <History>True|2023-10-02T18:44:20.8076159Z;False|2023-10-03T00:11:04.7871541+05:30;True|2023-10-03T00:03:07.5876741+05:30;False|2023-10-02T23:57:01.3128559+05:30;True|2023-10-02T23:51:59.4311273+05:30;True|2023-10-02T02:45:05.3730676+05:30;False|2023-10-02T02:38:53.7827948+05:30;True|2023-10-02T02:10:03.8267856+05:30;False|2023-10-02T01:51:03.3633182+05:30;True|2023-10-01T17:25:36.5787167+05:30;True|2023-10-01T02:26:55.9807853+05:30;True|2023-01-31T12:01:59.2883518+05:30;False|2023-01-31T11:54:49.1916832+05:30;True|2023-01-30T01:10:24.7749023+05:30;True|2023-01-29T17:29:50.0842620+05:30;True|2023-01-29T17:22:10.6885522+05:30;False|2023-01-29T17:16:59.1235217+05:30;False|2023-01-29T17:12:42.8504457+05:30;False|2023-01-29T17:12:16.7582394+05:30;False|2023-01-29T17:07:36.6794411+05:30;True|2023-01-27T01:58:30.8303515+05:30;False|2023-01-27T01:54:34.0978860+05:30;True|2023-01-25T01:34:04.9556670+05:30;False|2023-01-25T01:29:30.7225450+05:30;True|2023-01-23T21:10:25.4768672+05:30;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
     <File Include="appsettings.Development.json">
-      <publishTime>01/22/2023 12:10:52</publishTime>
+      <publishTime>06/08/2023 21:12:21</publishTime>
     </File>
     <File Include="appsettings.json">
-      <publishTime>01/31/2023 11:50:32</publishTime>
+      <publishTime>10/01/2023 17:27:01</publishTime>
     </File>
     <File Include="Dapper.dll">
       <publishTime>03/11/2021 19:37:40</publishTime>
     </File>
     <File Include="LMS.Core.dll">
-      <publishTime>01/31/2023 11:51:11</publishTime>
+      <publishTime>10/03/2023 00:05:47</publishTime>
     </File>
     <File Include="LMS.Core.pdb">
-      <publishTime>01/31/2023 11:51:11</publishTime>
+      <publishTime>03/10/2023 00:05:47</publishTime>
     </File>
     <File Include="LMS.deps.json">
-      <publishTime>01/31/2023 11:59:32</publishTime>
+      <publishTime>10/03/2023 00:11:14</publishTime>
     </File>
     <File Include="LMS.dll">
-      <publishTime>01/31/2023 11:59:32</publishTime>
+      <publishTime>10/03/2023 00:11:13</publishTime>
     </File>
     <File Include="LMS.exe">
-      <publishTime>01/31/2023 11:59:32</publishTime>
+      <publishTime>10/03/2023 00:11:13</publishTime>
     </File>
     <File Include="LMS.pdb">
-      <publishTime>01/31/2023 11:59:32</publishTime>
+      <publishTime>10/03/2023 00:11:13</publishTime>
     </File>
     <File Include="LMS.Repository.dll">
-      <publishTime>01/31/2023 11:51:12</publishTime>
+      <publishTime>10/03/2023 00:05:48</publishTime>
     </File>
     <File Include="LMS.Repository.pdb">
-      <publishTime>01/31/2023 11:51:12</publishTime>
+      <publishTime>03/10/2023 00:05:48</publishTime>
     </File>
     <File Include="LMS.runtimeconfig.json">
-      <publishTime>01/29/2023 17:04:03</publishTime>
+      <publishTime>03/10/2023 00:05:51</publishTime>
+    </File>
+    <File Include="Microsoft.AspNetCore.Authentication.JwtBearer.dll">
+      <publishTime>01/12/2022 09:46:52</publishTime>
     </File>
     <File Include="Microsoft.AspNetCore.SpaProxy.dll">
       <publishTime>05/18/2022 23:46:58</publishTime>
+    </File>
+    <File Include="Microsoft.IdentityModel.JsonWebTokens.dll">
+      <publishTime>03/31/2021 01:10:56</publishTime>
+    </File>
+    <File Include="Microsoft.IdentityModel.Logging.dll">
+      <publishTime>03/31/2021 01:12:38</publishTime>
+    </File>
+    <File Include="Microsoft.IdentityModel.Protocols.dll">
+      <publishTime>03/31/2021 01:16:46</publishTime>
+    </File>
+    <File Include="Microsoft.IdentityModel.Protocols.OpenIdConnect.dll">
+      <publishTime>03/31/2021 01:28:02</publishTime>
+    </File>
+    <File Include="Microsoft.IdentityModel.Tokens.dll">
+      <publishTime>03/31/2021 01:22:10</publishTime>
     </File>
     <File Include="Microsoft.OpenApi.dll">
       <publishTime>08/30/2020 01:44:12</publishTime>
     </File>
     <File Include="Newtonsoft.Json.dll">
       <publishTime>11/24/2022 07:40:26</publishTime>
+    </File>
+    <File Include="nuget.config">
+      <publishTime>06/08/2023 21:12:22</publishTime>
     </File>
     <File Include="runtimes/unix/lib/netcoreapp2.1/System.Data.SqlClient.dll">
       <publishTime>10/18/2022 04:56:02</publishTime>
@@ -84,17 +105,23 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="System.Data.SqlClient.dll">
       <publishTime>10/18/2022 04:46:04</publishTime>
     </File>
+    <File Include="System.IdentityModel.Tokens.Jwt.dll">
+      <publishTime>03/31/2021 01:09:30</publishTime>
+    </File>
     <File Include="web.config">
-      <publishTime>01/31/2023 12:00:49</publishTime>
+      <publishTime>10/03/2023 00:12:39</publishTime>
     </File>
     <File Include="wwwroot/asset-manifest.json">
-      <publishTime>01/31/2023 12:00:48</publishTime>
+      <publishTime>10/03/2023 00:12:37</publishTime>
     </File>
     <File Include="wwwroot/favicon.ico">
       <publishTime>01/22/2023 12:45:01</publishTime>
     </File>
+    <File Include="wwwroot/favicon.svg">
+      <publishTime>06/09/2023 20:50:12</publishTime>
+    </File>
     <File Include="wwwroot/index.html">
-      <publishTime>01/31/2023 12:00:48</publishTime>
+      <publishTime>10/03/2023 00:12:37</publishTime>
     </File>
     <File Include="wwwroot/logo192.png">
       <publishTime>01/22/2023 12:33:06</publishTime>
@@ -107,6 +134,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="wwwroot/robots.txt">
       <publishTime>01/22/2023 12:33:10</publishTime>
+    </File>
+    <File Include="wwwroot/static/css/54.525e2941.chunk.css">
+      <publishTime>10/03/2023 00:12:37</publishTime>
+    </File>
+    <File Include="wwwroot/static/css/main.10c2c001.css">
+      <publishTime>10/03/2023 00:12:37</publishTime>
     </File>
     <File Include="wwwroot/static/css/main.331d7063.css">
       <publishTime>01/01/0001 00:00:00</publishTime>
@@ -126,11 +159,17 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="wwwroot/static/js/165.014864b4.chunk.js">
       <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
+    <File Include="wwwroot/static/js/165.3eb74da6.chunk.js">
+      <publishTime>10/03/2023 00:12:37</publishTime>
+    </File>
     <File Include="wwwroot/static/js/165.7b3f28a7.chunk.js">
       <publishTime>01/31/2023 12:00:48</publishTime>
     </File>
     <File Include="wwwroot/static/js/180.3e37ff73.chunk.js">
       <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/180.5ca04de9.chunk.js">
+      <publishTime>10/03/2023 00:12:37</publishTime>
     </File>
     <File Include="wwwroot/static/js/180.729ecc39.chunk.js">
       <publishTime>01/29/2023 17:28:20</publishTime>
@@ -147,11 +186,23 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="wwwroot/static/js/185.1315339d.chunk.js">
       <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
+    <File Include="wwwroot/static/js/197.e9b519a1.chunk.js">
+      <publishTime>10/03/2023 00:12:37</publishTime>
+    </File>
     <File Include="wwwroot/static/js/243.11079352.chunk.js">
       <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
+    <File Include="wwwroot/static/js/243.8f377504.chunk.js">
+      <publishTime>10/03/2023 00:12:37</publishTime>
+    </File>
     <File Include="wwwroot/static/js/243.9e5d796d.chunk.js">
       <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/258.282d9da9.chunk.js">
+      <publishTime>10/03/2023 00:12:37</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/258.282d9da9.chunk.js.LICENSE.txt">
+      <publishTime>10/03/2023 00:12:37</publishTime>
     </File>
     <File Include="wwwroot/static/js/27.81749ab5.chunk.js">
       <publishTime>01/31/2023 12:00:48</publishTime>
@@ -162,11 +213,17 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="wwwroot/static/js/346.b5299104.chunk.js">
       <publishTime>01/31/2023 12:00:48</publishTime>
     </File>
+    <File Include="wwwroot/static/js/346.b912c168.chunk.js">
+      <publishTime>10/03/2023 00:12:37</publishTime>
+    </File>
     <File Include="wwwroot/static/js/357.026521aa.chunk.js">
       <publishTime>01/29/2023 17:28:20</publishTime>
     </File>
     <File Include="wwwroot/static/js/357.3b1181b1.chunk.js">
       <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/357.bd077c03.chunk.js">
+      <publishTime>10/03/2023 00:12:37</publishTime>
     </File>
     <File Include="wwwroot/static/js/357.ce497f1f.chunk.js">
       <publishTime>01/31/2023 12:00:48</publishTime>
@@ -216,14 +273,23 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="wwwroot/static/js/502.e4ce1088.chunk.js">
       <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
+    <File Include="wwwroot/static/js/522.8b8dfed7.chunk.js">
+      <publishTime>10/03/2023 00:12:37</publishTime>
+    </File>
     <File Include="wwwroot/static/js/525.4b0b3720.chunk.js">
       <publishTime>01/31/2023 12:00:48</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/525.91ba5a52.chunk.js">
+      <publishTime>10/03/2023 00:12:37</publishTime>
     </File>
     <File Include="wwwroot/static/js/525.fff5e541.chunk.js">
       <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="wwwroot/static/js/526.6a85236d.chunk.js">
       <publishTime>01/31/2023 12:00:48</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/526.721acad9.chunk.js">
+      <publishTime>10/03/2023 00:12:37</publishTime>
     </File>
     <File Include="wwwroot/static/js/534.85766c6e.chunk.js">
       <publishTime>01/29/2023 17:28:20</publishTime>
@@ -234,14 +300,29 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="wwwroot/static/js/54.3ec29dd8.chunk.js">
       <publishTime>01/30/2023 01:09:15</publishTime>
     </File>
+    <File Include="wwwroot/static/js/54.526bf6b4.chunk.js">
+      <publishTime>10/03/2023 00:12:37</publishTime>
+    </File>
     <File Include="wwwroot/static/js/54.88a20de2.chunk.js">
       <publishTime>01/31/2023 12:00:48</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/54.a53afa76.chunk.js">
+      <publishTime>10/03/2023 00:01:32</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/54.cc339ee0.chunk.js">
+      <publishTime>10/02/2023 23:50:46</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/54.f84c72f3.chunk.js">
+      <publishTime>10/01/2023 17:23:48</publishTime>
     </File>
     <File Include="wwwroot/static/js/600.f6680fc0.chunk.js">
       <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="wwwroot/static/js/609.acbb4b5b.chunk.js">
       <publishTime>01/30/2023 01:09:15</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/635.5b8e0bf9.chunk.js">
+      <publishTime>10/03/2023 00:12:37</publishTime>
     </File>
     <File Include="wwwroot/static/js/636.5f8925ad.chunk.js">
       <publishTime>01/31/2023 12:00:48</publishTime>
@@ -254,6 +335,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="wwwroot/static/js/668.619b1cac.chunk.js">
       <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/673.cf963155.chunk.js">
+      <publishTime>10/03/2023 00:12:37</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/673.cf963155.chunk.js.LICENSE.txt">
+      <publishTime>10/03/2023 00:12:37</publishTime>
     </File>
     <File Include="wwwroot/static/js/694.b7990354.chunk.js">
       <publishTime>01/30/2023 01:09:15</publishTime>
@@ -279,6 +366,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="wwwroot/static/js/819.01005356.chunk.js">
       <publishTime>01/31/2023 12:00:48</publishTime>
     </File>
+    <File Include="wwwroot/static/js/819.865fe742.chunk.js">
+      <publishTime>10/03/2023 00:12:37</publishTime>
+    </File>
     <File Include="wwwroot/static/js/819.c549f56c.chunk.js">
       <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
@@ -294,6 +384,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="wwwroot/static/js/893.b44524a1.chunk.js">
       <publishTime>01/31/2023 12:00:48</publishTime>
     </File>
+    <File Include="wwwroot/static/js/893.ecba356c.chunk.js">
+      <publishTime>10/03/2023 00:12:37</publishTime>
+    </File>
     <File Include="wwwroot/static/js/893.f4b5d9c2.chunk.js">
       <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
@@ -302,6 +395,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="wwwroot/static/js/956.0fa5d45a.chunk.js">
       <publishTime>01/29/2023 17:28:20</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/985.3123f413.chunk.js">
+      <publishTime>10/03/2023 00:12:37</publishTime>
     </File>
     <File Include="wwwroot/static/js/main.0034bbf9.js">
       <publishTime>01/30/2023 01:09:15</publishTime>
@@ -314,6 +410,36 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="wwwroot/static/js/main.43defbe9.js.LICENSE.txt">
       <publishTime>01/31/2023 12:00:48</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/main.4c838bf7.js">
+      <publishTime>10/01/2023 17:23:48</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/main.4c838bf7.js.LICENSE.txt">
+      <publishTime>10/01/2023 17:23:48</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/main.4e2e6160.js">
+      <publishTime>10/03/2023 00:12:37</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/main.4e2e6160.js.LICENSE.txt">
+      <publishTime>10/03/2023 00:12:37</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/main.5b33cb92.js">
+      <publishTime>10/02/2023 02:08:33</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/main.5b33cb92.js.LICENSE.txt">
+      <publishTime>10/02/2023 02:08:33</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/main.76deb579.js">
+      <publishTime>10/03/2023 00:01:33</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/main.76deb579.js.LICENSE.txt">
+      <publishTime>10/03/2023 00:01:33</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/main.7fa84c35.js">
+      <publishTime>10/02/2023 02:43:48</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/main.7fa84c35.js.LICENSE.txt">
+      <publishTime>10/02/2023 02:43:48</publishTime>
     </File>
     <File Include="wwwroot/static/js/main.88b197ee.js">
       <publishTime>01/01/0001 00:00:00</publishTime>
@@ -333,6 +459,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="wwwroot/static/js/main.d6abd450.js.LICENSE.txt">
       <publishTime>01/29/2023 17:28:20</publishTime>
     </File>
+    <File Include="wwwroot/static/js/main.eed55767.js">
+      <publishTime>10/02/2023 23:50:46</publishTime>
+    </File>
+    <File Include="wwwroot/static/js/main.eed55767.js.LICENSE.txt">
+      <publishTime>10/02/2023 23:50:46</publishTime>
+    </File>
     <File Include="wwwroot/static/js/main.f4a74e6b.js">
       <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
@@ -340,13 +472,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="wwwroot/static/media/facebook.5b823a6232805871728da1033d817609.svg">
-      <publishTime>01/31/2023 12:00:48</publishTime>
+      <publishTime>10/03/2023 00:12:37</publishTime>
     </File>
     <File Include="wwwroot/static/media/google.b7da2ce748745374ee27eb11dd475b9c.svg">
-      <publishTime>01/31/2023 12:00:48</publishTime>
+      <publishTime>10/03/2023 00:12:37</publishTime>
     </File>
     <File Include="wwwroot/static/media/twitter.5b9c9738bc8e86846c91f27886cebacf.svg">
-      <publishTime>01/31/2023 12:00:48</publishTime>
+      <publishTime>10/03/2023 00:12:37</publishTime>
     </File>
   </ItemGroup>
 </Project>

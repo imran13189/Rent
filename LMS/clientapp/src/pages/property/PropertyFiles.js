@@ -33,16 +33,20 @@ const img = {
 };
 
 
-function PropertyFiles() {
+function PropertyFiles({setFormFiles }) {
     const [files, setFiles] = useState([]);
     const { getRootProps, getInputProps } = useDropzone({
         accept: {
             'image/*': []
         },
         onDrop: acceptedFiles => {
+           
             setFiles(acceptedFiles.map(file => Object.assign(file, {
                 preview: URL.createObjectURL(file)
             })));
+
+            setFormFiles(acceptedFiles);
+            
         }
     });
 
@@ -62,7 +66,7 @@ function PropertyFiles() {
 
     useEffect(() => {
         // Make sure to revoke the data uris to avoid memory leaks, will run on unmount
-        return () => files.forEach(file => URL.revokeObjectURL(file.preview));
+        //return () => files.forEach(file => URL.revokeObjectURL(file.preview));
     }, []);
 
     return (
