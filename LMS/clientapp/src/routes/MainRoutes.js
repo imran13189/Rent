@@ -6,7 +6,7 @@ import MainLayout from 'layout/MainLayout';
 
 // render - dashboard
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard')));
-
+const Landing = Loadable(lazy(() => import('pages/dashboard/LandingPage')));
 // render - sample page
 const SamplePage = Loadable(lazy(() => import('pages/extra-pages/SamplePage')));
 
@@ -15,7 +15,8 @@ const Typography = Loadable(lazy(() => import('pages/components-overview/Typogra
 const Color = Loadable(lazy(() => import('pages/components-overview/Color')));
 const Shadow = Loadable(lazy(() => import('pages/components-overview/Shadow')));
 const AntIcons = Loadable(lazy(() => import('pages/components-overview/AntIcons')));
-
+const AuthLogin = Loadable(lazy(() => import('pages/authentication/Login')));
+const AuthRegister = Loadable(lazy(() => import('pages/authentication/Register')));
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -24,7 +25,7 @@ const MainRoutes = {
   children: [
     {
       path: '/',
-      element: <DashboardDefault />
+          element: <Landing />
     },
     {
       path: 'color',
@@ -54,7 +55,15 @@ const MainRoutes = {
     {
       path: 'icons/ant',
       element: <AntIcons />
-    }
+      },
+      {
+          path: 'login',
+          element: <AuthLogin />
+      },
+      {
+          path: 'register',
+          element: <AuthRegister />
+      },
   ]
 };
 

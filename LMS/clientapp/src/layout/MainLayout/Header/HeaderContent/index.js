@@ -1,7 +1,7 @@
 // material-ui
-import { Box, IconButton, Link, useMediaQuery } from '@mui/material';
+import { Box, Button, useMediaQuery } from '@mui/material';
 import { GithubOutlined } from '@ant-design/icons';
-
+import { Link } from 'react-router-dom';
 // project import
 import Search from './Search';
 import Profile from './Profile';
@@ -15,20 +15,20 @@ const HeaderContent = () => {
 
   return (
     <>
-      {!matchesXs && <Search />}
+      {/*!matchesXs && <Search />*/}
       {matchesXs && <Box sx={{ width: '100%', ml: 1 }} />}
 
-      <IconButton
-        component={Link}
-        href="https://github.com/codedthemes/mantis-free-react-admin-template"
-        target="_blank"
-        disableRipple
-        color="secondary"
-        title="Download Free Version"
-        sx={{ color: 'text.primary', bgcolor: 'grey.100' }}
-      >
-        <GithubOutlined />
-      </IconButton>
+          <Button
+              component={Link}
+              to="/login"
+              variant="contained"
+              title="Download Free Version"
+              sx={{ color: 'common.white', bgcolor: 'text.main' }}
+
+          >
+             
+        Sign&nbsp;In         
+      </Button>
 
       <Notification />
       {!matchesXs && <Profile />}

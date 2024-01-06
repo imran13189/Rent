@@ -25,13 +25,19 @@ const Palette = (mode) => {
     '#141414',
     '#000000'
   ];
+    const siteColors = [
+        '#1ea69a',
+        '#DF9F9E'
+       
+    ];
   const greyAscent = ['#fafafa', '#bfbfbf', '#434343', '#1f1f1f'];
   const greyConstant = ['#fafafb', '#e6ebf1'];
 
-  colors.grey = [...greyPrimary, ...greyAscent, ...greyConstant];
+    colors.grey = [...greyPrimary, ...greyAscent, ...greyConstant];
+    colors.site = [...siteColors]
 
-  const paletteColor = ThemeOption(colors);
-
+    const paletteColor = ThemeOption(colors);
+    
   return createTheme({
     palette: {
       mode,
@@ -41,9 +47,10 @@ const Palette = (mode) => {
       },
       ...paletteColor,
       text: {
-        primary: paletteColor.grey[700],
-        secondary: paletteColor.grey[500],
-        disabled: paletteColor.grey[400]
+          primary: paletteColor.grey[700],
+          secondary: paletteColor.grey[500],
+          disabled: paletteColor.grey[400],
+          main: paletteColor.site[0]
       },
       action: {
         disabled: paletteColor.grey[300]
@@ -51,7 +58,7 @@ const Palette = (mode) => {
       divider: paletteColor.grey[200],
       background: {
         paper: paletteColor.grey[0],
-        default: paletteColor.grey.A50
+          default: paletteColor.grey[0]
       }
     }
   });

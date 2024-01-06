@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { AppBar, IconButton, Toolbar, useMediaQuery } from '@mui/material';
+import { AppBar, Typography, Toolbar, useMediaQuery,Box } from '@mui/material';
 
 // project import
 import AppBarStyled from './AppBarStyled';
@@ -21,21 +21,20 @@ const Header = ({ open, handleDrawerToggle }) => {
   const iconBackColorOpen = 'grey.200';
 
   // common header
-  const mainHeader = (
-    <Toolbar>
-      <IconButton
-        disableRipple
-        aria-label="open drawer"
-        onClick={handleDrawerToggle}
-        edge="start"
-        color="secondary"
-        sx={{ color: 'text.primary', bgcolor: open ? iconBackColorOpen : iconBackColor, ml: { xs: 0, lg: -2 } }}
-      >
-        {!open ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-      </IconButton>
-      <HeaderContent />
-    </Toolbar>
-  );
+    const mainHeader = (
+        <Toolbar>
+           
+            <Box sx={{ width: '100%', ml: { xs: 0, md: 1 } }}>
+                <Typography
+                    aria-label="open drawer"
+                    onClick={handleDrawerToggle}
+                    edge="start"
+                    sx={{ ml: { xs: 0, lg: -2 } }}><h1>Imeshma</h1>
+                </Typography>
+            </Box>
+            <HeaderContent />
+        </Toolbar>
+    );
 
   // app-bar params
   const appBar = {
@@ -43,8 +42,8 @@ const Header = ({ open, handleDrawerToggle }) => {
     color: 'inherit',
     elevation: 0,
     sx: {
-      borderBottom: `1px solid ${theme.palette.divider}`
-      // boxShadow: theme.customShadows.z1
+     // borderBottom: `1px solid ${theme.palette.divider}`
+      //boxShadow: theme.customShadows.z1
     }
   };
 

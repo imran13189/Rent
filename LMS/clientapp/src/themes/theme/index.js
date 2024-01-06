@@ -1,7 +1,7 @@
 // ==============================|| PRESET THEME - THEME SELECTOR ||============================== //
 
 const Theme = (colors) => {
-  const { blue, red, gold, cyan, green, grey } = colors;
+  const { blue, red, gold, cyan, green, grey,site } = colors;
   const greyColors = {
     0: grey[0],
     50: grey[1],
@@ -21,7 +21,12 @@ const Theme = (colors) => {
     A700: grey[14],
     A800: grey[16]
   };
-  const contrastText = '#fff';
+    const contrastText = '#fff';
+
+    const siteColors = {
+        0: site[0],
+        1:site[1]
+    }
 
   return {
     primary: {
@@ -85,7 +90,8 @@ const Theme = (colors) => {
       darker: green[9],
       contrastText
     },
-    grey: greyColors
+      grey: greyColors,
+    site:site
   };
 };
 
