@@ -17,19 +17,32 @@ const HeaderContent = () => {
     <>
       {/*!matchesXs && <Search />*/}
       {matchesXs && <Box sx={{ width: '100%', ml: 1 }} />}
-
+          <Box sx={{  ml: 1 }}  >
           <Button
               component={Link}
-              to="/login"
+              to="login"
               variant="contained"
               title="Download Free Version"
-              sx={{ color: 'common.white', bgcolor: 'text.main' }}
+                  sx={{ color: 'common.white', bgcolor: 'action.main' }}
 
           >
              
         Sign&nbsp;In         
-      </Button>
+          </Button>
+          </Box>
+          <Box sx={{  ml: 1 }}>
+          <Button
+              component={Link}
+                  to="property"
+              variant="contained"
+              title="Download Free Version"
+                  sx={{ color: 'common.white', bgcolor: 'action.main' }}
 
+          >
+
+              Post&nbsp;Ad
+          </Button>
+          </Box>
       <Notification />
       {!matchesXs && <Profile />}
       {matchesXs && <MobileSection />}

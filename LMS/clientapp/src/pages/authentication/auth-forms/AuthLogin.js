@@ -56,6 +56,7 @@ const AuthLogin = () => {
     };
     return (
         <>
+           
             <Formik
                 initialValues={{
                     mobile: "",
@@ -204,7 +205,7 @@ const AuthLogin = () => {
                                         size="large"
                                         type="submit"
                                         variant="contained"
-                                        color="primary"
+                                        sx={{ color: 'common.white', bgcolor: 'action.main' }}
                                     >
                                         {isOTPSent ? "Verify" : "Get Otp"}
                                     </Button>
@@ -212,12 +213,12 @@ const AuthLogin = () => {
                             </Grid>
                             <Grid item xs={12}>
                                 <Divider>
-                                    <Typography variant="caption"> Login with</Typography>
+                                    <Typography variant="caption">Need help?</Typography>
                                 </Divider>
                             </Grid>
-                            <Grid item xs={12}>
-                                <FirebaseSocial />
-                            </Grid>
+                            {/*<Grid item xs={12}>*/}
+                            {/*    <FirebaseSocial />*/}
+                            {/*</Grid>*/}
                         </Grid>
                     </form>
                 )}

@@ -305,11 +305,11 @@ const PropertyForm = () => {
                             <Grid item xs={12}>
                                 <Typography variant="body2">
                                     <Checkbox name="termcondition" onChange={handleChange}  size="small" /> By Publishing, you agree to our &nbsp;
-                                    <Link variant="subtitle2" component={RouterLink} to="#">
+                                    <Link variant="subtitle2" component={RouterLink} to="#" color="action.main">
                                         Terms of Service
                                     </Link>
                                     &nbsp; and &nbsp;
-                                    <Link variant="subtitle2" component={RouterLink} to="#">
+                                    <Link variant="subtitle2" color="action.main"  component={RouterLink} to="#">
                                         Privacy Policy
                                     </Link>
                                 </Typography>
@@ -321,14 +321,14 @@ const PropertyForm = () => {
                             )}
                             <Grid item xs={12}>
                                 <AnimateButton>
-                                    <Button disabled={!values.termcondition} fullWidth size="large" type="submit" variant="contained" color="primary">
+                                    <Button disabled={!values.termcondition} fullWidth size="large" type="submit" variant="contained" sx={{bgcolor:"action.main"} }>
                                         Publish 
                                     </Button>
                                 </AnimateButton>
                             </Grid>
                             <Grid item xs={12}>
                                 <Divider>
-                                    <Typography variant="caption">Sign up with</Typography>
+                                    <Typography variant="caption">Need help?</Typography>
                                 </Divider>
                             </Grid>
                             

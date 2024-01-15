@@ -13,7 +13,10 @@ export default function Button(theme) {
         disableElevation: true
       },
       styleOverrides: {
-        root: {
+          root: {
+              "&:hover": {
+                  backgroundColor: theme.palette.site[1],
+              },
           fontWeight: 400
         },
         contained: {

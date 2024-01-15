@@ -12,19 +12,19 @@ import { useTheme } from '@mui/material/styles';
 // ==============================|| LOGO SVG ||============================== //
 
 const Logo = () => {
-  const theme = useTheme();
+    const theme = useTheme();
 
-  return (
-    /**
-     * if you want to use image instead of svg uncomment following, and comment out <svg> element.
-     *
-     * <img src={logo} alt="Mantis" width="100" />
-     *
-     */
-    <>
-      <h1>IMESHMA</h1>
-    </>
-  );
+    return (
+        /**
+         * if you want to use image instead of svg uncomment following, and comment out <svg> element.
+         *
+         * <img src={logo} alt="Mantis" width="100" />
+         *
+         */
+        <>
+            <img height="30" src="logo-color.png" alt=""></img>
+        </>
+    );
 };
 
 export default Logo;

@@ -26,8 +26,8 @@ const Palette = (mode) => {
     '#000000'
   ];
     const siteColors = [
-        '#1ea69a',
-        '#DF9F9E'
+        '#d02943',
+        '#e78594'
        
     ];
   const greyAscent = ['#fafafa', '#bfbfbf', '#434343', '#1f1f1f'];
@@ -50,10 +50,12 @@ const Palette = (mode) => {
           primary: paletteColor.grey[700],
           secondary: paletteColor.grey[500],
           disabled: paletteColor.grey[400],
-          main: paletteColor.site[0]
+          main: paletteColor.site[1],
+          heading: paletteColor.site[0]
       },
       action: {
-        disabled: paletteColor.grey[300]
+          disabled: paletteColor.grey[300],
+          main: paletteColor.site[0]
       },
       divider: paletteColor.grey[200],
       background: {

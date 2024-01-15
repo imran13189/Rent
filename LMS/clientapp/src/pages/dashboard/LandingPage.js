@@ -1,93 +1,75 @@
-import { useState } from 'react';
-
+import { useState } from "react";
+import { Link as RouterLink } from 'react-router-dom';
 // material-ui
 import {
-  Avatar,
-  AvatarGroup,
-  Box,
-  Button,
-  Grid,
-  List,
-  ListItemAvatar,
-  ListItemButton,
-  ListItemSecondaryAction,
-  ListItemText,
-  MenuItem,
-  Stack,
-  TextField,
-  Typography
-} from '@mui/material';
+    Link,
+    AvatarGroup,
+    Box,
+    Button,
+    Grid,
+    FormLabel,
+    Typography,
+} from "@mui/material";
 
-// project import
-import OrdersTable from './OrdersTable';
-import IncomeAreaChart from './IncomeAreaChart';
-import MonthlyBarChart from './MonthlyBarChart';
-import ReportAreaChart from './ReportAreaChart';
-import SalesColumnChart from './SalesColumnChart';
-import MainCard from 'components/MainCard';
-import AnalyticEcommerce from 'components/cards/statistics/AnalyticEcommerce';
-import Search from './Search';
 
-// assets
-import { GiftOutlined, MessageOutlined, SettingOutlined } from '@ant-design/icons';
-import avatar1 from 'assets/images/users/avatar-1.png';
-import avatar2 from 'assets/images/users/avatar-2.png';
-import avatar3 from 'assets/images/users/avatar-3.png';
-import avatar4 from 'assets/images/users/avatar-4.png';
+import Search from "./Search";
 
-// avatar style
-const avatarSX = {
-  width: 36,
-  height: 36,
-  fontSize: '1rem'
-};
-
-// action style
-const actionSX = {
-  mt: 0.75,
-  ml: 1,
-  top: 'auto',
-  right: 'auto',
-  alignSelf: 'flex-start',
-  transform: 'none'
-};
-
-// sales report status
-const status = [
-  {
-    value: 'today',
-    label: 'Today'
-  },
-  {
-    value: 'month',
-    label: 'This Month'
-  },
-  {
-    value: 'year',
-    label: 'This Year'
-  }
-];
 
 // ==============================|| DASHBOARD - DEFAULT ||============================== //
 
 const LandingPage = () => {
-    const [value, setValue] = useState('today');
-    const [slot, setSlot] = useState('week');
+    const [value, setValue] = useState("today");
+    const [slot, setSlot] = useState("week");
 
     return (
-        <Grid container  columnSpacing={2.75}>
+        <Grid container Spacing={3} mt={10 }>
             {/* row 1 */}
-            <Grid item xs={12} lg={12} >
-                <Box display="flex" justifyContent="center"   sx={{ color: (theme) => theme.palette.grey[500] }}>
-                    <h1>Search your rent house</h1>
-                </Box>
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={12} >
-                <Box  justifyContent="center" sx={{ color: (theme) => theme.palette.grey[500] }}>
-                    <Search />
-                </Box>
-            </Grid>
 
+            <Grid height={600}item sm={12} md={7} lg={7}>
+
+                <div className="property" >&nbsp;</div>
+                </Grid>
+            
+            <Grid item xs={12} sm={12} md={5} lg={5} >
+                <Grid container Spacing={2.75}>
+                <Grid
+                  
+                    item
+                    xs={12}
+                    lg={12}
+                    mt={10}
+                    >
+                        <Typography variant="h1" sx={{ color: "text.primary" }}>
+                            Welcome, <FormLabel sx={{ color: "action.main", fontSize: "2rem" }}>  Explore your abode</FormLabel>
+                        </Typography>
+                </Grid>
+                <Grid
+                  
+                    item
+                    xs={12}
+                    sm={12}
+                    md={12}
+                        lg={12}
+                        mt={5}
+                >
+                    <Box sx={{ width: "100%", color: (theme) => theme.palette.grey[500] }}>
+                        <Search />
+                    </Box>
+                    </Grid>
+                    <Grid
+
+                        item
+                        xs={12}
+                        lg={12}
+                        mt={1}
+                    >
+                        <Typography variant="body2" sx={{ color: "text.primary" }}>
+                            <FormLabel sx={{ color: "text.secondary", fontSize: "0.9rem" }}> <b>Top Localities:</b></FormLabel> <Link sx={{ color: "text.secondary", fontSize: "0.9rem" }}>Turner Road, </Link>
+                            <Link component={RouterLink} to="/list" sx={{ color: "text.secondary", fontSize: "0.9rem"  }}>Majra</Link>
+                        </Typography>
+                    </Grid>
+                </Grid>
+            </Grid>
         </Grid>
     );
 };

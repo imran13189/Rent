@@ -7,7 +7,7 @@ import { AppBar, Typography, Toolbar, useMediaQuery,Box } from '@mui/material';
 // project import
 import AppBarStyled from './AppBarStyled';
 import HeaderContent from './HeaderContent';
-
+import Logo from './../../../components/Logo';
 // assets
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 
@@ -23,13 +23,12 @@ const Header = ({ open, handleDrawerToggle }) => {
   // common header
     const mainHeader = (
         <Toolbar>
-           
             <Box sx={{ width: '100%', ml: { xs: 0, md: 1 } }}>
                 <Typography
                     aria-label="open drawer"
                     onClick={handleDrawerToggle}
                     edge="start"
-                    sx={{ ml: { xs: 0, lg: -2 } }}><h1>Imeshma</h1>
+                    sx={{ ml: { xs: 0, lg: -2 }, color: 'text.heading' }}><Logo></Logo>
                 </Typography>
             </Box>
             <HeaderContent />
