@@ -36,13 +36,13 @@ namespace LMS.Controllers
 
         [HttpPost]
         [Route("api/SaveProperty")]
-        public async Task<Result> SaveProperty([FromForm] Property property)
+        public async Task<Result> SaveProperty([FromForm] Property property, List<IFormFile> formFiles)
         {
             try
             {
                 return await _property.SaveProperty(property);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }

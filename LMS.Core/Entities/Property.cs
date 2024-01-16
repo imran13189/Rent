@@ -15,6 +15,9 @@ namespace LMS.Core.Entities
         public string RentAmount { get; set; }
         public int IsFurnished { get; set; }
         public int Bathrooms { get; set; }
-        public List<IFormFile> formFiles { get; set; }
+        public int Description { get; set; }
+        public int Parking { get; set; }
+        public DateTime? AvailableFrom { get; set; }
+
     }
 }

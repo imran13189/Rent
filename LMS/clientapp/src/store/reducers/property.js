@@ -22,7 +22,7 @@ const property = createSlice({
     initialState,
     reducers: {
         setSelectedPosition(state, action) {
-            debugger;
+          
             if (action.payload.positionDetails)
                 state.positionDetails = action.payload.positionDetails;
 

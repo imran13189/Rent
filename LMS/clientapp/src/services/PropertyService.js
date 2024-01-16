@@ -12,7 +12,7 @@ class PropertyService {
     };
 
     SaveProperty = async (contact) => {
-        debugger;
+     
         const res = await axios.post(`${url}SaveProperty`, contact );
         return res.data;
     };

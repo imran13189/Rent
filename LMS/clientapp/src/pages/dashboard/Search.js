@@ -30,7 +30,7 @@ const Search = () => {
     }
 
     const handleLocation = (event, value) => {
-        debugger;
+      
         dispatch(setSelectedPosition({ positionDetails: { lat: value.Lat, lng: value.Long, LocationName: value.LocationName, LocationId: value.LocationId } }));
     }
     const handleMouseDownPassword = (event) => {

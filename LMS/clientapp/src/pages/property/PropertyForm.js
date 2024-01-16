@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import LocationOnOutlined from '@mui/icons-material/LocationOnOutlined';
@@ -34,6 +33,10 @@ import AnimateButton from 'components/@extended/AnimateButton';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Checkbox from '@mui/material/Checkbox';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import dayjs from 'dayjs';
+import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 // assets
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 import PropertyFiles from './PropertyFiles';
@@ -46,8 +49,14 @@ import PropertyService from './../../services/PropertyService';
 const PropertyForm = () => {
     
     const [showPassword, setShowPassword] = useState(false);
-    const [open, setOpen] = React.useState(false);
-    const [files, setFormFiles] = React.useState([]);
+    const [open, setOpen] = useState(false);
+    const [files, setFormFiles] = useState([]);
+    const [initialValues, setInitialValues] = useState({
+        LocationName: "",
+        Bathrooms: 1,
+        termcondition: false,
+        submit: null
+    });
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword);
     };
@@ -61,30 +70,49 @@ const PropertyForm = () => {
    
  
     const handleOpen = () => setOpen(true);
-    
+
+    const validateCategories = (values, props) => {
+        debugger;
+        let error = {}
+        if (!props.selectIsCategoriesValid) {
+            error.categories = 'please select a category'
+        }
+        return error
+    }
 
     useEffect(() => {
         debugger;
-        var data = positionDetails;
+        setInitialValues({ ...initialValues, LocationName: positionDetails.LocationName });
     }, [positionDetails]);
 
     return (
         <>
             <Formik
-                initialValues={{
-                    Bathrooms: 1,
-                    termcondition:false,
-                    submit: null
+                initialValues={initialValues}
+                validationSchema={Yup.object().shape({
+                    LocationName: Yup.string().required("Location Required")
+                        
+
+                })}
+                validate={(values) => {
+                   
+                    //const errrors = {};
+                    //if (positionDetails.LocationName) {
+                    //    values.LocationName = positionDetails.LocationName;
+                    //    return true;
+                    //}
+
                     
-                }}
-               
+                } }
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
                     try {
-                        
+                        debugger;
                         const formData = new FormData();
                         for (var key in values) {
                             formData.append(key, values[key]);
                         }
+
+                        formData.append("LocationId", positionDetails.LocationId);
 
                         for (let i = 0; i < files.length; i++) {
                             let image = files[i];
@@ -110,10 +138,13 @@ const PropertyForm = () => {
                             <Grid item xs={12} >
                                 <Stack spacing={1}>
                                     <InputLabel htmlFor="firstname-signup">Location*</InputLabel>
+                                    
                                     <TextField
+                                        type="text"
                                         label=""
-                                        value={positionDetails.LocationName}
+                                        value={values.LocationName}
                                         name="LocationName"
+                                        onBlur={handleBlur}
                                         onMouseDown={handleOpen}
                                         onChange={handleChange}
                                         InputProps={{
@@ -135,23 +166,23 @@ const PropertyForm = () => {
 
                                     />
                                    
-                                    {touched.firstname && errors.firstname && (
+                                    {touched.LocationName && errors.LocationName && (
                                         <FormHelperText error id="helper-text-firstname-signup">
-                                            {errors.firstname}
+                                            {errors.LocationName}
                                         </FormHelperText>
                                     )}
                                 </Stack>
                             </Grid>
                           
-                            <Grid item xs={12} lg={6}>
+                            <Grid item xs={12} lg={4}>
                                 <Stack spacing={1}>
                                     <InputLabel htmlFor="company-signup">Property Type</InputLabel>
                                     <Select
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
-                                        value={values.PropertyType}
+                                        value={values.PropertyTypeId}
                                         label="Age"
-                                        name="PropertyType"
+                                        name="PropertyTypeId"
                                         onChange={handleChange}
                                     >
                                         <MenuItem value={10}>1 BHK</MenuItem>
@@ -165,7 +196,22 @@ const PropertyForm = () => {
                                     )}
                                 </Stack>
                             </Grid>
-                            <Grid item xs={12} lg={6}>
+                            <Grid item xs={12} lg={4}>
+                                <Stack spacing={1}>
+                                    <InputLabel htmlFor="company-signup">Available From:</InputLabel>
+                                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                        <MobileDatePicker name="AvailableFrom" onChange={(value) => {
+                                            setFieldValue('AvailableFrom', Date.parse(value));
+                                        }} defaultValue={dayjs('2022-04-17')} />
+                                    </LocalizationProvider>
+                                    {touched.company && errors.company && (
+                                        <FormHelperText error id="helper-text-company-signup">
+                                            {errors.company}
+                                        </FormHelperText>
+                                    )}
+                                </Stack>
+                            </Grid>
+                            <Grid item xs={12} lg={4}>
                                 <Stack spacing={1}>
                                     <InputLabel htmlFor="email-signup">Rent Amount</InputLabel>
                                     <OutlinedInput
@@ -284,7 +330,10 @@ const PropertyForm = () => {
                                     <TextField
                                         id="outlined-textarea"
                                         label=""
-                                        placeholder=""
+                                        placeholder="Description"
+                                        name="Description"
+                                        onChange={handleChange}
+                                        value={values.Description}
                                         multiline
                                     />
                                     {touched.Bathrooms && errors.Bathrooms && (

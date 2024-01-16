@@ -47,7 +47,7 @@ const AuthLogin = () => {
     const inputRef = useRef(new Array());
 
     const handleOtp = (e, index) => {
-        debugger;
+      
         //inputRef.current[++index].focus();
         if (!(e.key === "Backspace")) {
             if (inputRef.current[index + 1])
@@ -79,7 +79,7 @@ const AuthLogin = () => {
                     }
                 }}
                 onSubmitExecutionError={() => {
-                    debugger;
+                  
                 } }
             >
                 {({

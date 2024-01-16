@@ -47,6 +47,11 @@
     object-fit: cover;
 }
 
+section.container
+{
+    width:100%;
+}
+
 @media only screen and (min-width: 768px) {
     .login {
             background: url(login.jpg) no-repeat;

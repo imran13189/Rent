@@ -29,13 +29,13 @@ namespace LMS.Repository.Repo
         {
             Task<Result> taskdb= QueryFirstOrDefaultAsync<Result>("SP_SaveProperty", property);
 
-            Task[] tasks=new Task[property.formFiles.Count];
+            //Task[] tasks=new Task[property.formFiles.Count];
             //for (int i = 0; i < property.formFiles.Count; i++)
             //{
             //    tasks[i]= SaveFiles(property.formFiles[i]);
             //}
            
-            await Task.WhenAll(tasks);
+            //await Task.WhenAll(tasks);
 
             return await taskdb;
         }
