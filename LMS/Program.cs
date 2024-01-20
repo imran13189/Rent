@@ -18,7 +18,7 @@ builder.Services.AddCors(options =>
         policy =>
         {
             policy.WithOrigins("http://localhost:3000",
-                                "https://localhost").AllowAnyHeader()
+                                "https://localhost", "https://imeshma.com").AllowAnyHeader()
                                                   .AllowAnyMethod();
         });
 });

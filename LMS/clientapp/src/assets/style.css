@@ -27,7 +27,9 @@
 }
 
 .property-list {
-    height: 6rem
+    height: 7.25rem;
+    position: absolute;
+
 }
 
 .property-image {
@@ -52,6 +54,13 @@ section.container
     width:100%;
 }
 
+.hide{
+    display:none;
+}
+
+.show{
+    display:block;
+}
 @media only screen and (min-width: 768px) {
     .login {
             background: url(login.jpg) no-repeat;

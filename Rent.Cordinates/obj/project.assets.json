@@ -249,7 +249,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
-          "Microsoft.AspNetCore.Http.Features": "5.0.17"
+          "Microsoft.AspNetCore.Http.Features": "5.0.17",
+          "Rent.BunnyNet": "1.0.0"
         },
         "compile": {
           "bin/placeholder/LMS.Core.dll": {}
@@ -266,6 +267,7 @@
           "Dapper": "2.0.123",
           "LMS.Core": "1.0.0",
           "Newtonsoft.Json": "13.0.2",
+          "Rent.BunnyNet": "1.0.0",
           "System.Data.SqlClient": "4.8.5"
         },
         "compile": {
@@ -273,6 +275,16 @@
         },
         "runtime": {
           "bin/placeholder/LMS.Repository.dll": {}
+        }
+      },
+      "Rent.BunnyNet/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/Rent.BunnyNet.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Rent.BunnyNet.dll": {}
         }
       }
     }
@@ -770,6 +782,11 @@
       "type": "project",
       "path": "../LMS.Repository/LMS.Repository.csproj",
       "msbuildProject": "../LMS.Repository/LMS.Repository.csproj"
+    },
+    "Rent.BunnyNet/1.0.0": {
+      "type": "project",
+      "path": "../Rent.BunnyNet/Rent.BunnyNet.csproj",
+      "msbuildProject": "../Rent.BunnyNet/Rent.BunnyNet.csproj"
     }
   },
   "projectFileDependencyGroups": {

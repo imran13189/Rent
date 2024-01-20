@@ -2,6 +2,9 @@ const Env = {
     baseurl: "http://localhost/api/",
     appUrl: "http://localhost",
 
+    //baseurl: "https://imeshma.com/api/",
+    //appUrl: "https://imeshma.com",
+
     //baseurl: "https://services.trustcab.in/api/",
     //appUrl: "https://services.trustcab.in",
 

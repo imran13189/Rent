@@ -1,0 +1,10 @@
+C:\Users\perve\source\Rent\BunnyCDN.Net.Storage\bin\Debug\netstandard2.0\BunnyCDN.Net.Storage.deps.json
+C:\Users\perve\source\Rent\BunnyCDN.Net.Storage\bin\Debug\netstandard2.0\BunnyCDN.Net.Storage.dll
+C:\Users\perve\source\Rent\BunnyCDN.Net.Storage\bin\Debug\netstandard2.0\BunnyCDN.Net.Storage.pdb
+C:\Users\perve\source\Rent\BunnyCDN.Net.Storage\obj\Debug\netstandard2.0\BunnyCDN.Net.Storage.csproj.AssemblyReference.cache
+C:\Users\perve\source\Rent\BunnyCDN.Net.Storage\obj\Debug\netstandard2.0\BunnyCDN.Net.Storage.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\perve\source\Rent\BunnyCDN.Net.Storage\obj\Debug\netstandard2.0\BunnyCDN.Net.Storage.AssemblyInfoInputs.cache
+C:\Users\perve\source\Rent\BunnyCDN.Net.Storage\obj\Debug\netstandard2.0\BunnyCDN.Net.Storage.AssemblyInfo.cs
+C:\Users\perve\source\Rent\BunnyCDN.Net.Storage\obj\Debug\netstandard2.0\BunnyCDN.Net.Storage.csproj.CoreCompileInputs.cache
+C:\Users\perve\source\Rent\BunnyCDN.Net.Storage\obj\Debug\netstandard2.0\BunnyCDN.Net.Storage.dll
+C:\Users\perve\source\Rent\BunnyCDN.Net.Storage\obj\Debug\netstandard2.0\BunnyCDN.Net.Storage.pdb

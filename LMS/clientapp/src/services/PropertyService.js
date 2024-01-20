@@ -17,6 +17,11 @@ class PropertyService {
         return res.data;
     };
 
+    getProperties = async (params) => {
+        const res = await axios.post(`${url}GetProperties`, params);
+        return res.data;
+    };
+
 }
 
 export default new PropertyService();

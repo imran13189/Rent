@@ -5,14 +5,11 @@ import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 // material-ui
 import {
-  
     Select,
     MenuItem,
     TextField,
-    ButtonGroup,
     Button,
     Divider,
-   
     FormHelperText,
     Grid,
     Link,
@@ -55,6 +52,7 @@ const PropertyForm = () => {
         LocationName: "",
         Bathrooms: 1,
         termcondition: false,
+        AvailableFrom: new Date(),
         submit: null
     });
     const handleClickShowPassword = () => {
@@ -138,31 +136,43 @@ const PropertyForm = () => {
                             <Grid item xs={12} >
                                 <Stack spacing={1}>
                                     <InputLabel htmlFor="firstname-signup">Location*</InputLabel>
-                                    
-                                    <TextField
-                                        type="text"
-                                        label=""
-                                        value={values.LocationName}
-                                        name="LocationName"
-                                        onBlur={handleBlur}
-                                        onMouseDown={handleOpen}
-                                        onChange={handleChange}
-                                        InputProps={{
-                                            type: 'search',
-                                            endAdornment: (
-                                                <InputAdornment position="end" >
-                                                    <LocationOnOutlined
-                                                        aria-label="toggle password visibility"
-                                                        onClick={handleOpen}
-                                                        onMouseDown={handleMouseDownPassword}
-                                                        edge="end"
-                                                        size="large"
-                                                    >
-                                                        {showPassword ? <EyeOutlined /> : <EyeInvisibleOutlined />}
-                                                    </LocationOnOutlined>
-                                                </InputAdornment>
-                                            )
+                                    <Autocomplete
+                                        autoComplete
+                                        includeInputInList
+                                        freeSolo
+                                        disableOpenOnFocus
+                                        filterOptions={x => {
+                                            return x;
                                         }}
+                                        id="free-solo-2-demo"
+                                        disableClearable
+                                        options={options}
+                                        onChange={(event, value) => setPrams({ ...value })}
+                                        getOptionLabel={(option) => typeof option === "string" ? option : option.LocationName}
+                                        renderInput={(params) => (
+                                            <TextField
+                                                {...params}
+                                                placeholder="Search location"
+                                                onChange={handleLocations}
+                                                InputProps={{
+                                                    ...params.InputProps,
+                                                    type: 'search',
+                                                    endAdornment: (
+                                                        < InputAdornment position="end" >
+                                                            <LocationOnOutlined
+                                                                aria-label="toggle password visibility"
+                                                                edge="end"
+                                                                size="large"
+                                                            >
+
+                                                            </LocationOnOutlined>
+                                                        </InputAdornment>
+                                                    )
+                                                }}
+
+                                            />
+                                        )}
+
 
                                     />
                                    
@@ -200,9 +210,10 @@ const PropertyForm = () => {
                                 <Stack spacing={1}>
                                     <InputLabel htmlFor="company-signup">Available From:</InputLabel>
                                     <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                        <MobileDatePicker name="AvailableFrom" onChange={(value) => {
+                                        <MobileDatePicker name="AvailableFrom" onChange={(value,dd) => {
+                                           
                                             setFieldValue('AvailableFrom', Date.parse(value));
-                                        }} defaultValue={dayjs('2022-04-17')} />
+                                        }} defaultValue={dayjs(new Date())} />
                                     </LocalizationProvider>
                                     {touched.company && errors.company && (
                                         <FormHelperText error id="helper-text-company-signup">

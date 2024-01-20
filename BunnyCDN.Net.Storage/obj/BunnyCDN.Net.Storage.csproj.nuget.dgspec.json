@@ -1,0 +1,25 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\perve\\source\\Rent\\BunnyCDN.Net.Storage\\BunnyCDN.Net.Storage.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\perve\\source\\Rent\\BunnyCDN.Net.Storage\\BunnyCDN.Net.Storage.csproj": {
+      "restore": {
+        "projectUniqueName": "C:\\Users\\perve\\source\\Rent\\BunnyCDN.Net.Storage\\BunnyCDN.Net.Storage.csproj",
+        "projectPath": "C:\\Users\\perve\\source\\Rent\\BunnyCDN.Net.Storage\\BunnyCDN.Net.Storage.csproj",
+        "packagesPath": "C:\\Users\\perve\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\perve\\source\\Rent\\BunnyCDN.Net.Storage\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\perve\\source\\Rent\\LMS\\NuGet.Config",
+          "C:\\Users\\perve\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        }
+      }
+    }
+  }
+}
