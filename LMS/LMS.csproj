@@ -14,8 +14,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AWSSDK.Extensions.NETCore.Setup" Version="3.7.7" />
-    <PackageReference Include="AWSSDK.S3" Version="3.7.205.9" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.13" />
     <PackageReference Include="Microsoft.AspNetCore.SpaProxy" Version="6.0.6" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
@@ -30,6 +28,9 @@
   <ItemGroup>
     <ProjectReference Include="..\LMS.Core\LMS.Core.csproj" />
     <ProjectReference Include="..\LMS.Repository\LMS.Repository.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UploadFiles\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

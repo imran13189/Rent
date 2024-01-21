@@ -31,6 +31,9 @@
     position: absolute;
 
 }
+.MuiLoadingButton-loadingIndicatorCenter {
+    color: #d02943;
+}
 
 .property-image {
     position: absolute;

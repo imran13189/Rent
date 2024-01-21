@@ -56,6 +56,7 @@ const PropertyAd = ({ setShowMessage }) => {
     const [options, setOptions] = useState([]);
     const [open, setOpen] = useState(false);
     const [files, setFormFiles] = useState([]);
+    const [loading, setLoading] = useState(false);
     const [initialValues, setInitialValues] = useState({
         LocationName: "",
         Bathrooms: 1,
@@ -108,6 +109,7 @@ const PropertyAd = ({ setShowMessage }) => {
         onSubmit: async (values, { setErrors, setStatus, setSubmitting }) => {
             try {
                 debugger;
+                setLoading(true);
                 const formData = new FormData();
                 for (var key in values) {
                     formData.append(key, values[key]);
@@ -121,7 +123,7 @@ const PropertyAd = ({ setShowMessage }) => {
                 }
 
 
-                debugger;
+              
                 const result = await PropertyService.SaveProperty(formData);
                 setStatus({ success: false });
                 setSubmitting(false);
@@ -131,6 +133,7 @@ const PropertyAd = ({ setShowMessage }) => {
                 setStatus({ success: false });
                 setErrors({ submit: err.message });
                 setSubmitting(false);
+                setLoading(false);
             }
         },
     });
@@ -404,9 +407,9 @@ const PropertyAd = ({ setShowMessage }) => {
                     )}
                     <Grid item xs={12}>
                         <AnimateButton>
-                            <Button disabled={!formik.values.termcondition} fullWidth size="large" type="submit" variant="contained" sx={{ bgcolor: "action.main" }}>
-                                Publish
-                            </Button>
+                            <LoadingButton loading={loading} disabled={!formik.values.termcondition} fullWidth size="large" type="submit" variant="contained" sx={{ bgcolor: "action.main" }}>
+                                { loading?"disabled":"Publish"}
+                            </LoadingButton>
                         </AnimateButton>
                     </Grid>
                     <Grid item xs={12}>
