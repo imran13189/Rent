@@ -12,11 +12,13 @@ import { EditOutlined, ProfileOutlined, LogoutOutlined, UserOutlined, WalletOutl
 
 const ProfileTab = ({ handleLogout }) => {
   const theme = useTheme();
-
+    
   const [selectedIndex, setSelectedIndex] = useState(0);
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
   };
+
+
 
   return (
     <List component="nav" sx={{ p: 0, '& .MuiListItemIcon-root': { minWidth: 32, color: theme.palette.grey[500] } }}>

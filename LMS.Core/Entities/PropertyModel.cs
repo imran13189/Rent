@@ -25,6 +25,7 @@ namespace LMS.Core.Entities
         public bool IsDeleted { get; set; }
         public string LocationName { get; set; }
         public string? FilePath { get; set; }
+        public long RowNum { get; set; }
 
     }
    
@@ -36,6 +37,7 @@ namespace LMS.Core.Entities
         public decimal? Long { get; set; }
         public int? ptype { get; set; }
         public int? budget { get; set; }
+        public int? page { get; set; }
         
     }
 }

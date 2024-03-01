@@ -1,11 +1,4 @@
-import { useState } from "react";
-
-// material-ui
-import {
-    Grid
-} from "@mui/material";
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -21,7 +14,11 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-// ==============================|| DASHBOARD - DEFAULT ||============================== //
+import {
+    
+    Grid
+    
+} from "@mui/material";
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -34,21 +31,12 @@ const ExpandMore = styled((props) => {
     }),
 }));
 
-const PropertyList = () => {
-    const [value, setValue] = useState("today");
-    const [slot, setSlot] = useState("week");
-    const { properties } = useSelector((state) => state.property);
-    const [expanded, setExpanded] = useState(false);
+export default function MobilePropertyList({ properties }) {
+    const [expanded, setExpanded] = React.useState(false);
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
-
-    useEffect(() => {
-       
-        var ddd = properties;
-
-    }, [properties])
 
     return (
         <Grid container spacing={3}>
@@ -132,6 +120,4 @@ const PropertyList = () => {
             }
         </Grid>
     );
-};
-
-export default PropertyList;
+}

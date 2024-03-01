@@ -16,7 +16,7 @@ namespace LMS.Core.Interfaces
         Task<IEnumerable<UserViewModel>> GetUsers();
         public Task<Result> SaveUser(User user);
         public Task<UserViewModel> Login(User user);
-
+        public Task<string> ValidateOTP(User user);
         public Task<Result> PasswordReset(User user);
        
     }

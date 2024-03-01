@@ -20,7 +20,8 @@ import Search from "./Search";
 const LandingPage = () => {
     const [value, setValue] = useState("today");
     const [slot, setSlot] = useState("week");
-
+    const [selectedValue, setSelectedValue] = useState();
+    
     return (
         <Grid container Spacing={3} mt={10 }>
             {/* row 1 */}
@@ -53,7 +54,7 @@ const LandingPage = () => {
                         mt={5}
                 >
                     <Box sx={{ width: "100%", color: (theme) => theme.palette.grey[500] }}>
-                        <Search />
+                            <Search selectedValue={selectedValue} setSelectedValue={setSelectedValue} />
                     </Box>
                     </Grid>
                     <Grid

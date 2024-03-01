@@ -30,7 +30,19 @@ namespace LMS.Controllers
             return await _user.GetRoles();
         }
 
-
+        [HttpPost]
+        [Route("api/ValidateOTP")]
+        public async Task<string> ValidateOTP(User user)
+        {
+            try
+            {
+                return await _user.ValidateOTP(user);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
 
         [HttpPost]
@@ -41,9 +53,9 @@ namespace LMS.Controllers
             {
                 return await _user.SaveUser(user);
             }
-            catch(Exception e)
+            catch(Exception)
             {
-                throw e;
+                throw;
             }
         }
     }

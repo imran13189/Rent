@@ -13,12 +13,11 @@ namespace LMS.Controllers
     public class PropertyController : ControllerBase
     {
         public IProperty _property;
-        private IWebHostEnvironment _hostingEnvironment;
+      
         //private readonly IAmazonS3 _s3Client;
-        public PropertyController(IProperty property, IWebHostEnvironment hostingEnvironment)
+        public PropertyController(IProperty property)
         {
             _property = property;
-            _hostingEnvironment = hostingEnvironment;
             // _s3Client = s3Client;
         }
 
@@ -59,8 +58,7 @@ namespace LMS.Controllers
         {
             try
             {
-                string uploads = Path.Combine(_hostingEnvironment.ContentRootPath, "UploadFiles");
-                return await _property.SaveProperty(property, formFiles,uploads);
+                return await _property.SaveProperty(property, formFiles);
             }
             catch (Exception ex)
             {

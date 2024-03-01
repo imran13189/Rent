@@ -108,7 +108,7 @@ const PropertyAd = ({ setShowMessage }) => {
         validationSchema: SignupSchema,
         onSubmit: async (values, { setErrors, setStatus, setSubmitting }) => {
             try {
-                debugger;
+               
                 setLoading(true);
                 const formData = new FormData();
                 for (var key in values) {
@@ -179,6 +179,7 @@ const PropertyAd = ({ setShowMessage }) => {
                                         onChange={handleLocations}
                                         value={formik.values.LocationName}
                                         InputProps={{
+                                            style: { padding: 5 },
                                             ...params.InputProps,
                                             type: 'search',
                                             endAdornment: (
@@ -242,7 +243,7 @@ const PropertyAd = ({ setShowMessage }) => {
                             <InputLabel htmlFor="company-signup">Available From:</InputLabel>
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <MobileDatePicker name="AvailableFrom" onChange={(value) => {
-                                    debugger;
+                                    
                                     formik.setFieldValue('AvailableFrom', value.$d.toISOString());
                                 }} defaultValue={dayjs(new Date())} />
                             </LocalizationProvider>

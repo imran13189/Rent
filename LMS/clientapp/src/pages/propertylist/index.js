@@ -1,27 +1,43 @@
 // material-ui
-import { useState } from 'react';
-import {
-    Grid, Stack, Typography, Alert,
-    AlertTitle } from '@mui/material';
-
+import { useState, useEffect } from 'react';
 // project import
 import SearchProperty from './SearchProperty';
 import PropertyList from './PropertyList';
-
+import { fetchProperties, locationSearch } from "./../../store/reducers/property";
 // ================================|| REGISTER ||================================ //
+import { useDispatch, useSelector } from "react-redux";
 
-const Index = () => { 
-    const [showMessage, setShowMessage] = useState(false);
-    const [properties, setProperties] = useState();
-  return (  
-      <>
-          <SearchProperty setProperties={setProperties }></SearchProperty>
-          <PropertyList properties={properties }></PropertyList>
-      </>
-     
-    
-);
+const Index = () => {
 
+    const [loading, setLoading] = useState(false);
+    const dispatch = new useDispatch();
+    const { selectedLocation } = useSelector((state) => state.property);
+   
+    const handleLoadMore = () => {
+        debugger;
+        dispatch(locationSearch({ ...selectedLocation, page:selectedLocation?.page+1 }));
+        //dispatch(fetchProperties(selectedLocation)); 
+    };
+
+
+    useEffect(() => {
+        if (selectedLocation) {
+            dispatch(fetchProperties(selectedLocation));
+        }
+
+    }, [selectedLocation]);
+   
+    return (
+        <>
+            <SearchProperty></SearchProperty>
+            <PropertyList></PropertyList>
+            {!loading && (
+                <button onClick={handleLoadMore} disabled={loading}>
+                    Load More
+                </button>
+            )}
+        </>
+    );
 }
 
 export default Index;

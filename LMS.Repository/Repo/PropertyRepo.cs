@@ -31,7 +31,7 @@ namespace LMS.Repository.Repo
 
         }
 
-        public async Task<Result> SaveProperty(Property property, List<IFormFile> formFiles, string phyPath)
+        public async Task<Result> SaveProperty(Property property, List<IFormFile> formFiles)
         {
             Result taskdb = await QueryFirstOrDefaultAsync<Result>("SP_SaveProperty", property);
 
@@ -81,7 +81,7 @@ namespace LMS.Repository.Repo
                 }
                 catch (Exception ex)
                 {
-                    throw ex;
+                    throw;
                 }
             }
             
@@ -89,7 +89,7 @@ namespace LMS.Repository.Repo
 
         public async Task<IEnumerable<PropertyModel>> GetProperties(LocationModel location)
         {
-            return await QueryAsync<PropertyModel>("SP_GetProperties", new { Lat = location.Lat, Long = location.Long, Location = location.LocationName, ptype = location.ptype, budget = location.budget });
+            return await QueryAsync<PropertyModel>("SP_GetProperties", new { Lat = location.Lat, Long = location.Long, Location = location.LocationName, ptype = location.ptype, budget = location.budget,page=location.page });
         }
 
         public async Task<List<StorageObject>> GetStorageObjectsAsync(string path)

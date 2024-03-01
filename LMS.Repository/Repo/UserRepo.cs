@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using LMS.Core.Entities;
 using LMS.Core.Interfaces;
+using System.Reflection;
 
 namespace LMS.Repo.Repository
 {
@@ -27,9 +28,9 @@ namespace LMS.Repo.Repository
             {
                 return await Query<Role>("SP_GetRoles");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -45,21 +46,21 @@ namespace LMS.Repo.Repository
 
         public async Task<Result> SaveUser(User user)
         {
-            await QueryFirstOrDefaultAsync<Result>("SP_SaveUser", user);
-            return await SentEmail(user);
+            UserResult result =await QueryFirstOrDefaultAsync<UserResult>("SP_SaveUser",new {UserId=0, Mobile=user.Mobile});
+            return await SentEmail(result.OTP);
         }
 
       
-        public async Task<Result> SentEmail(User user)
+        public async Task<Result> SentEmail(string OTP)
         {
             try
             {
                 MailMessage message = new MailMessage();
                 message.From = new MailAddress("aliusman9760@gmail.com");
-                message.To.Add(user.Email);
-                message.Subject = "Password Reset #" + user.Name;
+                message.To.Add("imran13189@gmail.com");
+                message.Subject = "OTP Verification #";
                 message.IsBodyHtml = true;
-                message.Body = user.Html;
+                message.Body = "<div>"+OTP+"</div>";
 
                 SmtpClient client = new SmtpClient("smtp.gmail.com", 587)
                 {
@@ -73,9 +74,9 @@ namespace LMS.Repo.Repository
 
                 return new Result() { IsSuccess = true, Message = "Email sent successfully" };
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
 
@@ -85,9 +86,9 @@ namespace LMS.Repo.Repository
             {
                 return await QueryFirstOrDefaultAsync<UserViewModel>("SP_LoginUser", new { UserName = user.Email, Password = user.Password });
             }
-            catch(Exception e)
+            catch(Exception)
             {
-                throw e;
+                throw;
             }
         }
 
@@ -95,11 +96,23 @@ namespace LMS.Repo.Repository
         {
             try
             {
-                return await QueryFirstOrDefaultAsync<Result>("SP_SavePassword", new { Password = user.Password, Token = user.Token });
+                return await QueryFirstOrDefaultAsync<Result>("SP_SavePassword", new { Password = user.Password, Token = user.OTP });
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
+            }
+        }
+
+        public async Task<string> ValidateOTP(User user)
+        {
+            try
+            {
+                return await QueryFirstOrDefaultAsync<string>("SP_ValidateOTP", new { Mobile = user.Mobile, OTP = user.OTP  });
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
     }

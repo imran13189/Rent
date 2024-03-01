@@ -14,8 +14,7 @@ namespace LMS.Core.Entities
         public int?   RoleId { get; set; }
         public string? Email { get; set; } = "";
         public string? Mobile { get; set; }
-        public string? Token{get; set; } = "";
-        public string? Html { get; set; }
+        public string? OTP{get; set; } = "";
         
     }
 }

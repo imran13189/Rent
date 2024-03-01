@@ -10,4 +10,9 @@ namespace LMS.Core.Entities
         public bool IsSuccess{get;set;}
         public long? Id { get; set; }
     }
+
+    public class UserResult:Result { 
+            public string OTP { get; set; }
+    }
+
 }

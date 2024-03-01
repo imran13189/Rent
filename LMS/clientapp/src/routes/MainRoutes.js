@@ -30,9 +30,14 @@ const MainRoutes = {
           element: <Landing />
       },
       {
+          path: '/list/:location',
+          element: <PropertyList />
+      },
+      {
         path: '/list',
         element: <PropertyList />
-    },
+      },
+      
     {
       path: 'color',
       element: <Color />

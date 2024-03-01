@@ -19,87 +19,43 @@ import {
     Stack,
     Typography
 } from '@mui/material';
+import { useSelector, useDispatch } from "react-redux";
 
-import LocationOnOutlined from '@mui/icons-material/LocationOnOutlined';
-import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 // ==============================|| DASHBOARD - DEFAULT ||============================== //
-import MasterService from './../../services/MasterService'
-import PropertyService from './../../services/PropertyService'
 
-const SearchProperty = ({ setProperties }) => {
-    const [options, setOptions] = useState([]);
+import PropertyService from './../../services/PropertyService';
+import Search from './../../pages/dashboard/Search';
+import { fetchProperties } from "./../../store/reducers/property";
+
+const SearchProperty = () => {
+
     const [params, setPrams] = useState(null);
-    
-    const handleLocations = (event) => {
-   
-        setOptions([]);
-        if (event.target.value.length > 2) {
-            MasterService.getLocations(event).then((data) => {
-                setOptions(data);
-            });
-        }
-        else {
-            setOptions([]);
-        }
-
-    }
+    const [selectedValue, setSelectedValue] = useState();
+    const [loading, setLoading] = useState(false);
+    const [page, setPage] = useState(1);
+    const { selectedLocation } = useSelector((state) => state.property);
+    const dispatch = new useDispatch();
 
     useEffect(() => {
-        if (params) {
-       
-            PropertyService.getProperties(params).then((data) => {
-                setProperties(data);
-            });
+        if (selectedLocation) {
+
+            //PropertyService.getProperties(params).then((data) => {
+            //    setProperties(data);
+            //});
+            dispatch(fetchProperties(selectedLocation));
         }
 
-    }, [params]);
-
+    }, [selectedLocation]);
+                               
+    //useEffect(() => {
+    //    setPrams({ ...params, ...selectedLocation });
+    //}, [selectedLocation]);
    
     return (
         <Grid container spacing={3} mt={10} justifyContent="flex-end">
             <Grid item xs={12} lg={4}>
                 <Stack spacing={1}>
-                    <Autocomplete
-                        autoComplete
-                        includeInputInList
-                        freeSolo
-                        disableOpenOnFocus
-                        filterOptions={x => {
-                            return x;
-                        }}
-                        id="free-solo-2-demo"
-                        disableClearable
-                        options={options}
-                        onChange={(event, value) => setPrams({ ...value } )}
-                        getOptionLabel={(option) => typeof option === "string" ? option : option.LocationName}
-                        renderInput={(params) => (
-                            <TextField
-                                {...params}
-                                placeholder="Search location"
-                                onChange={handleLocations}
-                                InputProps={{
-                                    ...params.InputProps,
-                                    type: 'search',
-                                    endAdornment: (
-                                        < InputAdornment position="end" >
-                                            <LocationOnOutlined
-                                                aria-label="toggle password visibility"
-                                                edge="end"
-                                                size="large"
-                                            >
-
-                                            </LocationOnOutlined>
-                                        </InputAdornment>
-                                    )
-                                }}
-
-                            />
-                        )}
-
-
-                    />
-
-
+                    <Search selectedValue={selectedLocation}></Search>
                 </Stack>
             </Grid>
 
@@ -138,8 +94,8 @@ const SearchProperty = ({ setProperties }) => {
                    
                 </Stack>
             </Grid>
-            <Grid item xs={12}>
-                <Divider>
+            <Grid item xs={12} pb={5}>
+                <Divider >
                 </Divider>
             </Grid>
 

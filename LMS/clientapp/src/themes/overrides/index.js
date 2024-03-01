@@ -18,10 +18,12 @@ import TableCell from './TableCell';
 import Tabs from './Tabs';
 import Typography from './Typography';
 
+
 // ==============================|| OVERRIDES - MAIN ||============================== //
 
 export default function ComponentsOverrides(theme) {
-  return merge(
+    return merge(
+        
     Button(theme),
     Badge(theme),
     CardContent(),
