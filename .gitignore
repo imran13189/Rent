@@ -47,3 +47,5 @@
 /Rent.Cordinates/obj/project.nuget.cache
 /Rent.Cordinates/obj/project.assets.json
 /LMS/UploadFiles
+/Rent.BunnyNet/obj/Release/net6.0
+/Rent.BunnyNet/bin/Release/net6.0
