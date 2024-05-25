@@ -7,7 +7,7 @@ import MainLayout from 'layout/MainLayout';
 // render - dashboard
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard')));
 const Landing = Loadable(lazy(() => import('pages/dashboard/LandingPage')));
-const PropertyList = Loadable(lazy(() => import('pages/propertylist/PropertyList')));
+const PropertyList = Loadable(lazy(() => import('pages/propertylist')));
 // render - sample page
 const SamplePage = Loadable(lazy(() => import('pages/extra-pages/SamplePage')));
 
@@ -30,9 +30,14 @@ const MainRoutes = {
           element: <Landing />
       },
       {
+          path: '/list/:location',
+          element: <PropertyList />
+      },
+      {
         path: '/list',
         element: <PropertyList />
-    },
+      },
+      
     {
       path: 'color',
       element: <Color />

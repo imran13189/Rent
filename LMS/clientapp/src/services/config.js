@@ -1,9 +1,12 @@
 const Env = {
-    baseurl: "http://localhost/api/",
-    appUrl: "http://localhost",
+    baseurl: process.env.REACT_APP_API_URL,
+    appUrl: process.env.REACT_APP_APP_URL,
 
-    //baseurl: "https://services.trustcab.in/api/",
-    //appUrl: "https://services.trustcab.in",
+    //baseurl: "https://imeshma.com/api/",
+    //appUrl: "https://imeshma.com",
+
+    //baseurl: "https://localhost:1301/api/",
+    //appUrl: "https://localhost:1301",
 
     //baseurl: "https://services.trustcab.in",
     //appUrl: "https://services.trustcab.in",

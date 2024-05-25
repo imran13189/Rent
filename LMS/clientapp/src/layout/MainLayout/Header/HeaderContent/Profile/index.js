@@ -28,7 +28,8 @@ import SettingTab from './SettingTab';
 // assets
 import avatar1 from 'assets/images/users/avatar-1.png';
 import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
-
+import { useDispatch } from "react-redux";
+import { setUserDetails } from "./../../../../../store/reducers/users";
 // tab panel wrapper
 function TabPanel({ children, value, index, ...other }) {
   return (
@@ -55,11 +56,11 @@ function a11yProps(index) {
 
 const Profile = () => {
   const theme = useTheme();
-
+    const dispatch = useDispatch();
   const handleLogout = async () => {
-    // logout
+      dispatch(setUserDetails({ userDetails:null}));
   };
-
+  
   const anchorRef = useRef(null);
   const [open, setOpen] = useState(false);
   const handleToggle = () => {

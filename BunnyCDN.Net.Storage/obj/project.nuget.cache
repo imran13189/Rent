@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "L70sVYk7mf/28x8d2t+6LMANH9tN3N8tjybbO2MrxM9Hr5w4JGwKTLMVaVfIZpfmtqJzkcro56bCZnQ3SL2dfQ==",
+  "success": false,
+  "projectFilePath": "C:\\Users\\perve\\source\\Rent\\BunnyCDN.Net.Storage\\BunnyCDN.Net.Storage.csproj",
+  "expectedPackageFiles": [],
+  "logs": [
+    {
+      "code": "NU1105",
+      "level": "Error",
+      "message": "Unable to read project information for 'BunnyCDN.Net.Storage': Invalid framework identifier ''."
+    }
+  ]
+}

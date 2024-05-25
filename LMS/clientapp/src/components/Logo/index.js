@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 // material-ui
 import { ButtonBase } from '@mui/material';
@@ -13,14 +13,13 @@ import { activeItem } from 'store/reducers/menu';
 // ==============================|| MAIN LOGO ||============================== //
 
 const LogoSection = ({ sx, to }) => {
-  const { defaultId } = useSelector((state) => state.menu);
-  const dispatch = useDispatch();
+ /* const { defaultId } = useSelector((state) => state.menu);*/
+    const navigate = useNavigate()
   return (
     <ButtonBase
       disableRipple
-      component={Link}
-      onClick={() => dispatch(activeItem({ openItem: [defaultId] }))}
-      to={!to ? config.defaultPath : to}
+      onClick={() =>  navigate(`/`) }
+
       sx={sx}
     >
       <Logo />

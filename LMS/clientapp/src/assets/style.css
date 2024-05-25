@@ -27,7 +27,12 @@
 }
 
 .property-list {
-    height: 6rem
+    height: 7.25rem;
+    position: absolute;
+
+}
+.MuiLoadingButton-loadingIndicatorCenter {
+    color: #d02943;
 }
 
 .property-image {
@@ -47,6 +52,23 @@
     object-fit: cover;
 }
 
+section.container
+{
+    width:100%;
+}
+
+.hide{
+    display:none;
+}
+
+.show{
+    display:block;
+}
+
+.OTP{
+    width:100%;
+   
+}
 @media only screen and (min-width: 768px) {
     .login {
             background: url(login.jpg) no-repeat;

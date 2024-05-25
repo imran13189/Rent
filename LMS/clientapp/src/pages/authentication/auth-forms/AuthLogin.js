@@ -1,20 +1,19 @@
 import { useRef, useState, forwardRef } from "react";
-import { Link as RouterLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // material-ui
 import {
     Button,
-    Checkbox,
+ 
     Divider,
-    FormControlLabel,
+   
     TextField,
     FormHelperText,
     Grid,
-    Link,
-    IconButton,
+  
     InputAdornment,
     InputLabel,
-    OutlinedInput,
+   
     Stack,
     Typography,
 } from "@mui/material";
@@ -22,24 +21,26 @@ import {
 // third party
 import * as Yup from "yup";
 import { Formik } from "formik";
+import { useDispatch } from "react-redux";
 
-// project import
-import FirebaseSocial from "./FirebaseSocial";
 import AnimateButton from "components/@extended/AnimateButton";
 
 // assets
 import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
 
+import UserService from "../../../services/UserService";
+import { setUserDetails } from "./../../../store/reducers/users";
 // ============================|| FIREBASE - LOGIN ||============================ //
 
 const AuthLogin = () => {
-    const [checked, setChecked] = useState(false);
+    const [otpError, setOTPError] = useState(false);
     const [isOTPSent, setOTPSent] = useState(false);
+    const navigate = useNavigate()
+    const dispatch = useDispatch();
 
     const [showPassword, setShowPassword] = useState(false);
-    const handleClickShowPassword = () => {
-        setShowPassword(!showPassword);
-    };
+ 
+    const redirectToHome = () => navigate(`/`)
 
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
@@ -47,12 +48,13 @@ const AuthLogin = () => {
     const inputRef = useRef(new Array());
 
     const handleOtp = (e, index) => {
-        debugger;
+      
         //inputRef.current[++index].focus();
         if (!(e.key === "Backspace")) {
             if (inputRef.current[index + 1])
                 inputRef.current[++index].getElementsByTagName("input")[0].focus();
         }
+        
     };
     return (
         <>
@@ -70,8 +72,30 @@ const AuthLogin = () => {
                 })}
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
                     try {
-                        setOTPSent(true);
-                        setSubmitting(false);
+                       
+
+                        if (isOTPSent) {
+                            var otp='';
+                            for (var i = 0; i < 4; i++) {
+                                otp =otp + inputRef.current[i].getElementsByTagName("input")[0].value.toString();
+                            }
+                          
+                            const result = await UserService.ValidateOTP({ ...values, OTP: otp });
+                            debugger;
+                            if (result.userData) {
+                                window.localStorage.setItem('user', JSON.stringify(result));
+                                dispatch(setUserDetails({ userDetails: result.userData }));
+                                redirectToHome();
+                            }
+                            else {
+                                setOTPError(true);
+                            }
+                        }
+                        else {
+                            const result = await UserService.SaveUser(values);
+                            setOTPSent(true);
+                            setSubmitting(false);
+                        }
                     } catch (err) {
                         setStatus({ success: false });
                         setErrors({ submit: err.message });
@@ -79,7 +103,7 @@ const AuthLogin = () => {
                     }
                 }}
                 onSubmitExecutionError={() => {
-                    debugger;
+                  
                 } }
             >
                 {({
@@ -147,52 +171,61 @@ const AuthLogin = () => {
                             )}
 
                             {isOTPSent&&<Grid item xs={12} lg={12}>
-                                <Grid container xs={12} lg={12} spacing={3}>
-                                    <Grid item xs={12}>
+                                <Grid container xs={12} lg={12} spacing={1}>
+                                    <Grid item xs={12} lg={12} >
                                         <Stack spacing={1}>
                                             <InputLabel htmlFor="email-login">OTP</InputLabel>
                                         </Stack>
                                     </Grid>
-                                    <Grid item xs={3}>
-                                        <Stack spacing={3}>
+                                    <Grid item xs={3} lg={3 }>
+                                      
                                             <TextField
-                                                inputProps={{ maxLength: 1, autoComplete: 'none' }}
+                                            className="OTP"
+                                            inputProps={{ style: { textAlign: 'center' }, maxLength: 1, autoComplete: 'none' }}
                                                 type="text"
                                                 ref={(element) => inputRef.current.push(element)}
                                                 onKeyUp={(e) => handleOtp(e, 0)}
                                             />
-                                        </Stack>
+                                        
                                     </Grid>
-                                    <Grid item xs={3}>
-                                        <Stack spacing={3}>
+                                    <Grid item xs={3} lg={3}>
+                                       
                                             <TextField
-                                                inputProps={{ maxLength: 1, autoComplete: 'none' }}
+                                                className="OTP"
+                                                inputProps={{ style: { textAlign: 'center' }, maxLength: 1, autoComplete: 'none' }}
                                                 type="text"
                                                 ref={(element) => inputRef.current.push(element)}
                                                 onKeyUp={(e) => handleOtp(e, 1)}
                                             />
-                                        </Stack>
+                                       
                                     </Grid>
-                                    <Grid item xs={3}>
-                                        <Stack spacing={1}>
+                                    <Grid item xs={3} lg={3}>
+                                       
                                             <TextField
-                                                inputProps={{ maxLength: 1, autoComplete: 'none' }}
+                                                className="OTP"
+                                                inputProps={{ style: { textAlign: 'center' }, minWidth:5, maxLength: 1, autoComplete: 'none' }}
                                                 type="text"
                                                 ref={(element) => inputRef.current.push(element)}
                                                 onKeyUp={(e) => handleOtp(e, 2)}
                                             />
-                                        </Stack>
+                                      
                                     </Grid>
-                                    <Grid item xs={3}>
-                                        <Stack spacing={1}>
+                                    <Grid item xs={3} lg={3}>
+                                        
                                             <TextField
-                                                inputProps={{ maxLength: 1, autoComplete: 'none' }}
+                                                className="OTP"
+                                                inputProps={{ style: { textAlign: 'center' }, maxLength: 1, autoComplete: 'none' }}
                                                 type="text"
                                                 ref={(element) => inputRef.current.push(element)}
                                                 onKeyUp={(e) => handleOtp(e, 3)}
                                             />
-                                        </Stack>
+                                      
                                     </Grid>
+                                    {otpError && (
+                                        <Grid item xs={12}>
+                                            <FormHelperText error>Invalid OTP</FormHelperText>
+                                        </Grid>
+                                    )}
                                 </Grid>
                             </Grid>
                             }

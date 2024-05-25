@@ -1,6 +1,6 @@
 // types
-import { createSlice } from "@reduxjs/toolkit";
-
+import {createSlice,createAsyncThunk} from "@reduxjs/toolkit";
+import PropertyService from './../../services/PropertyService';
 
 // initial state
 const initialState = {
@@ -10,8 +10,17 @@ const initialState = {
         locationName:""
     },
     showLocation:false,
-    search: ''
+    search: '',
+    selectedLocation: null,
+    selectedMainLocation: null,
+    params: {},
+    properties:[]
 };
+
+export const fetchProperties = createAsyncThunk('propertiesData/fetchProperties', async (params) => {
+    const response = await PropertyService.getProperties(params);
+    return response;
+});
 
 
 
@@ -22,7 +31,7 @@ const property = createSlice({
     initialState,
     reducers: {
         setSelectedPosition(state, action) {
-            debugger;
+          
             if (action.payload.positionDetails)
                 state.positionDetails = action.payload.positionDetails;
 
@@ -32,10 +41,38 @@ const property = createSlice({
         setSearch(state, action) {
             return { ...state, search: action.payload.search };
         },
+        locationSearch(state, action) {
+           
+            state.selectedLocation = { ...state.selectedLocation, ...action.payload };
+
+            /*return { ...state, {...payload.selectedLocation, ...action.payload } }*/
+        },
+        locationMainSearch(state, action) {
+
+            state.selectedMainLocation = { ...state.selectedMainLocation, ...action.payload };
+
+            /*return { ...state, {...payload.selectedLocation, ...action.payload } }*/
+        },
+        setParams(state, action) {
+            state.params = action.payload;
+        }
+    },
+    extraReducers: (builder) => {
+        // Add reducers for additional action types here, and handle loading state as needed
+        builder.addCase(fetchProperties.fulfilled, (state, action) => {
+           
+            if (state.selectedLocation?.page== 0)
+            {
+                state.properties = action.payload;
+            }
+            else
+            return { ...state, properties: [...state.properties, ...action.payload] };
+        })
+        
     }
    
 });
 
 export default property.reducer;
 
-export const { setSelectedPosition, setSearch } = property.actions;
+export const { setSelectedPosition, setSearch, locationSearch, locationMainSearch } = property.actions;

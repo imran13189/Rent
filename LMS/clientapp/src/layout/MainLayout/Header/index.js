@@ -26,7 +26,7 @@ const Header = ({ open, handleDrawerToggle }) => {
             <Box sx={{ width: '100%', ml: { xs: 0, md: 1 } }}>
                 <Typography
                     aria-label="open drawer"
-                    onClick={handleDrawerToggle}
+                    
                     edge="start"
                     sx={{ ml: { xs: 0, lg: -2 }, color: 'text.heading' }}><Logo></Logo>
                 </Typography>

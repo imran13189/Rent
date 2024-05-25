@@ -1,0 +1,33 @@
+{
+  "version": 3,
+  "targets": {},
+  "libraries": {},
+  "projectFileDependencyGroups": {},
+  "packageFolders": {
+    "C:\\Users\\perve\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "restore": {
+      "projectUniqueName": "C:\\Users\\perve\\source\\Rent\\BunnyCDN.Net.Storage\\BunnyCDN.Net.Storage.csproj",
+      "projectPath": "C:\\Users\\perve\\source\\Rent\\BunnyCDN.Net.Storage\\BunnyCDN.Net.Storage.csproj",
+      "packagesPath": "C:\\Users\\perve\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\perve\\source\\Rent\\BunnyCDN.Net.Storage\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\perve\\source\\Rent\\LMS\\NuGet.Config",
+        "C:\\Users\\perve\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "sources": {
+        "https://api.nuget.org/v3/index.json": {}
+      }
+    }
+  },
+  "logs": [
+    {
+      "code": "NU1105",
+      "level": "Error",
+      "message": "Unable to read project information for 'BunnyCDN.Net.Storage': Invalid framework identifier ''."
+    }
+  ]
+}
