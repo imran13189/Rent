@@ -71,7 +71,7 @@ const PropertyForm = () => {
     const handleOpen = () => setOpen(true);
 
     const validateCategories = (values, props) => {
-        debugger;
+       
         let error = {}
         if (!props.selectIsCategoriesValid) {
             error.categories = 'please select a category'

@@ -1,6 +1,6 @@
 import axios from "axios";
 import Config from "./config";
-//import Auth from "./Auth";
+import Auth from "./Auth";
 const url = Config.baseurl;
 
 class UserService {

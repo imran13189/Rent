@@ -79,10 +79,12 @@ const AuthLogin = () => {
                             for (var i = 0; i < 4; i++) {
                                 otp =otp + inputRef.current[i].getElementsByTagName("input")[0].value.toString();
                             }
-                            debugger;
+                          
                             const result = await UserService.ValidateOTP({ ...values, OTP: otp });
-                            if (result.length > 0) {
-                                dispatch(setUserDetails({ userDetails: result[0] }));
+                            debugger;
+                            if (result.userData) {
+                                window.localStorage.setItem('user', JSON.stringify(result));
+                                dispatch(setUserDetails({ userDetails: result.userData }));
                                 redirectToHome();
                             }
                             else {

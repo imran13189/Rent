@@ -39,7 +39,7 @@ const HeaderContent = () => {
           <Box sx={{  ml: 1 }}>
           <Button
               component={Link}
-                  to="property"
+                  to={userDetails?'property':'login'}
               variant="contained"
               title="Download Free Version"
                   sx={{ color: 'common.white', bgcolor: 'action.main' }}

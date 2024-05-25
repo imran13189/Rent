@@ -33,29 +33,16 @@ const SearchProperty = () => {
     const [selectedValue, setSelectedValue] = useState();
     const [loading, setLoading] = useState(false);
     const [page, setPage] = useState(1);
-    const { selectedLocation } = useSelector((state) => state.property);
+ 
     const dispatch = new useDispatch();
 
-    useEffect(() => {
-        if (selectedLocation) {
-
-            //PropertyService.getProperties(params).then((data) => {
-            //    setProperties(data);
-            //});
-            dispatch(fetchProperties(selectedLocation));
-        }
-
-    }, [selectedLocation]);
-                               
-    //useEffect(() => {
-    //    setPrams({ ...params, ...selectedLocation });
-    //}, [selectedLocation]);
+  
    
     return (
         <Grid container spacing={3} mt={10} justifyContent="flex-end">
             <Grid item xs={12} lg={4}>
                 <Stack spacing={1}>
-                    <Search selectedValue={selectedLocation}></Search>
+                    <Search ></Search>
                 </Stack>
             </Grid>
 

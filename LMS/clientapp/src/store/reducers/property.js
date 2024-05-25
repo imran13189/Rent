@@ -11,7 +11,8 @@ const initialState = {
     },
     showLocation:false,
     search: '',
-    selectedLocation: {page:1},
+    selectedLocation: null,
+    selectedMainLocation: null,
     params: {},
     properties:[]
 };
@@ -46,6 +47,12 @@ const property = createSlice({
 
             /*return { ...state, {...payload.selectedLocation, ...action.payload } }*/
         },
+        locationMainSearch(state, action) {
+
+            state.selectedMainLocation = { ...state.selectedMainLocation, ...action.payload };
+
+            /*return { ...state, {...payload.selectedLocation, ...action.payload } }*/
+        },
         setParams(state, action) {
             state.params = action.payload;
         }
@@ -53,10 +60,13 @@ const property = createSlice({
     extraReducers: (builder) => {
         // Add reducers for additional action types here, and handle loading state as needed
         builder.addCase(fetchProperties.fulfilled, (state, action) => {
-            // Add user to the state array
-            debugger;
+           
+            if (state.selectedLocation?.page== 0)
+            {
+                state.properties = action.payload;
+            }
+            else
             return { ...state, properties: [...state.properties, ...action.payload] };
-           // return { ...state, {properties: action.payload };
         })
         
     }
@@ -65,4 +75,4 @@ const property = createSlice({
 
 export default property.reducer;
 
-export const { setSelectedPosition, setSearch, locationSearch } = property.actions;
+export const { setSelectedPosition, setSearch, locationSearch, locationMainSearch } = property.actions;

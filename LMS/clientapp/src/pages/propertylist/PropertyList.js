@@ -44,11 +44,11 @@ const PropertyList = () => {
         setExpanded(!expanded);
     };
 
-    useEffect(() => {
-       
-        var ddd = properties;
-
-    }, [properties])
+    //useEffect(() => {
+    //    debugger;
+    //    var ddd = properties;
+    //    console.log(properties);
+    //}, [properties])
 
     return (
         <Grid container spacing={3}>
@@ -66,8 +66,8 @@ const PropertyList = () => {
                                     <MoreVertIcon />
                                 </IconButton>
                             }
-                            title="Shrimp and Chorizo Paella"
-                            subheader="September 14, 2016"
+                            title={item.propertyType}
+                            subheader={item.availableFrom }
                         />
                         <CardMedia
                             component="img"
@@ -77,9 +77,7 @@ const PropertyList = () => {
                         />
                         <CardContent>
                             <Typography variant="body2" color="text.secondary">
-                                This impressive paella is a perfect party dish and a fun meal to cook
-                                together with your guests. Add 1 cup of frozen peas along with the mussels,
-                                if you like.
+                                { item.description}
                             </Typography>
                         </CardContent>
                         <CardActions disableSpacing>

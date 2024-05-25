@@ -4,19 +4,19 @@ import { Box, TextField, InputAdornment, Autocomplete, Stack } from '@mui/materi
 import { useNavigate, useLocation } from "react-router-dom"
 // assets
 import LocationOnOutlined from '@mui/icons-material/LocationOnOutlined';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import MasterService from './../../services/MasterService'
 
 import { locationSearch } from "./../../store/reducers/property";
 
-const Search = ({selectedValue }) => {
+const Search = () => {
 
     const [options, setOptions] = useState([]);
     const location = useLocation();
     const navigate = useNavigate()
     const dispatch = useDispatch();
-    const onClickHandler = () => navigate(`/list/123`)
-
+    const onClickHandler = () => navigate(`/list/123/`)
+    const { selectedLocation } = useSelector((state) => state.property);
     const handleLocations = (event) => {
 
         setOptions([]);
@@ -40,7 +40,7 @@ const Search = ({selectedValue }) => {
             freeSolo
             disableOpenOnFocus
             p={0}
-            value={selectedValue?.LocationName}
+            value={selectedLocation?.LocationName}
             filterOptions={x => {
                 return x;
             }}
@@ -48,9 +48,15 @@ const Search = ({selectedValue }) => {
             disableClearable
             options={options}
             onChange={(event, value) => {
-                dispatch(locationSearch(value));
-                if (!location.pathname.indexOf("list")>-1)
-                        onClickHandler();
+              
+                if (!(location.pathname.indexOf("list") > -1)) {
+                    onClickHandler();
+                    dispatch(locationSearch({ ...value, page: 0 }));
+                    
+                }
+                else {
+                    dispatch(locationSearch({ ...value, page: 0 }));
+                }
             }}
             getOptionLabel={(option) => typeof option === "string" ? option : option.LocationName}
             renderInput={(params) => (
