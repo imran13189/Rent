@@ -49,3 +49,6 @@
 /LMS/UploadFiles
 /Rent.BunnyNet/obj/Release/net6.0
 /Rent.BunnyNet/bin/Release/net6.0
+/Rent.BunnyNet/obj
+/Rent.BunnyNet/bin
+/Rent.Cordinates/bin/Debug/net6.0/Newtonsoft.Json.dll
