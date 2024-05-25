@@ -51,4 +51,7 @@
 /Rent.BunnyNet/bin/Release/net6.0
 /Rent.BunnyNet/obj
 /Rent.BunnyNet/bin
+
 /Rent.Cordinates/bin/Debug/net6.0/Newtonsoft.Json.dll
+/Rent.Cordinates/obj/Debug/net6.0/Rent.Cordinates.csproj.FileListAbsolute.txt
+/Rent.BunnyNet/obj/Debug/net6.0/ref/Rent.BunnyNet.dll
