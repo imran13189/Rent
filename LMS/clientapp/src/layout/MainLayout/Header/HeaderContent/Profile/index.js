@@ -57,7 +57,8 @@ function a11yProps(index) {
 const Profile = () => {
   const theme = useTheme();
     const dispatch = useDispatch();
-  const handleLogout = async () => {
+    const handleLogout = async () => {
+        window.localStorage.removeItem('user',);
       dispatch(setUserDetails({ userDetails:null}));
   };
   

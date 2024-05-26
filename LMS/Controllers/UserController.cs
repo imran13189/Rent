@@ -9,7 +9,7 @@ using System.Text;
 
 namespace LMS.Controllers
 {
-
+    
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -47,10 +47,10 @@ namespace LMS.Controllers
                 if (userData != null)
                 {
                     var authClaims = new List<Claim>
-                {
+                    {
                     new Claim(ClaimTypes.Name, Convert.ToString(user.UserId)),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                };
+                    };
 
                     authClaims.Add(new Claim(ClaimTypes.Role, userData.RoleName));
                     var token = GetToken(authClaims);
@@ -62,7 +62,7 @@ namespace LMS.Controllers
                         userData = userData
                     });
                 }
-                return Unauthorized();
+                return Ok("Invalid OTP");
             }
             catch (Exception)
             {

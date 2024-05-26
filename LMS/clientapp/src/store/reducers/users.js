@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 
 // initial state
 const initialState = {
-    userDetails: null,
+    userDetails: window.localStorage.getItem("user"),
     showLocation:false,
     search: '',
     selectedLocation:''

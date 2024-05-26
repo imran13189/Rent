@@ -73,14 +73,14 @@ const AuthLogin = () => {
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
                     try {
                        
-
+                        debugger;
                         if (isOTPSent) {
                             var otp='';
                             for (var i = 0; i < 4; i++) {
                                 otp =otp + inputRef.current[i].getElementsByTagName("input")[0].value.toString();
                             }
                           
-                            const result = await UserService.ValidateOTP({ ...values, OTP: otp });
+                            const result = await UserService.ValidateOTP({Mobile:values.mobile, OTP: otp });
                             debugger;
                             if (result.userData) {
                                 window.localStorage.setItem('user', JSON.stringify(result));

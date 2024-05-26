@@ -27,13 +27,13 @@ builder.Services.AddCors(options =>
 // Add services to the container.
 builder.Services.AddScoped<IMasters, MasterRepo>();
 builder.Services.AddScoped<IProperty, PropertyRepo>();
-
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IUser, UserRepo>();
 builder.Services.AddScoped<IContact, ContactRepo>();
 builder.Services.AddScoped<IAccounts, AccountsRepo>();
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
 var appSettingsSection = builder.Configuration.GetSection("AppSettings");
 var appSettings = appSettingsSection.Get<AppSettings>();
 builder.Services.AddSingleton(appSettings);
