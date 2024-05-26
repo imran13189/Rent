@@ -14,16 +14,18 @@ using System.Drawing;
 using static System.Net.Mime.MediaTypeNames;
 using System.Reflection.Emit;
 using System.IO;
+using Rent.BunnyNet;
+using Microsoft.Extensions.Configuration;
 
 namespace LMS.Repository.Repo
 {
     public class PropertyRepo : BaseRepository, IProperty
     {
-
+        private readonly IConfiguration _configuration;
         //private readonly IAmazonS3 _s3Client;
-        public PropertyRepo()
+        public PropertyRepo(IConfiguration configuration)
         {
-
+            _configuration = configuration;
         }
         public async Task<Result> SaveLocation(Location location)
         {
@@ -35,9 +37,9 @@ namespace LMS.Repository.Repo
         {
             Result taskdb = await QueryFirstOrDefaultAsync<Result>("SP_SaveProperty", property);
 
-            string path = Convert.ToString(taskdb.Id) + "/" + property.Description?.Replace(" ", "_");
+            string path = Convert.ToString(taskdb.Id) + "/" + Convert.ToString(taskdb.Id);
             Task[] tasks = new Task[formFiles.Count];
-            
+
             for (int i = 0; i < formFiles.Count; i++)
             {
                 string path1 = path + Convert.ToString(i);
@@ -52,13 +54,14 @@ namespace LMS.Repository.Repo
 
         public async Task SaveFiles(IFormFile file, string path)
         {
-            BunnyCDNStorage storage = new BunnyCDNStorage("rentstorage", "30e2a0a6-7874-49da-a71c9bbadd39-be9e-4c6a");
+            //BunnyCDNStorage storage = new BunnyCDNStorage("rentstorage", "30e2a0a6-7874-49da-a71c9bbadd39-be9e-4c6a");
+            GoogleStorage storage = new GoogleStorage(_configuration);
             using (Bitmap postedImage = new Bitmap(file.OpenReadStream()))
             {
 
                 try
                 {
-                   
+
                     var key = path + ".jpg";
                     ImageCodecInfo myImageCodecInfo;
                     System.Drawing.Imaging.Encoder myEncoder;
@@ -74,22 +77,22 @@ namespace LMS.Repository.Repo
                         postedImage.Save(memoryStream, myImageCodecInfo, myEncoderParameters);
                         byte[] data = memoryStream.ToArray();
                         Stream s = new MemoryStream(data, 0, data.Length);
-                        await storage.UploadAsync(s, "rentstorage/" + key);
+                        await storage.UploadFile(s, "rentstorage/" + key);
                         s.Close();
                     }
-                   
+
                 }
                 catch (Exception ex)
                 {
                     throw;
                 }
             }
-            
+
         }
 
         public async Task<IEnumerable<PropertyModel>> GetProperties(LocationModel location)
         {
-            return await QueryAsync<PropertyModel>("SP_GetProperties", new { Lat = location.Lat, Long = location.Long, Location = location.LocationName, ptype = location.ptype, budget = location.budget,page=location.page });
+            return await QueryAsync<PropertyModel>("SP_GetProperties", new { Lat = location.Lat, Long = location.Long, Location = location.LocationName, ptype = location.ptype, budget = location.budget, page = location.page });
         }
 
         public async Task<List<StorageObject>> GetStorageObjectsAsync(string path)
@@ -98,7 +101,7 @@ namespace LMS.Repository.Repo
             return await storage.GetStorageObjectsAsync("rentstorage/1");
         }
 
-      
+
         private static ImageCodecInfo GetEncoderInfo(String mimeType)
         {
             int j;

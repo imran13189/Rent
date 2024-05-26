@@ -13,6 +13,7 @@ namespace LMS.Repo.Repository
     {
         public static string ConnectionString { get; set; }
         public static string AzadConnectionString { get; set; }
+        public static string GoogleSettings { get; set; }
 
         public object Query<T>(object gET_ALL_STATUS, object p, CommandType text)
         {
@@ -36,7 +37,7 @@ namespace LMS.Repo.Repository
                 {
                     return await conn.QueryAsync<T>(sql, param, commandType: commandType);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     throw;
                 }

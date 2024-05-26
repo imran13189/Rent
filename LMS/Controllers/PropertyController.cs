@@ -5,19 +5,25 @@ using LMS.Core.Entities;
 using LMS.Core.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting.Internal;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LMS.Controllers
 {
-   
+    [Authorize]
     [ApiController]
     public class PropertyController : ControllerBase
     {
         public IProperty _property;
-      
+        private readonly IWebHostEnvironment _hostingEnvironment;
+
         //private readonly IAmazonS3 _s3Client;
-        public PropertyController(IProperty property)
+        public PropertyController(IProperty property, IWebHostEnvironment hostingEnvironment)
         {
             _property = property;
+            _hostingEnvironment = hostingEnvironment;
             // _s3Client = s3Client;
         }
 

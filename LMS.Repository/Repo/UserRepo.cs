@@ -11,10 +11,11 @@ using System.Reflection;
 
 namespace LMS.Repo.Repository
 {
-    public class UserRepo: BaseRepository,IUser
+    public class UserRepo : BaseRepository, IUser
     {
         public readonly AppSettings _appSettings;
-        public UserRepo(AppSettings appSettings) {
+        public UserRepo(AppSettings appSettings)
+        {
             _appSettings = appSettings;
         }
         public async Task<IEnumerable<UserViewModel>> GetUsers()
@@ -46,11 +47,11 @@ namespace LMS.Repo.Repository
 
         public async Task<Result> SaveUser(User user)
         {
-            UserResult result =await QueryFirstOrDefaultAsync<UserResult>("SP_SaveUser",new {UserId=0, Mobile=user.Mobile});
+            UserResult result = await QueryFirstOrDefaultAsync<UserResult>("SP_SaveUser", new { UserId = 0, Mobile = user.Mobile });
             return await SentEmail(result.OTP);
         }
 
-      
+
         public async Task<Result> SentEmail(string OTP)
         {
             try
@@ -60,7 +61,7 @@ namespace LMS.Repo.Repository
                 message.To.Add("imran13189@gmail.com");
                 message.Subject = "OTP Verification #";
                 message.IsBodyHtml = true;
-                message.Body = "<div>"+OTP+"</div>";
+                message.Body = "<div>" + OTP + "</div>";
 
                 SmtpClient client = new SmtpClient("smtp.gmail.com", 587)
                 {
@@ -86,7 +87,7 @@ namespace LMS.Repo.Repository
             {
                 return await QueryFirstOrDefaultAsync<UserViewModel>("SP_LoginUser", new { UserName = user.Email, Password = user.Password });
             }
-            catch(Exception)
+            catch (Exception)
             {
                 throw;
             }
@@ -104,11 +105,11 @@ namespace LMS.Repo.Repository
             }
         }
 
-        public async Task<string> ValidateOTP(User user)
+        public async Task<UserViewModel> ValidateOTP(User user)
         {
             try
             {
-                return await QueryFirstOrDefaultAsync<string>("SP_ValidateOTP", new { Mobile = user.Mobile, OTP = user.OTP  });
+                return await QueryFirstOrDefaultAsync<UserViewModel>("SP_ValidateOTP", new { Mobile = user.Mobile, OTP = user.OTP });
             }
             catch (Exception)
             {
