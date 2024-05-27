@@ -92,7 +92,7 @@ namespace LMS.Controllers
             var token = new JwtSecurityToken(
                 issuer: _appSettings.ValidIssuer,
                 audience: _appSettings.ValidAudience,
-                expires: DateTime.Now.AddHours(3),
+                expires: DateTime.Now.AddYears(1),
                 claims: authClaims,
                 signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
                 );

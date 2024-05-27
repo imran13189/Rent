@@ -7,7 +7,7 @@ namespace LMS.Core.Interfaces
     public interface IProperty
     {
         Task<Result> SaveLocation(Location location);
-        Task<Result> SaveProperty(Property property, List<IFormFile> formFiles);
+        Task<Result> SaveProperty(Property property, List<IFormFile> formFiles, string FilePath);
         Task<IEnumerable<PropertyModel>> GetProperties(LocationModel Location);
         Task<List<StorageObject>> GetStorageObjectsAsync(string path);
     }
