@@ -275,28 +275,50 @@ const PropertyAd = ({ setShowMessage }) => {
                             )}
                         </Stack>
                     </Grid>
-                    <Grid item xs={12} lg={6}>
+
+                    <Grid item xs={12} lg={4}>
+                        <Stack spacing={1}>
+                            <InputLabel htmlFor="email-signup">Area(Sq ft)</InputLabel>
+                            <OutlinedInput
+                                fullWidth
+                                error={Boolean(formik.touched.Area && formik.errors.Area)}
+                                id="email-login"
+                                type="number"
+                                value={formik.values.Area}
+                                name="Area"
+                                onBlur={formik.handleBlur}
+                                onChange={formik.handleChange}
+                                placeholder="Area"
+                            />
+                            {formik.touched.Area && formik.errors.Area && (
+                                <FormHelperText error id="helper-text-email-signup">
+                                    {formik.errors.Area}
+                                </FormHelperText>
+                            )}
+                        </Stack>
+                    </Grid>
+
+                    <Grid item xs={12} lg={5}>
                         <Stack spacing={1}>
                             <InputLabel htmlFor="password-signup">No. of Bathrooms</InputLabel>
                             <OutlinedInput
                                 fullWidth
                                 id="Bathrooms"
+                                inputProps={{ min: 0, style: { textAlign: 'center' } }}
                                 type="text"
                                 value={formik.values.Bathrooms}
                                 name="Bathrooms"
                                 onBlur={formik.handleBlur}
-                                onChange={(e) => {
-                                    formik.handleChange(e);
-                                    changePassword(e.target.value);
-                                }}
+                                onChange={formik.handleChange}
                                 startAdornment={
-                                    <InputAdornment position="end">
+                                    <InputAdornment position="start">
                                         <RemoveOutlinedIcon
                                             aria-label="toggle password visibility"
-                                            onClick={() => { parseInt(values.Bathrooms) >= 1 ? setFieldValue("Bathrooms", parseInt(values.Bathrooms) - 1) : 0; }}
+                                            onClick={() => { parseInt(formik.values.Bathrooms) >= 1 ? formik.setFieldValue("Bathrooms", parseInt(formik.values.Bathrooms) - 1) : 0; }}
                                             onMouseDown={handleMouseDownPassword}
-                                            edge="end"
+                                            edge="start"
                                             size="large"
+                                            position="start"
                                         >
                                             {showPassword ? <EyeOutlined /> : <EyeInvisibleOutlined />}
                                         </RemoveOutlinedIcon>
@@ -316,7 +338,7 @@ const PropertyAd = ({ setShowMessage }) => {
                                     </InputAdornment>
                                 }
                                 placeholder="0"
-                                inputProps={{}}
+                              
                             />
                             {formik.touched.Bathrooms && formik.errors.Bathrooms && (
                                 <FormHelperText error id="helper-text-password-signup">
@@ -326,7 +348,7 @@ const PropertyAd = ({ setShowMessage }) => {
                         </Stack>
 
                     </Grid>
-                    <Grid item xs={12} lg={6}>
+                    <Grid item xs={12} lg={3}>
                         <Stack spacing={1} >
                             <InputLabel htmlFor="email-signup">Parking</InputLabel>
                             <ToggleButtonGroup
@@ -344,7 +366,8 @@ const PropertyAd = ({ setShowMessage }) => {
 
                     </Grid>
                     <Grid item xs={12} lg={12}>
-                        <Stack spacing={1} direction="row">
+                        <Stack spacing={1} >
+                            <InputLabel htmlFor="propertyStatus">Property Status</InputLabel>
                             <ToggleButtonGroup
                                 color="primary"
                                 value={`${formik.values.IsFurnished}`}
@@ -353,9 +376,9 @@ const PropertyAd = ({ setShowMessage }) => {
                                 aria-label="Platform"
                                 name="IsFurnished"
                             >
-                                <ToggleButton size="small" name="IsFurnished" color="info" value="1">Furnished</ToggleButton>
-                                <ToggleButton size="small" name="IsFurnished" color="success" value="2">Semi-Furnished</ToggleButton>
-                                <ToggleButton size="small" name="IsFurnished" color="secondary" value="3">Non-Furnished</ToggleButton>
+                                <ToggleButton size="small" name="IsFurnished" color="success" value="1">Furnished</ToggleButton>
+                                <ToggleButton size="small" name="IsFurnished" color="info" value="2">Semi-Furnished</ToggleButton>
+                                <ToggleButton size="small" name="IsFurnished" color="error" value="3">Non-Furnished</ToggleButton>
                             </ToggleButtonGroup>
 
                             {formik.touched.Bathrooms && formik.errors.Bathrooms && (
@@ -391,7 +414,7 @@ const PropertyAd = ({ setShowMessage }) => {
 
                     <Grid item xs={12}>
                         <Typography variant="body2">
-                            <Checkbox name="termcondition" onChange={formik.handleChange} size="small" /> By Publishing, you agree to our &nbsp;
+                            <Checkbox  name="termcondition" onChange={formik.handleChange} size="small" /> By Publishing, you agree to our &nbsp;
                             <Link variant="subtitle2" component={RouterLink} to="#" color="action.main">
                                 Terms of Service
                             </Link>
@@ -408,7 +431,7 @@ const PropertyAd = ({ setShowMessage }) => {
                     )}
                     <Grid item xs={12}>
                         <AnimateButton>
-                            <LoadingButton loading={loading} disabled={!formik.values.termcondition} fullWidth size="large" type="submit" variant="contained" sx={{ bgcolor: "action.main" }}>
+                            <LoadingButton loading={loading} disabled={!formik.values.termcondition && !formik.values.LocationName && !formik.values.PropertyTypeId && !formik.values.RentAmount} fullWidth size="large" type="submit" variant="contained" sx={{ bgcolor: "action.main" }}>
                                 { loading?"disabled":"Publish"}
                             </LoadingButton>
                         </AnimateButton>

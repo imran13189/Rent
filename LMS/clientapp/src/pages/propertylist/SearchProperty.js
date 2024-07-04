@@ -26,6 +26,7 @@ import { useSelector, useDispatch } from "react-redux";
 import PropertyService from './../../services/PropertyService';
 import Search from './../../pages/dashboard/Search';
 import { fetchProperties } from "./../../store/reducers/property";
+import { locationSearch } from "./../../store/reducers/property";
 
 const SearchProperty = () => {
 
@@ -33,7 +34,8 @@ const SearchProperty = () => {
     const [selectedValue, setSelectedValue] = useState();
     const [loading, setLoading] = useState(false);
     const [page, setPage] = useState(1);
- 
+    const { selectedLocation } = useSelector((state) => state.property);
+
     const dispatch = new useDispatch();
 
   
@@ -51,7 +53,7 @@ const SearchProperty = () => {
                     <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
-                        onChange={(evt) => setPrams({ ...params, ptype: evt.target.value })}
+                        onChange={(evt) => dispatch(locationSearch({ ...selectedLocation, ptype: evt.target.value }))}
                         label="Age"
                         name="PropertyTypeId"
                       
@@ -76,7 +78,12 @@ const SearchProperty = () => {
                         type="number"
                         name="RentAmount"
                         placeholder="Budget"
-                        onChange={(evt) => setPrams({ ...params, budget:  parseInt(evt.target.value??0) })}
+                        onChange={(evt) => {
+                            debugger;
+                            dispatch(locationSearch({
+                                ...selectedLocation, budget: parseInt(evt.target.value ?? 0)
+                            }))
+                        }}
                     />
                    
                 </Stack>

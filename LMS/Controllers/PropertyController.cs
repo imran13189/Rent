@@ -34,12 +34,7 @@ namespace LMS.Controllers
             return await _property.GetStorageObjectsAsync("rentstorage/1");
         }
 
-        [HttpPost]
-        [Route("api/GetProperties")]
-        public async Task<IEnumerable<PropertyModel>> GetProperties(LocationModel location)
-        {
-            return await _property.GetProperties(location);
-        }
+    
 
 
         [HttpPost]

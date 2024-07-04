@@ -16,8 +16,8 @@ const AuthFooter = () => {
       >
         <Typography variant="subtitle2" color="secondary" component="span">
           &copy; All right reserved by &nbsp;
-          <Typography component={Link} variant="subtitle2" href="https://codedthemes.com" target="_blank" underline="hover">
-            Imeshma
+          <Typography component={Link} variant="subtitle2" href="https://sipaz.in" target="_blank" underline="hover">
+            SIPAZ
           </Typography>
         </Typography>
 

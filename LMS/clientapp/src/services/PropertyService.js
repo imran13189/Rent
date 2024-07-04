@@ -22,9 +22,7 @@ class PropertyService {
     };
 
     getProperties = async (params) => {
-        const res = await axios.post(`${url}GetProperties`, params,{
-            headers: Auth.getHeader()
-        });
+        const res = await axios.post(`${url}GetProperties`, params);
         return res.data;
     };
 

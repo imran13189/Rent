@@ -11,13 +11,14 @@ const initialState = {
     },
     showLocation:false,
     search: '',
-    selectedLocation: null,
+    selectedLocation: { page :0},
     selectedMainLocation: null,
     params: {},
     properties:[]
 };
 
 export const fetchProperties = createAsyncThunk('propertiesData/fetchProperties', async (params) => {
+    debugger;
     const response = await PropertyService.getProperties(params);
     return response;
 });

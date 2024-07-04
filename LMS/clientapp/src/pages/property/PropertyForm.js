@@ -80,7 +80,7 @@ const PropertyForm = () => {
     }
 
     useEffect(() => {
-        debugger;
+      
         setInitialValues({ ...initialValues, LocationName: positionDetails.LocationName });
     }, [positionDetails]);
 
@@ -94,7 +94,7 @@ const PropertyForm = () => {
 
                 })}
                 validate={(values) => {
-                   
+                  
                     //const errrors = {};
                     //if (positionDetails.LocationName) {
                     //    values.LocationName = positionDetails.LocationName;
@@ -105,7 +105,7 @@ const PropertyForm = () => {
                 } }
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
                     try {
-                        debugger;
+                     
                         const formData = new FormData();
                         for (var key in values) {
                             formData.append(key, values[key]);
@@ -119,7 +119,7 @@ const PropertyForm = () => {
                         }
                         
                         
-                        debugger;
+                     
                         const result = await PropertyService.SaveProperty(formData);
                         setStatus({ success: false });
                         setSubmitting(false);
@@ -383,7 +383,7 @@ const PropertyForm = () => {
                             )}
                             <Grid item xs={12}>
                                 <AnimateButton>
-                                    <Button disabled={!values.termcondition} fullWidth size="large" type="submit" variant="contained" sx={{bgcolor:"action.main"} }>
+                                    <Button disabled={!values.termcondition&&values.} fullWidth size="large" type="submit" variant="contained" sx={{ bgcolor: "action.main" }}>
                                         Publish 
                                     </Button>
                                 </AnimateButton>

@@ -6,6 +6,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Newtonsoft.Json.Linq;
 
 namespace LMS.Controllers
 {
@@ -14,11 +15,13 @@ namespace LMS.Controllers
     public class UserController : ControllerBase
     {
         public IUser _user;
+        public IProperty _property;
         public readonly AppSettings _appSettings;
-        public UserController(IUser user, AppSettings appSettings)
+        public UserController(IUser user, IProperty property, AppSettings appSettings)
         {
             _user = user;
             _appSettings = appSettings;
+            _property = property;
         }
 
         [HttpGet]
@@ -36,6 +39,8 @@ namespace LMS.Controllers
 
             return await _user.GetRoles();
         }
+
+      
 
         [HttpPost]
         [Route("api/ValidateOTP")]
@@ -83,6 +88,13 @@ namespace LMS.Controllers
             {
                 throw;
             }
+        }
+
+        [HttpPost]
+        [Route("api/GetProperties")]
+        public async Task<IEnumerable<PropertyModel>> GetProperties(LocationModel location)
+        {
+            return await _property.GetProperties(location);
         }
 
         private JwtSecurityToken GetToken(List<Claim> authClaims)

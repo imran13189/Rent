@@ -1,4 +1,4 @@
-import { useRef, useState, forwardRef } from "react";
+import { useRef, useState, forwardRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 // material-ui
@@ -48,14 +48,29 @@ const AuthLogin = () => {
     const inputRef = useRef(new Array());
 
     const handleOtp = (e, index) => {
-      
-        //inputRef.current[++index].focus();
-        if (!(e.key === "Backspace")) {
-            if (inputRef.current[index + 1])
-                inputRef.current[++index].getElementsByTagName("input")[0].focus();
+        debugger;
+        if (!(e.key === "Enter")) {
+            if (!(e.key === "Backspace")) {
+                if (inputRef.current[index + 1])
+                    inputRef.current[++index].getElementsByTagName("input")[0].focus();
+            }
+            else if (e.key === "Backspace") {
+                if (inputRef.current[index - 1]) {
+                    inputRef.current[--index].getElementsByTagName("input")[0].focus();
+                }
+
+            }
         }
         
     };
+
+    useEffect(() => {
+      
+        if (inputRef.current.length>0)
+            inputRef.current[0].getElementsByTagName("input")[0].focus()
+
+    }, [isOTPSent]);
+
     return (
         <>
            
@@ -73,7 +88,7 @@ const AuthLogin = () => {
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
                     try {
                        
-                        debugger;
+                      
                         if (isOTPSent) {
                             var otp='';
                             for (var i = 0; i < 4; i++) {
@@ -81,7 +96,7 @@ const AuthLogin = () => {
                             }
                           
                             const result = await UserService.ValidateOTP({Mobile:values.mobile, OTP: otp });
-                            debugger;
+                           
                             if (result.userData) {
                                 window.localStorage.setItem('user', JSON.stringify(result));
                                 dispatch(setUserDetails({ userDetails: result.userData }));
@@ -95,6 +110,7 @@ const AuthLogin = () => {
                             const result = await UserService.SaveUser(values);
                             setOTPSent(true);
                             setSubmitting(false);
+                           
                         }
                     } catch (err) {
                         setStatus({ success: false });
