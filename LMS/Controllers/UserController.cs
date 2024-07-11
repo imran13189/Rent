@@ -1,115 +1,61 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using LMS.Core.Entities;
-using LMS.Core.Interfaces;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using Microsoft.IdentityModel.Tokens;
+﻿using System;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
-using Newtonsoft.Json.Linq;
+using System.Threading.Tasks;
 
-namespace LMS.Controllers
+namespace SharePointUpdate
 {
-    
-    [ApiController]
-    public class UserController : ControllerBase
+    class Program
     {
-        public IUser _user;
-        public IProperty _property;
-        public readonly AppSettings _appSettings;
-        public UserController(IUser user, IProperty property, AppSettings appSettings)
+        static async Task Main(string[] args)
         {
-            _user = user;
-            _appSettings = appSettings;
-            _property = property;
-        }
+            var siteUrl = "https://yoursite.sharepoint.com";
+            var listName = "YourListName";
+            var itemId = 1; // For example, item with ID = 1
+            var utf8Value = "Your UTF-8 encoded value";
+            var username = "yourusername";
+            var password = "yourpassword";
+            var fieldName = "YourFieldName";
 
-        [HttpGet]
-        [Route("api/GetUsers")]
-        public async Task<IEnumerable<UserViewModel>> GetUsers()
-        {
-
-            return await _user.GetUsers();
-        }
-
-        [HttpGet]
-        [Route("api/GetRoles")]
-        public async Task<IEnumerable<Role>> GetRoles()
-        {
-
-            return await _user.GetRoles();
-        }
-
-      
-
-        [HttpPost]
-        [Route("api/ValidateOTP")]
-        public async Task<IActionResult> ValidateOTP(User user)
-        {
-            try
+            using (var client = new HttpClient())
             {
-                var userData = await _user.ValidateOTP(user);
-                if (userData != null)
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                // Authentication
+                var authToken = Convert.ToBase64String(Encoding.ASCII.GetBytes($"{username}:{password}"));
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", authToken);
+
+                // Get the form digest value
+                var digestUrl = $"{siteUrl}/_api/contextinfo";
+                var digestResponse = await client.PostAsync(digestUrl, new StringContent(string.Empty));
+                var digestJson = await digestResponse.Content.ReadAsStringAsync();
+                var formDigestValue = Newtonsoft.Json.Linq.JObject.Parse(digestJson)["d"]["GetContextWebInformation"]["FormDigestValue"].ToString();
+
+                // Update the list item with the UTF-8 value
+                var updateUrl = $"{siteUrl}/_api/web/lists/getbytitle('{listName}')/items({itemId})";
+                var itemPayload = new
                 {
-                    var authClaims = new List<Claim>
-                    {
-                    new Claim(ClaimTypes.Name, Convert.ToString(user.UserId)),
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                    };
+                    __metadata = new { type = $"SP.Data.{listName}ListItem" },
+                    YourFieldName = utf8Value
+                };
+                var itemContent = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(itemPayload), Encoding.UTF8, "application/json");
+                itemContent.Headers.Add("X-RequestDigest", formDigestValue);
+                itemContent.Headers.Add("IF-MATCH", "*");
+                itemContent.Headers.Add("X-HTTP-Method", "MERGE");
 
-                    authClaims.Add(new Claim(ClaimTypes.Role, userData.RoleName));
-                    var token = GetToken(authClaims);
+                var updateResponse = await client.PostAsync(updateUrl, itemContent);
 
-                    return Ok(new
-                    {
-                        token = new JwtSecurityTokenHandler().WriteToken(token),
-                        expiration = token.ValidTo,
-                        userData = userData
-                    });
+                if (updateResponse.IsSuccessStatusCode)
+                {
+                    Console.WriteLine("Item updated successfully");
                 }
-                return Ok("Invalid OTP");
+                else
+                {
+                    var error = await updateResponse.Content.ReadAsStringAsync();
+                    Console.WriteLine($"Error updating item: {error}");
+                }
             }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-
-        [HttpPost]
-        [Route("api/SaveUser")]
-        public async Task<Result> SaveUser(User user)
-        {
-            try
-            {
-                return await _user.SaveUser(user);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        [HttpPost]
-        [Route("api/GetProperties")]
-        public async Task<IEnumerable<PropertyModel>> GetProperties(LocationModel location)
-        {
-            return await _property.GetProperties(location);
-        }
-
-        private JwtSecurityToken GetToken(List<Claim> authClaims)
-        {
-            var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appSettings.TSecret));
-
-            var token = new JwtSecurityToken(
-                issuer: _appSettings.ValidIssuer,
-                audience: _appSettings.ValidAudience,
-                expires: DateTime.Now.AddYears(1),
-                claims: authClaims,
-                signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
-                );
-
-            return token;
         }
     }
 }
