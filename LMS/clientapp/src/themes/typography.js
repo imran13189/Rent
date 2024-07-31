@@ -44,14 +44,15 @@ const Typography = (fontFamily) => ({
   },
   body1: {
     fontSize: '0.875rem',
-    lineHeight: 1.57
+    lineHeight: 1.57,
+   color: '#000'
   },
   body2: {
     fontSize: '0.75rem',
     lineHeight: 1.66
     },
     body3: {
-        fontSize: '0.70rem',
+        fontSize: '0.80rem',
         lineHeight: 1.66
     },
   subtitle1: {

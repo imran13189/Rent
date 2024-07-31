@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 // material-ui
 import { Grid, Stack, Typography, useMediaQuery } from "@mui/material";
-
+import Logo from 'components/Logo';
 // project import
 import AuthLogin from "./auth-forms/AuthLogin";
 import AuthWrapper from "./AuthWrapper";
@@ -13,12 +13,15 @@ const Login = () => {
 
 
     return (
-        <Grid container spacing={3}>
-            <Grid item sm={ 7} md={7} lg={7}>
+        <Grid container >
+            <Grid item xs={12} lg={12} sx={{ ml: 3, mt: 3 }}>
+                <Logo />
+            </Grid>
+            <Grid  sm={7} md={7} lg={7} sx={{ mt:0}}>
                 <div className="login">&nbsp;</div>
             </Grid>
             
-            <Grid item xs={12} sm={5} lg={5}>
+            <Grid  xs={12} sm={5} lg={5} sx={{ mt: 0 }}>
                 <AuthWrapper>
                     <Grid container spacing={3}>
                         <Grid item xs={12} sm={12}  lg={12}>

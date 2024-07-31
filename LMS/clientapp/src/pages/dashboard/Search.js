@@ -15,7 +15,7 @@ const Search = () => {
     const location = useLocation();
     const navigate = useNavigate()
     const dispatch = useDispatch();
-    const onClickHandler = () => navigate(`/list/123/`)
+    const onClickHandler = (value) => navigate(`/list/${value?.LocationName}`)
     const { selectedLocation } = useSelector((state) => state.property);
     const handleLocations = (event) => {
 
@@ -50,7 +50,7 @@ const Search = () => {
             onChange={(event, value) => {
               
                 if (!(location.pathname.indexOf("list") > -1)) {
-                    onClickHandler();
+                    onClickHandler(value);
                     dispatch(locationSearch({ ...value, page: 0 }));
                     
                 }

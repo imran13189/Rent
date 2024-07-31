@@ -28,7 +28,8 @@ const Header = ({ open, handleDrawerToggle }) => {
                     aria-label="open drawer"
                     
                     edge="start"
-                    sx={{ ml: { xs: 0, lg: -2 }, color: 'text.heading' }}><Logo></Logo>
+                    sx={{ ml: { xs: 0, lg: -2 }, color: 'text.heading' }}>
+                    <Logo></Logo>
                 </Typography>
             </Box>
             <HeaderContent />
@@ -48,13 +49,9 @@ const Header = ({ open, handleDrawerToggle }) => {
 
   return (
     <>
-      {!matchDownMD ? (
-        <AppBarStyled open={open} {...appBar}>
-          {mainHeader}
-        </AppBarStyled>
-      ) : (
+     
         <AppBar {...appBar}>{mainHeader}</AppBar>
-      )}
+      
     </>
   );
 };

@@ -91,3 +91,11 @@ section.container
             display: block;
         }
     }
+
+
+@media only screen and (min-width:480px) {
+    .mobileLogo {
+        margin-top: 50px;
+        margin-left: 50px;
+    }
+}

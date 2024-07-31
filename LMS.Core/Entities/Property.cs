@@ -18,7 +18,7 @@ namespace LMS.Core.Entities
         public string? Description { get; set; }
         public int Parking { get; set; }
         public DateTime? AvailableFrom { get; set; }
-     
+        public long UserId { get; set; }
 
     }
 }

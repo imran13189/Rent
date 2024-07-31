@@ -77,6 +77,7 @@ const PropertyAd = ({ setShowMessage }) => {
 
 
     const { positionDetails } = useSelector((state) => state.property);
+    const { userDetails } = useSelector((state) => state.users);
 
 
     const handleOpen = () => setOpen(true);
@@ -115,7 +116,10 @@ const PropertyAd = ({ setShowMessage }) => {
                     formData.append(key, values[key]);
                 }
 
+                debugger;
                 formData.append("LocationId", positionDetails.LocationId);
+                formData.append("UserId", userDetails.userId);
+
 
                 for (let i = 0; i < files.length; i++) {
                     let image = files[i];
