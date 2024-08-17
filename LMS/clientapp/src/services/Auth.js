@@ -1,7 +1,7 @@
 export default new (class Auth {
     getUser() {
         try {
-            debugger;
+           
             const value = window.localStorage.getItem("user");
             if (value) {
                 return JSON.parse(value);

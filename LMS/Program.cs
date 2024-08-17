@@ -1,5 +1,4 @@
-using Amazon.Runtime;
-using Amazon.S3;
+
 using LMS.Core.Entities;
 using LMS.Core.Interfaces;
 using LMS.Repo.Repository;

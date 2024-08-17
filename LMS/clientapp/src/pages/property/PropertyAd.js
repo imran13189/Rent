@@ -116,7 +116,7 @@ const PropertyAd = ({ setShowMessage }) => {
                     formData.append(key, values[key]);
                 }
 
-                debugger;
+              
                 formData.append("LocationId", positionDetails.LocationId);
                 formData.append("UserId", userDetails.userId);
 

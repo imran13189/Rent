@@ -79,7 +79,7 @@ const SearchProperty = () => {
                         name="RentAmount"
                         placeholder="Budget"
                         onChange={(evt) => {
-                            debugger;
+                          
                             dispatch(locationSearch({
                                 ...selectedLocation, budget: parseInt(evt.target.value ?? 0)
                             }))

@@ -13,5 +13,6 @@ namespace LMS.Core.Entities
         public string ValidAudience { get; set; }
         public string ValidIssuer { get; set; }
         public string TSecret { get; set; }
+        public string RedirectUrl { get; set; }
     }
 }

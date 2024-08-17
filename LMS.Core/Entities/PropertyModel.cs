@@ -27,6 +27,8 @@ namespace LMS.Core.Entities
         public string? FilePath { get; set; }
         public long RowNum { get; set; }
 
+        public string PropertyUrl { get; set; }
+
     }
    
     public class LocationModel
@@ -39,5 +41,14 @@ namespace LMS.Core.Entities
         public int? budget { get; set; }
         public int? page { get; set; }
         
+    }
+
+    public class FileModel
+    {
+        public int? Id { get; set;}
+        public string? img { get; set; }   
+        public string title { get; set; }
+        public int rows { get; set; }
+        public int cols { get; set; }
     }
 }

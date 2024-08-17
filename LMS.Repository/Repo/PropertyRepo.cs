@@ -160,6 +160,11 @@ namespace LMS.Repository.Repo
             return await QueryAsync<PropertyModel>("SP_GetProperties", new { Lat = location.Lat, Long = location.Long, Location = location.LocationName, ptype = location.ptype, budget = location.budget, page = location.page });
         }
 
+        public async Task<PropertyModel> GetProperty(long PropertyId)
+        {
+            return await QueryFirstOrDefaultAsync<PropertyModel>("SP_GetProperty", new {PropertyId= PropertyId });
+        }
+
         public async Task<List<StorageObject>> GetStorageObjectsAsync(string path)
         {
             BunnyCDNStorage storage = new BunnyCDNStorage("rentstorage", "30e2a0a6-7874-49da-a71c9bbadd39-be9e-4c6a");

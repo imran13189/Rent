@@ -7,7 +7,7 @@ import {
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { styled } from '@mui/material/styles';
-import Card from '@mui/material/Card';
+import { Card, CardActionArea } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import CardHeader from '@mui/material/CardHeader';
@@ -59,6 +59,7 @@ const PropertyList = () => {
             {properties?.map((item) =>
                 <Grid key={item.propertyId} item xs={12} sm={10} md={5} lg={6} >
                     <Card sx={{ maxWidth: '100%' }}>
+                        <CardActionArea href={item.propertyUrl}>
                         <CardMedia
                             sx={{ height: 140 }}
                             image={item.filePath}
@@ -129,7 +130,8 @@ const PropertyList = () => {
                             </IconButton>
 
                            
-                        </CardActions>
+                            </CardActions>
+                        </CardActionArea>
                     </Card>
                    
                 </Grid>

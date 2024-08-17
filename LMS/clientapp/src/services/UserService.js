@@ -21,6 +21,16 @@ class UserService {
         return res.data;
     };
 
+    getProperty = async (propertyId) => {
+        const res = await axios.get(`${url}GetProperty?propertyId=${propertyId}`);
+        return res.data;
+    };
+
+    getPropertyFiles = async (propertyId) => {
+        const res = await axios.get(`${url}GetPropertyFiles?propertyId=${propertyId}`);
+        return res.data;
+    };
+
 }
 
 export default new UserService();

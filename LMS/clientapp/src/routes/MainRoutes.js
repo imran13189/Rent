@@ -8,6 +8,7 @@ import MainLayout from 'layout/MainLayout';
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard')));
 const Landing = Loadable(lazy(() => import('pages/dashboard/LandingPage')));
 const PropertyList = Loadable(lazy(() => import('pages/propertylist')));
+const PropertyDetails = Loadable(lazy(() => import('pages/propertydetails')));
 // render - sample page
 const SamplePage = Loadable(lazy(() => import('pages/extra-pages/SamplePage')));
 
@@ -37,7 +38,11 @@ const MainRoutes = {
         path: '/list',
         element: <PropertyList />
       },
-      
+      {
+          path: '/:url/:id',
+          element: <PropertyDetails />
+      }
+      ,
     {
       path: 'color',
       element: <Color />

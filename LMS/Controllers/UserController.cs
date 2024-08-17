@@ -7,6 +7,8 @@ using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Newtonsoft.Json.Linq;
+using Microsoft.Extensions.Hosting.Internal;
+using System.Collections.Generic;
 
 namespace LMS.Controllers
 {
@@ -17,11 +19,14 @@ namespace LMS.Controllers
         public IUser _user;
         public IProperty _property;
         public readonly AppSettings _appSettings;
-        public UserController(IUser user, IProperty property, AppSettings appSettings)
+        private readonly IWebHostEnvironment _hostingEnvironment;
+
+        public UserController(IUser user, IProperty property, AppSettings appSettings, IWebHostEnvironment hostingEnvironment)
         {
             _user = user;
             _appSettings = appSettings;
             _property = property;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         [HttpGet]
@@ -95,6 +100,46 @@ namespace LMS.Controllers
         public async Task<IEnumerable<PropertyModel>> GetProperties(LocationModel location)
         {
             return await _property.GetProperties(location);
+        }
+
+
+        [HttpGet]
+        [Route("api/GetProperty")]
+        public async Task<PropertyModel> GetProperty(long propertyId)
+        {
+            return await _property.GetProperty(propertyId);
+        }
+
+
+        [HttpGet]
+        [Route("api/GetPropertyFiles")]
+        public async Task<IEnumerable<FileModel>> GetPropertyFiles(long propertyId)
+        {
+            string folderPath =Path.Combine(_hostingEnvironment.ContentRootPath, "Files", Convert.ToString(propertyId));
+            List<FileModel> fileList = new();
+            if (Directory.Exists(folderPath))
+            {
+                DirectoryInfo directoryInfo = new DirectoryInfo(folderPath);
+                var filesData = directoryInfo.GetFiles();
+                var request = HttpContext.Request;
+                var baseUrl = $"{request.Scheme}://{request.Host}{request.PathBase}/Files/{Convert.ToString(propertyId)}/";
+                for (int i = 0; i < filesData.Count(); i++)
+                {
+                    fileList.Add(new FileModel()
+                    {
+                        Id = i,
+                        title = filesData[i].Name,
+                        img = baseUrl + filesData[i].Name,
+                        rows=i==0?4:2,
+                        cols = i == 0 ? 2 : 1,
+                    });
+                }
+            }
+            else
+            {
+                throw new DirectoryNotFoundException($"The directory at path {folderPath} does not exist.");
+            }
+            return fileList;
         }
 
         private JwtSecurityToken GetToken(List<Claim> authClaims)

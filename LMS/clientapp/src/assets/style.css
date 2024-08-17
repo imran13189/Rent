@@ -69,6 +69,25 @@ section.container
     width:100%;
    
 }
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+.carousel .thumb img {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.carousel .slide img {
+    max-height: 60vh; /* change this to whatever you want */
+    width: auto;
+}
+
 @media only screen and (min-width: 768px) {
     .login {
             background: url(login.jpg) no-repeat;
@@ -90,12 +109,17 @@ section.container
             width: 100%;
             display: block;
         }
+
+   
+
     }
 
 
-@media only screen and (min-width:480px) {
+@media only screen and (min-device-width:480px) {
     .mobileLogo {
         margin-top: 50px;
         margin-left: 50px;
     }
+
+   
 }

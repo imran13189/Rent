@@ -18,7 +18,7 @@ const initialState = {
 };
 
 export const fetchProperties = createAsyncThunk('propertiesData/fetchProperties', async (params) => {
-    debugger;
+   
     const response = await PropertyService.getProperties(params);
     return response;
 });

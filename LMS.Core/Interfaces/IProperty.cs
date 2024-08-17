@@ -10,5 +10,6 @@ namespace LMS.Core.Interfaces
         Task<Result> SaveProperty(Property property, List<IFormFile> formFiles, string FilePath);
         Task<IEnumerable<PropertyModel>> GetProperties(LocationModel Location);
         Task<List<StorageObject>> GetStorageObjectsAsync(string path);
+        Task<PropertyModel> GetProperty(long propertyId);
     }
 }

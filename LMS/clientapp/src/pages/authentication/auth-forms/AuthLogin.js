@@ -38,9 +38,7 @@ const AuthLogin = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch();
 
-    const [showPassword, setShowPassword] = useState(false);
- 
-    const redirectToHome = () => navigate(`/`)
+    const redirectToHome = () => navigate(`/`);
 
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
@@ -48,7 +46,7 @@ const AuthLogin = () => {
     const inputRef = useRef(new Array());
 
     const handleOtp = (e, index) => {
-        debugger;
+       
         if (!(e.key === "Enter")) {
             if (!(e.key === "Backspace")) {
                 if (inputRef.current[index + 1])
@@ -139,14 +137,26 @@ const AuthLogin = () => {
                                     <InputLabel htmlFor="email-login">Mobile</InputLabel>
                                     <TextField
                                         id="email-login"
-                                        type="text"
+                                        type="number"
                                         value={values.mobile}
                                         name="mobile"
                                         onBlur={handleBlur}
+                                        onKeyDown={(evt) => ["e", "E", "+", "-"].includes(evt.key) && evt.preventDefault()}
                                         onChange={(e) => {
-                                            setFieldValue('mobile', e.currentTarget.value);
-                                            if (e.currentTarget.value.length < 10)
-                                                setOTPSent(false);
+                                            e.preventDefault();
+                                            const { value } = e.target;
+                                            const regex = /^(0*[1-9][0-9]*(\.[0-9]*)?|0*\.[0-9]*[1-9][0-9]*)$/;
+                                            if (regex.test(value.toString())) {
+                                                
+                                                if (e.currentTarget.value.length <=10) {
+                                                    setFieldValue('mobile', e.currentTarget.value);
+                                                    setOTPSent(false);
+                                                }
+                                                   
+                                            }
+                                            else
+                                                setFieldValue('mobile', e.currentTarget.value);
+
                                         }}
                                         placeholder="9999 999 999"
                                         fullWidth
