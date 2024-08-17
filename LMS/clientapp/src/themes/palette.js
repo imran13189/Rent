@@ -28,7 +28,8 @@ const Palette = (mode) => {
     const siteColors = [
         '#d02943',
         '#e78594',
-        greyPrimary[6]
+        greyPrimary[6],
+        '#8BCF1D'
        
     ];
   const greyAscent = ['#fafafa', '#bfbfbf', '#434343', '#1f1f1f'];
@@ -57,7 +58,8 @@ const Palette = (mode) => {
       action: {
           disabled: paletteColor.grey[300],
           main: paletteColor.site[0],
-          default: paletteColor.site[2]
+          default: paletteColor.site[2],
+          success: paletteColor.site[3],
       },
       divider: paletteColor.grey[200],
       background: {

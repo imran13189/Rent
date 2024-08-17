@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 using LMS.Core.Entities;
 using LMS.Core.Interfaces;
 using System.Reflection;
+using Microsoft.AspNetCore.Http;
+using System.Drawing.Imaging;
+using System.Drawing;
 
 namespace LMS.Repo.Repository
 {
@@ -35,15 +38,7 @@ namespace LMS.Repo.Repository
             }
         }
 
-        //public async Task<Result> SaveInventory(Inventory inventory)
-        //{
-        //    return await QueryFirstOrDefaultAsync<Result>("SP_SaveInventory", inventory);
-        //}
-
-        //public async Task<IEnumerable<InventoryModel>> GetInventories()
-        //{
-        //    return await Query<InventoryModel>("SP_GetInventory");
-        //}
+     
 
         public async Task<Result> SaveUser(User user)
         {
@@ -51,6 +46,26 @@ namespace LMS.Repo.Repository
             return await SentEmail(result.OTP);
         }
 
+        public async Task<UserViewModel> UpdateUser(User user, IFormFile formFile, string ServerPath)
+        {
+            var userData = new
+            {
+                UserId = user.UserId,
+                Name = user.Name,
+                Password = user.Password,
+                Email = user.Email,
+                Mobile = user.Mobile
+            };
+            Task<UserViewModel> updateUser =  QueryFirstOrDefaultAsync<UserViewModel>("SP_SaveUser",  userData );
+            Task saveFile = Task.CompletedTask;
+
+            if(formFile!=null)
+             saveFile=SaveFiles(formFile, user.UserId, user.Mobile, ServerPath);
+
+            Task sendUpdate = SentUpdate(user);
+            await Task.WhenAll(updateUser,saveFile, sendUpdate);
+            return updateUser.Result;
+        }
 
         public async Task<Result> SentEmail(string OTP)
         {
@@ -62,6 +77,36 @@ namespace LMS.Repo.Repository
                 message.Subject = "OTP Verification #";
                 message.IsBodyHtml = true;
                 message.Body = "<div>" + OTP + "</div>";
+
+                SmtpClient client = new SmtpClient("smtp.gmail.com", 587)
+                {
+                    Credentials = new NetworkCredential(_appSettings.Email, _appSettings.Secret),
+                    EnableSsl = true
+                };
+
+
+                client.SendAsync(message, null);
+
+
+                return new Result() { IsSuccess = true, Message = "Email sent successfully" };
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+        public async Task<Result> SentUpdate(User user)
+        {
+            try
+            {
+                MailMessage message = new MailMessage();
+                message.From = new MailAddress("aliusman9760@gmail.com");
+                message.To.Add(user.Email);
+                message.Subject = "!Important Profile Update";
+                message.IsBodyHtml = true;
+                message.Body = "<div>Profile updated successfully!</div>";
 
                 SmtpClient client = new SmtpClient("smtp.gmail.com", 587)
                 {
@@ -116,5 +161,61 @@ namespace LMS.Repo.Repository
                 throw;
             }
         }
+
+
+        #region Common Methods
+        public async Task SaveFiles(IFormFile file, long? Id, string fileId,string filepath)
+        {
+
+            filepath = Path.Combine(filepath, "Files", "Profile");
+            using (Bitmap postedImage = new Bitmap(file.OpenReadStream()))
+            {
+
+                try
+                {
+                    if (!Directory.Exists(filepath))
+                        Directory.CreateDirectory(filepath);
+
+
+                    filepath = Path.Combine(filepath, fileId + ".jpg");
+                    ImageCodecInfo myImageCodecInfo;
+                    System.Drawing.Imaging.Encoder myEncoder;
+                    EncoderParameter myEncoderParameter;
+                    EncoderParameters myEncoderParameters;
+                    myImageCodecInfo = GetEncoderInfo("image/jpeg");
+                    myEncoder = System.Drawing.Imaging.Encoder.Quality;
+                    myEncoderParameters = new EncoderParameters(1);
+                    myEncoderParameter = new EncoderParameter(myEncoder, 20L);
+                    myEncoderParameters.Param[0] = myEncoderParameter;
+                    using (MemoryStream memoryStream = new MemoryStream())
+                    {
+                        postedImage.Save(memoryStream, myImageCodecInfo, myEncoderParameters);
+                        byte[] data = memoryStream.ToArray();
+                        await System.IO.File.WriteAllBytesAsync(filepath, data);
+
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
+            }
+
+        }
+        private static ImageCodecInfo GetEncoderInfo(String mimeType)
+        {
+            int j;
+            ImageCodecInfo[] encoders;
+            encoders = ImageCodecInfo.GetImageEncoders();
+            for (j = 0; j < encoders.Length; ++j)
+            {
+                if (encoders[j].MimeType == mimeType)
+                    return encoders[j];
+            }
+            return null;
+        }
+
+        #endregion
     }
 }

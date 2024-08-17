@@ -116,10 +116,9 @@ const PropertyAd = ({ setShowMessage }) => {
                     formData.append(key, values[key]);
                 }
 
-              
+                debugger;
                 formData.append("LocationId", positionDetails.LocationId);
                 formData.append("UserId", userDetails.userId);
-
 
                 for (let i = 0; i < files.length; i++) {
                     let image = files[i];
@@ -242,6 +241,29 @@ const PropertyAd = ({ setShowMessage }) => {
                             )}
                         </Stack>
                     </Grid>
+
+                    <Grid item xs={12} lg={4}>
+                        <Stack spacing={1}>
+                            <InputLabel htmlFor="area">Area(Sq ft)</InputLabel>
+                            <OutlinedInput
+                                fullWidth
+                                error={Boolean(formik.touched.Area && formik.errors.Area)}
+                                id="area"
+                                type="number"
+                                value={formik.values.Area}
+                                name="Area"
+                                onBlur={formik.handleBlur}
+                                onChange={formik.handleChange}
+                                placeholder="Area"
+                            />
+                            {formik.touched.Area && formik.errors.Area && (
+                                <FormHelperText error id="helper-text-area-signup">
+                                    {formik.errors.Area}
+                                </FormHelperText>
+                            )}
+                        </Stack>
+                    </Grid>
+
                     <Grid item xs={12} lg={4}>
                         <Stack spacing={1}>
                             <InputLabel htmlFor="company-signup">Available From:</InputLabel>
@@ -260,11 +282,11 @@ const PropertyAd = ({ setShowMessage }) => {
                     </Grid>
                     <Grid item xs={12} lg={4}>
                         <Stack spacing={1}>
-                            <InputLabel htmlFor="email-signup">Rent Amount</InputLabel>
+                            <InputLabel htmlFor="rent-amount">Rent Amount</InputLabel>
                             <OutlinedInput
                                 fullWidth
                                 error={Boolean(formik.touched.RentAmount && formik.errors.RentAmount)}
-                                id="email-login"
+                                id="Rent-Amount"
                                 type="number"
                                 value={formik.values.RentAmount}
                                 name="RentAmount"
@@ -273,7 +295,7 @@ const PropertyAd = ({ setShowMessage }) => {
                                 placeholder="00.00"
                             />
                             {formik.touched.RentAmount && formik.errors.RentAmount && (
-                                <FormHelperText error id="helper-text-email-signup">
+                                <FormHelperText error id="helper-text-rent-amount">
                                     {formik.errors.RentAmount}
                                 </FormHelperText>
                             )}
@@ -282,29 +304,30 @@ const PropertyAd = ({ setShowMessage }) => {
 
                     <Grid item xs={12} lg={4}>
                         <Stack spacing={1}>
-                            <InputLabel htmlFor="email-signup">Area(Sq ft)</InputLabel>
+                            <InputLabel htmlFor="security-amount">Security Amount</InputLabel>
                             <OutlinedInput
                                 fullWidth
-                                error={Boolean(formik.touched.Area && formik.errors.Area)}
-                                id="email-login"
+                                error={Boolean(formik.touched.SecurityAmount && formik.errors.SecurityAmount)}
+                                id="Security-Amount"
                                 type="number"
-                                value={formik.values.Area}
-                                name="Area"
+                                value={formik.values.SecurityAmount}
+                                name="SecurityAmount"
                                 onBlur={formik.handleBlur}
                                 onChange={formik.handleChange}
-                                placeholder="Area"
+                                placeholder="00.00"
                             />
-                            {formik.touched.Area && formik.errors.Area && (
-                                <FormHelperText error id="helper-text-email-signup">
-                                    {formik.errors.Area}
+                            {formik.touched.SecurityAmount && formik.errors.SecurityAmount && (
+                                <FormHelperText error id="helper-text-security-amountpa">
+                                    {formik.errors.SecurityAmount}
                                 </FormHelperText>
                             )}
                         </Stack>
                     </Grid>
+                   
 
-                    <Grid item xs={12} lg={5}>
+                    <Grid item xs={12} lg={4}>
                         <Stack spacing={1}>
-                            <InputLabel htmlFor="password-signup">No. of Bathrooms</InputLabel>
+                            <InputLabel htmlFor="password-signup">Bathrooms</InputLabel>
                             <OutlinedInput
                                 fullWidth
                                 id="Bathrooms"
@@ -315,29 +338,25 @@ const PropertyAd = ({ setShowMessage }) => {
                                 onBlur={formik.handleBlur}
                                 onChange={formik.handleChange}
                                 startAdornment={
-                                    <InputAdornment position="start">
+                                    <InputAdornment >
                                         <RemoveOutlinedIcon
                                             aria-label="toggle password visibility"
                                             onClick={() => { parseInt(formik.values.Bathrooms) >= 1 ? formik.setFieldValue("Bathrooms", parseInt(formik.values.Bathrooms) - 1) : 0; }}
                                             onMouseDown={handleMouseDownPassword}
-                                            edge="start"
-                                            size="large"
-                                            position="start"
                                         >
-                                            {showPassword ? <EyeOutlined /> : <EyeInvisibleOutlined />}
+                                           
                                         </RemoveOutlinedIcon>
                                     </InputAdornment>
                                 }
                                 endAdornment={
-                                    <InputAdornment position="end">
+                                    <InputAdornment >
                                         <AddOutlinedIcon
                                             aria-label="toggle password visibility"
                                             onClick={() => { formik.setFieldValue("Bathrooms", parseInt(formik.values.Bathrooms) + 1); }}
                                             onMouseDown={handleMouseDownPassword}
-                                            edge="end"
-                                            size="large"
+                                         
                                         >
-                                            {showPassword ? <EyeOutlined /> : <EyeInvisibleOutlined />}
+                                          
                                         </AddOutlinedIcon>
                                     </InputAdornment>
                                 }
@@ -352,9 +371,9 @@ const PropertyAd = ({ setShowMessage }) => {
                         </Stack>
 
                     </Grid>
-                    <Grid item xs={12} lg={3}>
+                    <Grid item xs={12} lg={4}>
                         <Stack spacing={1} >
-                            <InputLabel htmlFor="email-signup">Parking</InputLabel>
+                            <InputLabel htmlFor="parking-signup">Parking</InputLabel>
                             <ToggleButtonGroup
                                 color="primary"
                                 value={`${formik.values.Parking}`}
@@ -369,7 +388,34 @@ const PropertyAd = ({ setShowMessage }) => {
                         </Stack>
 
                     </Grid>
-                    <Grid item xs={12} lg={12}>
+
+                    <Grid item xs={12} lg={5}>
+                        <Stack spacing={1} >
+                            <InputLabel htmlFor="propertyStatus">Available for:</InputLabel>
+                            <ToggleButtonGroup
+                                color="primary"
+                                value={`${formik.values.AvailableFor}`}
+                                exclusive
+                                onChange={formik.handleChange}
+                                aria-label="AvailableFor"
+                                name="AvailableFor"
+                                Allow multiple selections
+                            >
+                                <ToggleButton size="small" name="AvailableFor" color="success" value="1">Only Family</ToggleButton>
+                                <ToggleButton size="small" name="AvailableFor" color="info" value="2">All</ToggleButton>
+
+                            </ToggleButtonGroup>
+
+                            {formik.touched.AvailableFor && formik.errors.AvailableFor && (
+                                <FormHelperText error id="helper-text-AvailableFor">
+                                    {formik.errors.AvailableFor}
+                                </FormHelperText>
+                            )}
+                        </Stack>
+
+                    </Grid>
+
+                    <Grid item xs={12} lg={10}>
                         <Stack spacing={1} >
                             <InputLabel htmlFor="propertyStatus">Property Status</InputLabel>
                             <ToggleButtonGroup
@@ -393,9 +439,10 @@ const PropertyAd = ({ setShowMessage }) => {
                         </Stack>
 
                     </Grid>
+                   
                     <Grid item xs={12} lg={12}>
                         <Stack spacing={1}>
-                            <InputLabel htmlFor="email-signup">Description</InputLabel>
+                            <InputLabel htmlFor="description-signup">Description</InputLabel>
                             <TextField
                                 id="outlined-textarea"
                                 label=""

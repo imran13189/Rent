@@ -5,6 +5,7 @@ using System.Data;
 using System.Text;
 using System.Threading.Tasks;
 using LMS.Core.Entities;
+using Microsoft.AspNetCore.Http;
 
 namespace LMS.Core.Interfaces
 {
@@ -18,6 +19,7 @@ namespace LMS.Core.Interfaces
         public Task<UserViewModel> Login(User user);
         public Task<UserViewModel> ValidateOTP(User user);
         public Task<Result> PasswordReset(User user);
+        public Task<UserViewModel> UpdateUser(User user, IFormFile formFile, string ServerPath);
 
     }
 }

@@ -62,7 +62,7 @@ namespace LMS.Controllers
                 string path = _hostingEnvironment.ContentRootPath;
                 return await _property.SaveProperty(property, formFiles, path);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }

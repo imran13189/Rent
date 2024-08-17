@@ -2,9 +2,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 
+const userData = JSON.parse(window.localStorage.getItem("userDetails"));
 // initial state
 const initialState = {
-    userDetails: JSON.parse(window.localStorage.getItem("user")),
+    userDetails: userData,
     showLocation:false,
     search: '',
     selectedLocation:''
@@ -19,12 +20,12 @@ const users = createSlice({
     initialState,
     reducers: {
         setUserDetails(state, action) {
-            
+
             if (action.payload.userDetails)
                 state.userDetails = action.payload.userDetails;
             else
                 state.userDetails = null;
-            
+
         }
     }
 });

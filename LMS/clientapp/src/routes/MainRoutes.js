@@ -17,7 +17,7 @@ const Typography = Loadable(lazy(() => import('pages/components-overview/Typogra
 const Color = Loadable(lazy(() => import('pages/components-overview/Color')));
 const Shadow = Loadable(lazy(() => import('pages/components-overview/Shadow')));
 const AntIcons = Loadable(lazy(() => import('pages/components-overview/AntIcons')));
-const AuthLogin = Loadable(lazy(() => import('pages/authentication/Login')));
+const ViewProfile = Loadable(lazy(() => import('pages/authentication/ViewProfile')));
 const AuthRegister = Loadable(lazy(() => import('pages/authentication/Register')));
 
 // ==============================|| MAIN ROUTING ||============================== //
@@ -38,41 +38,13 @@ const MainRoutes = {
         path: '/list',
         element: <PropertyList />
       },
+      
       {
           path: '/:url/:id',
           element: <PropertyDetails />
       }
-      ,
-    {
-      path: 'color',
-      element: <Color />
-    },
-    {
-      path: 'dashboard',
-      children: [
-        {
-          path: 'default',
-          element: <DashboardDefault />
-        }
-      ]
-    },
-    {
-      path: 'sample-page',
-      element: <SamplePage />
-    },
-    {
-      path: 'shadow',
-      element: <Shadow />
-    },
-    {
-      path: 'typography',
-      element: <Typography />
-    },
-    {
-      path: 'icons/ant',
-      element: <AntIcons />
-      }
-     
+    
+    
      
   ]
 };

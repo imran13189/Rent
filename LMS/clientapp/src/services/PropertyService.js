@@ -13,9 +13,9 @@ class PropertyService {
         return res.data;
     };
 
-    SaveProperty = async (contact) => {
+    SaveProperty = async (property) => {
      
-        const res = await axios.post(`${url}SaveProperty`, contact,{
+        const res = await axios.post(`${url}SaveProperty`, property,{
             headers: Auth.getHeader()
         } );
         return res.data;

@@ -6,7 +6,6 @@ import MinimalLayout from 'layout/MinimalLayout';
 
 // render - login
 const AuthLogin = Loadable(lazy(() => import('pages/authentication/Login')));
-const PropertyForm = Loadable(lazy(() => import('pages/property/Index')));
 
 // ==============================|| AUTH ROUTING ||============================== //
 
@@ -19,10 +18,7 @@ const LoginRoutes = {
             element: <AuthLogin />
         },
 
-        {
-            path: 'property',
-            element: <PropertyForm />
-        }
+       
       
     ]
 };

@@ -97,6 +97,7 @@ const AuthLogin = () => {
                            
                             if (result.userData) {
                                 window.localStorage.setItem('user', JSON.stringify(result));
+                                window.localStorage.setItem('userDetails', JSON.stringify(result.userData));
                                 dispatch(setUserDetails({ userDetails: result.userData }));
                                 redirectToHome();
                             }

@@ -1,14 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using LMS.Core.Entities;
 using LMS.Core.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using Newtonsoft.Json.Linq;
-using Microsoft.Extensions.Hosting.Internal;
-using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LMS.Controllers
 {
@@ -142,6 +139,21 @@ namespace LMS.Controllers
             return fileList;
         }
 
+        [Authorize]
+        [HttpPost]
+        [Route("api/UpdateUser")]
+        public async Task<UserViewModel> UpdateUser([FromForm] User user,IFormFile? formFiles=null)
+        {
+            try
+            {
+                string path = _hostingEnvironment.ContentRootPath;
+                return await _user.UpdateUser(user, formFiles,path);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
         private JwtSecurityToken GetToken(List<Claim> authClaims)
         {
             var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appSettings.TSecret));

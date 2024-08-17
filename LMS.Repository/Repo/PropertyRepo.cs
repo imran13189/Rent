@@ -24,7 +24,7 @@ namespace LMS.Repository.Repo
     {
         private readonly IConfiguration _configuration;
        
-        //private readonly IAmazonS3 _s3Client;
+      
         public PropertyRepo(IConfiguration configuration)
         {
             _configuration = configuration;
@@ -54,29 +54,12 @@ namespace LMS.Repository.Repo
             return taskdb;
         }
 
-        //public async Task SaveFiles(IFormFile file, string path)
-        //{
-        //    var filePath = _env.ContentRootPath;
-        //    var docName = Path.GetFileName(file.FileName);
-        //    if (file != null && file.Length > 0)
-        //    {
-               
-        //        filePath = Path.Combine(filePath, "Files", fileDetail.Id.ToString() + fileDetail.DocType);
-        //        using (var stream = new FileStream(filePath,FileMode.Create))
-        //        {
-        //            file.CopyToAsync(stream);
-        //        }
-
-        //        _context.Add(fileDetail);
-        //        _context.SaveChangesAsync();
-        //    }
-        //}
+     
 
 
         public async Task SaveFiles(IFormFile file,long? Id,int fileId,string filepath)
         {
-            //BunnyCDNStorage storage = new BunnyCDNStorage("rentstorage", "30e2a0a6-7874-49da-a71c9bbadd39-be9e-4c6a");
-            //GoogleStorage storage = new GoogleStorage(_configuration);
+            
             string pp = Convert.ToString(Id);
             filepath = Path.Combine(filepath, "Files",pp);
             using (Bitmap postedImage = new Bitmap(file.OpenReadStream()))
@@ -103,9 +86,7 @@ namespace LMS.Repository.Repo
                         postedImage.Save(memoryStream, myImageCodecInfo, myEncoderParameters);
                         byte[] data = memoryStream.ToArray();
                         await System.IO.File.WriteAllBytesAsync(filepath, data);
-                        //Stream s = new MemoryStream(data, 0, data.Length);
-                        //await storage.UploadFile(s, "rentstorage/" + key);
-                        //s.Close();
+                       
                     }
 
                 }
@@ -117,43 +98,7 @@ namespace LMS.Repository.Repo
 
         }
 
-        //    public async Task SaveFiles(IFormFile file, string path)
-        //{
-        //    //BunnyCDNStorage storage = new BunnyCDNStorage("rentstorage", "30e2a0a6-7874-49da-a71c9bbadd39-be9e-4c6a");
-        //    GoogleStorage storage = new GoogleStorage(_configuration);
-        //    using (Bitmap postedImage = new Bitmap(file.OpenReadStream()))
-        //    {
-
-        //        try
-        //        {
-
-        //            var key = path + ".jpg";
-        //            ImageCodecInfo myImageCodecInfo;
-        //            System.Drawing.Imaging.Encoder myEncoder;
-        //            EncoderParameter myEncoderParameter;
-        //            EncoderParameters myEncoderParameters;
-        //            myImageCodecInfo = GetEncoderInfo("image/jpeg");
-        //            myEncoder = System.Drawing.Imaging.Encoder.Quality;
-        //            myEncoderParameters = new EncoderParameters(1);
-        //            myEncoderParameter = new EncoderParameter(myEncoder, 20L);
-        //            myEncoderParameters.Param[0] = myEncoderParameter;
-        //            using (MemoryStream memoryStream = new MemoryStream())
-        //            {
-        //                postedImage.Save(memoryStream, myImageCodecInfo, myEncoderParameters);
-        //                byte[] data = memoryStream.ToArray();
-        //                Stream s = new MemoryStream(data, 0, data.Length);
-        //                await storage.UploadFile(s, "rentstorage/" + key);
-        //                s.Close();
-        //            }
-
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //}
+       
 
         public async Task<IEnumerable<PropertyModel>> GetProperties(LocationModel location)
         {

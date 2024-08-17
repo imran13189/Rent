@@ -1,6 +1,6 @@
 import axios from "axios";
 import Config from "./config";
-//import Auth from "./Auth";
+import Auth from "./Auth";
 const url = Config.baseurl;
 
 class UserService {
@@ -28,6 +28,14 @@ class UserService {
 
     getPropertyFiles = async (propertyId) => {
         const res = await axios.get(`${url}GetPropertyFiles?propertyId=${propertyId}`);
+        return res.data;
+    };
+
+    updateUser = async (user) => {
+
+        const res = await axios.post(`${url}UpdateUser`, user, {
+            headers: Auth.getHeader()
+        });
         return res.data;
     };
 

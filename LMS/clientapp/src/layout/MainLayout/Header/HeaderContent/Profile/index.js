@@ -28,7 +28,7 @@ import SettingTab from './SettingTab';
 // assets
 import avatar1 from 'assets/images/users/avatar-1.png';
 import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUserDetails } from "./../../../../../store/reducers/users";
 // tab panel wrapper
 function TabPanel({ children, value, index, ...other }) {
@@ -59,6 +59,7 @@ const Profile = () => {
     const dispatch = useDispatch();
     const handleLogout = async () => {
         window.localStorage.removeItem('user',);
+        window.localStorage.removeItem('userDetails',);
       dispatch(setUserDetails({ userDetails:null}));
   };
   
@@ -81,7 +82,9 @@ const Profile = () => {
     setValue(newValue);
   };
 
-  const iconBackColorOpen = 'grey.300';
+    const iconBackColorOpen = 'grey.300';
+
+    const { userDetails } = useSelector((state) => state.users);
 
   return (
     <Box sx={{ flexShrink: 0, ml: 0.75 }}>
@@ -100,7 +103,7 @@ const Profile = () => {
       >
         <Stack direction="row" spacing={2} alignItems="center" sx={{ p: 0.5 }}>
           <Avatar alt="profile user" src={avatar1} sx={{ width: 32, height: 32 }} />
-          <Typography variant="subtitle1">John Doe</Typography>
+                  <Typography variant="subtitle1">{userDetails?.name }</Typography>
         </Stack>
       </ButtonBase>
       <Popper
@@ -143,9 +146,9 @@ const Profile = () => {
                           <Stack direction="row" spacing={1.25} alignItems="center">
                             <Avatar alt="profile user" src={avatar1} sx={{ width: 32, height: 32 }} />
                             <Stack>
-                              <Typography variant="h6">John Doe</Typography>
+                              <Typography variant="h6">{userDetails?.name }</Typography>
                               <Typography variant="body2" color="textSecondary">
-                                UI/UX Designer
+                                      {userDetails?.name}
                               </Typography>
                             </Stack>
                           </Stack>
