@@ -1,6 +1,5 @@
 
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
+import { ImageList, ImageListItem, Box, Typography }  from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { openImageModal } from "./../../store/reducers/propertydetails";
 import { useSelector, useDispatch } from "react-redux";
@@ -44,7 +43,7 @@ export default function Gallery() {
         if (params.id) {
             const fetchData = async () => {
                 const filesdata = await UserService.getPropertyFiles(params.id);
-                setFiles(filesdata);
+                setFiles(filesdata.slice(0, 5));
             }
             fetchData();
         }              
@@ -67,8 +66,23 @@ export default function Gallery() {
                         loading="lazy"
                     />
                 </ImageListItemWithStyle>
+
             ))}
-        </ImageList>
+
+                <Box
+                    position="absolute"
+                    top="50%"
+                    left="50%"
+                    transform="translate(-50%, -50%)"
+                    bgcolor="rgba(0, 0, 0, 0.5)"
+                    color="white"
+                    p={2}
+                    borderRadius={1}
+                >
+                    <Typography variant="h6">Your Message Here</Typography>
+                </Box>
+            </ImageList>
+          
             <ImageModal files={files}></ImageModal>
         </>
     );
