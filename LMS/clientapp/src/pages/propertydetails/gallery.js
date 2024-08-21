@@ -1,5 +1,5 @@
 
-import { ImageList, ImageListItem, Box, Typography }  from '@mui/material';
+import { ImageList, ImageListItem, Box, Typography, ImageListItemBar }  from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { openImageModal } from "./../../store/reducers/propertydetails";
 import { useSelector, useDispatch } from "react-redux";
@@ -22,7 +22,7 @@ function srcset(image, size, rows = 1, cols = 1) {
 }
 
 const ImageListItemWithStyle = styled(ImageListItem)(({ theme }) => ({
-    "&:hover": {
+    "&:hover .MuiImageListItemBar-root": {
         cursor: "pointer",
         opacity: 0.8,
        
@@ -46,43 +46,50 @@ export default function Gallery() {
                 setFiles(filesdata.slice(0, 5));
             }
             fetchData();
-        }              
+        }
 
     }, [])
 
     return (
         <>
-        <ImageList
-            sx={{ width: '100%' }}
-            variant="quilted"
-            cols={4}
-            rowHeight={100}
-        >
-            {files.map((item,i) => (
-                <ImageListItemWithStyle onClick={()=>dispatch(openImageModal({ imageModalOpen:true }))} key={item.id} cols={item.cols || 1} rows={item.rows || 1}>
-                    <img
-                        {...srcset(item.img, 500, item.rows, item.cols)}
-                        alt={item.title}
-                        loading="lazy"
-                    />
-                </ImageListItemWithStyle>
+            <ImageList
+                sx={{ width: '100%' }}
+                variant="quilted"
+                cols={4}
+                rowHeight={100}
+            >
+                {files.map((item, i) => (
+                    <ImageListItemWithStyle onClick={() => dispatch(openImageModal({ imageModalOpen: true }))} key={item.id} cols={item.cols || 1} rows={item.rows || 1}>
+                        <img
+                            {...srcset(item.img, 500, item.rows, item.cols)}
+                            alt={item.title}
+                            loading="lazy"
+                        />
+                        <ImageListItemBar
+                            title="See More"
 
-            ))}
+                            sx={{
+                                position: 'absolute',
+                                top: '50%',
+                                left: '50%',
+                                transform: 'translate(-50%, -50%)',
+                                background: 'rgba(0, 0, 0, 0.5)',
+                                opacity: 0, // Initially hidden
+                                transition: 'opacity 0.3s ease-in-out', // Smooth transition
+                                width: '100%', // Optional: Adjust width as needed
+                                height: '100%',
+                                textAlign: 'center', // Center the text
+                            }}
+                        />
 
-                <Box
-                    position="absolute"
-                    top="50%"
-                    left="50%"
-                    transform="translate(-50%, -50%)"
-                    bgcolor="rgba(0, 0, 0, 0.5)"
-                    color="white"
-                    p={2}
-                    borderRadius={1}
-                >
-                    <Typography variant="h6">Your Message Here</Typography>
-                </Box>
+
+                    </ImageListItemWithStyle>
+
+                ))}
+
+
             </ImageList>
-          
+
             <ImageModal files={files}></ImageModal>
         </>
     );

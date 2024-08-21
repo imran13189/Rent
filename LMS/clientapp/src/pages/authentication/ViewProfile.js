@@ -46,6 +46,7 @@ export default function SignUp() {
         const result = await UserService.updateUser(formData);
         if (result) {
             dispatch(setUserDetails({ userDetails: result }));
+            window.localStorage.setItem('userDetails', JSON.stringify(result));
             setMessage("Updated Successfully!");
         }
         setLoading(false);
@@ -91,8 +92,8 @@ export default function SignUp() {
                         multiple
                         type="file"
                     />
-                    <label htmlFor="raised-button-file">
-                        <Avatar sx={{ m: 1, bgcolor: 'secondary.main', width: 100, height: 100 }} src={avatar1} >
+                <label htmlFor="raised-button-file">
+                    <Avatar sx={{ m: 1, bgcolor: 'secondary.main', width: 100, height: 100 }} src={userDetails?.imagePath} >
                         </Avatar>
                     </label> 
                        

@@ -102,7 +102,7 @@ const Profile = () => {
         onClick={handleToggle}
       >
         <Stack direction="row" spacing={2} alignItems="center" sx={{ p: 0.5 }}>
-          <Avatar alt="profile user" src={avatar1} sx={{ width: 32, height: 32 }} />
+                  <Avatar alt="profile user" src={userDetails?.imagePath} sx={{ width: 32, height: 32 }} />
                   <Typography variant="subtitle1">{userDetails?.name }</Typography>
         </Stack>
       </ButtonBase>
@@ -144,7 +144,7 @@ const Profile = () => {
                       <Grid container justifyContent="space-between" alignItems="center">
                         <Grid item>
                           <Stack direction="row" spacing={1.25} alignItems="center">
-                            <Avatar alt="profile user" src={avatar1} sx={{ width: 32, height: 32 }} />
+                            <Avatar alt="profile user" src={userDetails?.imagePath} sx={{ width: 32, height: 32 }} />
                             <Stack>
                               <Typography variant="h6">{userDetails?.name }</Typography>
                               <Typography variant="body2" color="textSecondary">

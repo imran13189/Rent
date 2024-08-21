@@ -16,7 +16,7 @@ namespace LMS.Core.Entities
         public decimal RentAmount { get; set; }
         public string IsFurnished { get; set; }
         public byte Bathrooms { get; set; }
-        public byte Parking { get; set; }
+        public string Parking { get; set; }
         public string Description { get; set; }
         public string AvailableFrom { get; set; }
         public DateTime CreatedDate { get; set; }
@@ -26,6 +26,8 @@ namespace LMS.Core.Entities
         public string LocationName { get; set; }
         public string? FilePath { get; set; }
         public long RowNum { get; set; }
+        public string Lat { get; set; }
+        public string Long { get; set; }
 
         public string PropertyUrl { get; set; }
 

@@ -12,7 +12,7 @@ namespace LMS.Controllers
             _appSettings = appSettings;
         }
 
-        [HttpGet("{url}/{id}")]
+        [HttpGet("propertyforrent/{url}/{id}")]
         public IActionResult Index(string url,int id)
         {
            

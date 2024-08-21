@@ -22,7 +22,7 @@ const Logo = () => {
          *
          */
         <>
-            <img height="30" src="logo-color.png" alt=""></img>
+            <img height="30" src="/logo-color.png" alt=""></img>
         </>
     );
 };

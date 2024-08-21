@@ -28,6 +28,7 @@ import MessageOutlinedIcon from '@mui/icons-material/MessageOutlined';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import Divider from '@mui/material/Divider';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import DraggableMarker from './../property/DraggableMarker';
 // ==============================|| DASHBOARD - DEFAULT ||============================== //
 
 const ExpandMore = styled((props) => {
@@ -59,7 +60,7 @@ const PropertyList = () => {
             {properties?.map((item) =>
                 <Grid key={item.propertyId} item xs={12} sm={10} md={5} lg={6} >
                     <Card sx={{ maxWidth: '100%' }}>
-                        <CardActionArea href={item.propertyUrl}>
+                        <CardActionArea target="_blank" href={item.propertyUrl}>
                         <CardMedia
                             sx={{ height: 140 }}
                             image={item.filePath}
@@ -138,6 +139,13 @@ const PropertyList = () => {
 
             )
             }
+
+            <Grid item xs={12} mt={5} lg={9}>
+                <Typography variant="h3" color="text.secondary">
+                    Locate on map
+                </Typography>
+                <DraggableMarker></DraggableMarker>
+            </Grid>
         </Grid>
     );
 };

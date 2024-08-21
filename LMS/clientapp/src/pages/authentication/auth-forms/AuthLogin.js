@@ -49,8 +49,10 @@ const AuthLogin = () => {
        
         if (!(e.key === "Enter")) {
             if (!(e.key === "Backspace")) {
-                if (inputRef.current[index + 1])
-                    inputRef.current[++index].getElementsByTagName("input")[0].focus();
+                if (!isNaN(e.key) && e.key !== ' ') {
+                    if (inputRef.current[index + 1])
+                        inputRef.current[++index].getElementsByTagName("input")[0].focus();
+                }
             }
             else if (e.key === "Backspace") {
                 if (inputRef.current[index - 1]) {
@@ -208,8 +210,9 @@ const AuthLogin = () => {
                                       
                                             <TextField
                                             className="OTP"
+
                                             inputProps={{ style: { textAlign: 'center' }, maxLength: 1, autoComplete: 'none' }}
-                                                type="text"
+                                                type="number"
                                                 ref={(element) => inputRef.current.push(element)}
                                                 onKeyUp={(e) => handleOtp(e, 0)}
                                             />
@@ -220,7 +223,7 @@ const AuthLogin = () => {
                                             <TextField
                                                 className="OTP"
                                                 inputProps={{ style: { textAlign: 'center' }, maxLength: 1, autoComplete: 'none' }}
-                                                type="text"
+                                                type="number"
                                                 ref={(element) => inputRef.current.push(element)}
                                                 onKeyUp={(e) => handleOtp(e, 1)}
                                             />
@@ -231,7 +234,7 @@ const AuthLogin = () => {
                                             <TextField
                                                 className="OTP"
                                                 inputProps={{ style: { textAlign: 'center' }, minWidth:5, maxLength: 1, autoComplete: 'none' }}
-                                                type="text"
+                                                type="number"
                                                 ref={(element) => inputRef.current.push(element)}
                                                 onKeyUp={(e) => handleOtp(e, 2)}
                                             />
@@ -242,7 +245,7 @@ const AuthLogin = () => {
                                             <TextField
                                                 className="OTP"
                                                 inputProps={{ style: { textAlign: 'center' }, maxLength: 1, autoComplete: 'none' }}
-                                                type="text"
+                                                type="number"
                                                 ref={(element) => inputRef.current.push(element)}
                                                 onKeyUp={(e) => handleOtp(e, 3)}
                                             />
