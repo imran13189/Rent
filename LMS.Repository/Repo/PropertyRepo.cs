@@ -110,6 +110,24 @@ namespace LMS.Repository.Repo
             return await QueryFirstOrDefaultAsync<PropertyModel>("SP_GetProperty", new {PropertyId= PropertyId });
         }
 
+
+        public async Task<Result> SaveWishList(long UserId, long PropertyId)
+        {
+            try
+            {
+                return await QueryFirstOrDefaultAsync<Result>("SP_SaveWishList", new { PropertyId = PropertyId, UserId = UserId });
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<IEnumerable<WishListModel>> GetWishList(long userId)
+        {
+            return await QueryAsync<WishListModel>("SP_GetWishList", new { UserId = userId });
+        }
+
         public async Task<List<StorageObject>> GetStorageObjectsAsync(string path)
         {
             BunnyCDNStorage storage = new BunnyCDNStorage("rentstorage", "30e2a0a6-7874-49da-a71c9bbadd39-be9e-4c6a");

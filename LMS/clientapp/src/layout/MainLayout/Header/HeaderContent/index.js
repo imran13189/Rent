@@ -7,18 +7,23 @@ import Search from './Search';
 import Profile from './Profile';
 import Notification from './Notification';
 import MobileSection from './MobileSection';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from 'react';
+import { fetchWishList, fetchMessages } from "./../../../../store/reducers/users";
 // ==============================|| HEADER - CONTENT ||============================== //
 
 const HeaderContent = () => {
     const matchesXs = useMediaQuery((theme) => theme.breakpoints.down('md'));
     const { userDetails } = useSelector((state) => state.users);
     const location = useLocation();
-
+    const dispatch = new useDispatch();
 
     useEffect(() => {
-        const ddd = userDetails;
+     
+        if (userDetails) {
+            dispatch(fetchWishList());
+            dispatch(fetchMessages());
+        }
 
     }, [userDetails]);
     return (

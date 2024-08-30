@@ -92,6 +92,21 @@ namespace LMS.Controllers
             }
         }
 
+
+        [HttpPost]
+        [Route("api/SaveMessage")]
+        public async Task<Result> SaveMessage(Messages message)
+        {
+            try
+            {
+                return await _user.SaveMessage(message);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         [HttpPost]
         [Route("api/GetProperties")]
         public async Task<IEnumerable<PropertyModel>> GetProperties(LocationModel location)
@@ -105,6 +120,13 @@ namespace LMS.Controllers
         public async Task<PropertyModel> GetProperty(long propertyId)
         {
             return await _property.GetProperty(propertyId);
+        }
+
+        [HttpGet]
+        [Route("api/GetMessages")]
+        public async Task<string> GetMessages(long UserId)
+        {
+            return await _user.GetMessages(UserId);
         }
 
 

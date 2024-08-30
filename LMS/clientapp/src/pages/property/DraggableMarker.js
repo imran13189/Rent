@@ -30,27 +30,17 @@ function MyComponent() {
             console.log('location found:', location)
         },
     })
-    const { positionDetails, properties } = useSelector((state) => state.property);   
+    const { positionDetails, properties } = useSelector((state) => state.property);
 
     useEffect(() => {
         if (positionDetails) {
-         
+
             map.flyTo([positionDetails.lat, positionDetails.lng], 14, {
                 duration: 2
             });
         }
 
-        if (properties?.length>0) {
-            debugger;
-            //properties.forEach(function (location) {
-            //    L.marker([location.lat, location.long], { icon: redIcon }).addTo(map)
-            //        .bindPopup('Location: ' + location.propertyType)
-            //        .openPopup();
-            //});
-        }
-       
-
-    }, [positionDetails, properties]);
+    }, [positionDetails]);
 
     return (
         <>
@@ -60,12 +50,9 @@ function MyComponent() {
             />
             <MapMarker />
 
-            {
-                properties.map((location, idx) => (<CustomMarker key={idx} location={location} />)) 
-        
-             }
+            {properties.map((location, idx) => (<CustomMarker key={idx} location={location} />))}
         </>
-    )
+    );
 }
 
 const CustomMarker = ({ location }) => {

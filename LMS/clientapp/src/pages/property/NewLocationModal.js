@@ -17,7 +17,7 @@ import {
     Button
 } from '@mui/material';
 import { useDispatch, useSelector } from "react-redux";
-import { setSelectedPosition } from "./../../store/reducers/property";
+import { setSelectedPosition, setShowMapModal } from "./../../store/reducers/property";
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useEffect } from 'react';
@@ -96,7 +96,8 @@ export default function NewLocationModal() {
                             try {
                                 const location = {LocationId:0, CityId:values.CityId, LocationName: values.LocationName, ["Lat"]: positionDetails.lat.toString(), ["Long"]: positionDetails.lng.toString() };
                                 const locationData=await PropertyService.SaveLocation(location);
-                                dispatch(setSelectedPosition({ showLocation: false, positionDetails: { ...positionDetails, LocationId: locationData.id, LocationName: values.LocationName } }))
+                                dispatch(setSelectedPosition({showMapModal:false,showLocation: false, positionDetails: { ...positionDetails, LocationId: locationData.id, LocationName: values.LocationName } }))
+                                
                                 setSubmitting(false);
                             } catch (err) {
                                 console.error(err);
@@ -120,8 +121,8 @@ export default function NewLocationModal() {
                                                 name="city_name"
                                                 getOptionLabel={(option) => option.city_name}
                                                 onChange={(e, option) => {
-                                                    setFieldValue("CityId", option.city_id);
-                                                    setFieldValue("city_name", option.city_name);
+                                                    setFieldValue("CityId", option?.city_id);
+                                                    setFieldValue("city_name", option?.city_name);
                                                 }}
                                                 renderInput={(params) => (
                                                     <TextField {...params} label=" " />

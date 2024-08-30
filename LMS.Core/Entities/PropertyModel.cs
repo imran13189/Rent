@@ -30,6 +30,7 @@ namespace LMS.Core.Entities
         public string Long { get; set; }
 
         public string PropertyUrl { get; set; }
+        public string AvailableFor { get; set; }
 
     }
    
@@ -52,5 +53,11 @@ namespace LMS.Core.Entities
         public string title { get; set; }
         public int rows { get; set; }
         public int cols { get; set; }
+    }
+
+    public class WishListModel
+    {
+        public long PropertyId { get; set; }
+        public long UserId { get; set; }
     }
 }

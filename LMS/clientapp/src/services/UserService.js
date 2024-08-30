@@ -11,6 +11,11 @@ class UserService {
         return res.data;
     };
 
+    SaveMessage = async (message) => {
+        const res = await axios.post(`${url}SaveMessage`, message);
+        return res.data;
+    };
+
     ValidateOTP = async (user) => {
         const res = await axios.post(`${url}ValidateOTP`, user);
         return res.data;
@@ -18,6 +23,11 @@ class UserService {
 
     getProperties = async (params) => {
         const res = await axios.post(`${url}GetProperties`, params);
+        return res.data;
+    };
+
+    GetMessages = async (userId) => {
+        const res = await axios.get(`${url}GetMessages?UserId=${userId}`);
         return res.data;
     };
 
@@ -34,6 +44,14 @@ class UserService {
     updateUser = async (user) => {
 
         const res = await axios.post(`${url}UpdateUser`, user, {
+            headers: Auth.getHeader()
+        });
+        return res.data;
+    };
+
+    getWishList = async (userId) => {
+      
+        const res = await axios.get(`${url}GetWishList?userId=${userId}`, {
             headers: Auth.getHeader()
         });
         return res.data;

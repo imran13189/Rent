@@ -22,7 +22,7 @@ const Logo = () => {
          *
          */
         <>
-            <img height="30" src="/logo-color.png" alt=""></img>
+            <img style={{marginLeft:'20px'}} height="50" width="100" src="/logo-color.png" alt=""></img>
         </>
     );
 };

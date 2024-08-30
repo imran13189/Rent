@@ -10,6 +10,7 @@ import { useParams } from "react-router-dom";
 import { setSelectedPosition } from "./../../store/reducers/property";
 import DraggableMarker from './../property/DraggableMarker';
 import { useDispatch, useSelector } from "react-redux";
+import { fetchProperties } from "./../../store/reducers/property";
 const Details = () => {
     let params = useParams();
     /* const { properties } = useSelector((state) => state.property);*/
@@ -21,7 +22,15 @@ const Details = () => {
             const fetchData = async () => {
                 const property = await UserService.getProperty(params.id);
                 setProperty(property);
-                dispatch(setSelectedPosition({ positionDetails: { lat: property.lat, lng: property.long, LocationName: property.locationName} }));
+                dispatch(setSelectedPosition({ positionDetails: { lat: property.lat, lng: property.long, LocationName: property.locationName } }));
+
+                dispatch(fetchProperties({
+                    page: 0,
+                    LocationId: property?.locationId,
+                    LocationName: null,
+                    Long: property.long,
+                    Lat: property.lat
+                }))
             };
             fetchData();
         }

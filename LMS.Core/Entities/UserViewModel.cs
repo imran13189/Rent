@@ -20,4 +20,10 @@ namespace LMS.Core.Entities
         public string? ImagePath { get; set; }
 
     }
+
+    public class Messages
+    {
+        public long UserId { get; set;}
+        public string Message { get; set;}
+    }
 }

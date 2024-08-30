@@ -15,8 +15,8 @@ import {
     Typography,
     Autocomplete
 } from '@mui/material';
-import { useDispatch } from "react-redux";
-import { setSelectedPosition } from "./../../store/reducers/property";
+import { useDispatch, useSelector } from "react-redux";
+import { setSelectedPosition, setShowMapModal } from "./../../store/reducers/property";
 
 
 const style = {
@@ -38,7 +38,7 @@ export default function MapModal({ open, setOpen }) {
     const [, setInputValue] = React.useState("");
     const handleClose = () => setOpen(false);
     const dispatch = useDispatch();
-    //const { positionDetails } = useSelector((state) => state.property);
+    const { showMapModal } = useSelector((state) => state.property);
 
     const handleLocations = (event) => {
     
@@ -65,8 +65,8 @@ export default function MapModal({ open, setOpen }) {
     return (
         <div>
             <Modal
-                open={open}
-                onClose={handleClose}
+                open={showMapModal}
+                onClose={() => dispatch(setShowMapModal({ showMapModal:false}))}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
@@ -74,7 +74,7 @@ export default function MapModal({ open, setOpen }) {
                     <Typography id="modal-modal-title" variant="h6" component="h2">
                         <IconButton
                             aria-label="close"
-                            onClick={handleClose}
+                            onClick={() => dispatch(setShowMapModal({ showMapModal: false }))}
                             sx={{
                                 position: 'absolute',
                                 right: 8,

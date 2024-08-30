@@ -32,9 +32,7 @@ function MapMarker() {
         setDraggable((d) => !d)
     }, []);
 
-    useEffect(() => {
-        positionDetails;
-    }, [positionDetails]);
+
 
     return (
         <Marker

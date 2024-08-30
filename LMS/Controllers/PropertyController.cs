@@ -69,5 +69,31 @@ namespace LMS.Controllers
         }
 
 
+
+     
+        [HttpPost]
+        [Route("api/SaveWishList")]
+        public async Task<Result> SaveWishList(WishListModel model)
+        {
+            try
+            {
+                return await _property.SaveWishList(model.UserId, model.PropertyId);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+
+        [HttpGet]
+        [Route("api/GetWishList")]
+        public async Task<IEnumerable<WishListModel>> GetWishList(long userId)
+        {
+            return await _property.GetWishList(userId);
+        }
+
+
+
     }
 }

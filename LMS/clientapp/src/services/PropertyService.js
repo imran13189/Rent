@@ -26,6 +26,18 @@ class PropertyService {
         return res.data;
     };
 
+
+    SaveWishList = async (UserId,PropertyId) => {
+
+        const res = await axios.post(`${url}SaveWishList`, { UserId:UserId, PropertyId:PropertyId } , {
+            headers: Auth.getHeader()
+        });
+        return res.data;
+    };
+
+
+    
+
 }
 
 export default new PropertyService();

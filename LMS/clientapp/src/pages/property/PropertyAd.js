@@ -45,7 +45,7 @@ import NewLocationModal from './NewLocationModal';
 import { useDispatch, useSelector } from "react-redux";
 import MasterService from './../../services/MasterService'
 import PropertyService from './../../services/PropertyService';
-import { setSelectedPosition } from "./../../store/reducers/property";
+import { setSelectedPosition, setShowMapModal } from "./../../store/reducers/property";
 import LoadingButton from '@mui/lab/LoadingButton';
 
 // ============================|| FIREBASE - REGISTER ||============================ //
@@ -58,12 +58,12 @@ const PropertyAd = ({ setShowMessage }) => {
     const [files, setFormFiles] = useState([]);
     const [loading, setLoading] = useState(false);
     const [initialValues, setInitialValues] = useState({
-        LocationName: "",
+        LocationName:"",
         Bathrooms: 1,
         termcondition: false,
         submit: null,
         AvailableFrom: dayjs(new Date()),
-        PropertyTypeId: 0,
+        PropertyTypeId:0,
         RentAmount: ""
     });
     const dispatch = useDispatch();
@@ -80,14 +80,17 @@ const PropertyAd = ({ setShowMessage }) => {
     const { userDetails } = useSelector((state) => state.users);
 
 
-    const handleOpen = () => setOpen(true);
+    const handleOpen = () => dispatch(true);
 
     const digitsOnly = (value) => /^\d*[.{1}\d*]\d*$/.test(value);
 
     const SignupSchema = Yup.object().shape({
         LocationName: Yup.string().required("Location Required"),
         PropertyTypeId: Yup.number().min(1, "Type Required"),
-        RentAmount: Yup.string().required().test('inputEntry', 'The field should have digits only', digitsOnly)
+        RentAmount: Yup.string().required().test('inputEntry', 'The field should have digits only', digitsOnly),
+        termcondition: Yup.boolean()
+            .oneOf([true], 'You must accept the terms and conditions.')
+            .required('You must accept the terms and conditions.')
     });
 
     const handleLocations = (event) => {
@@ -116,7 +119,7 @@ const PropertyAd = ({ setShowMessage }) => {
                     formData.append(key, values[key]);
                 }
 
-                debugger;
+              
                 formData.append("LocationId", positionDetails.LocationId);
                 formData.append("UserId", userDetails.userId);
 
@@ -147,7 +150,7 @@ const PropertyAd = ({ setShowMessage }) => {
     }
 
     useEffect(() => {
-        formik.values.LocationName = positionDetails.LocationName;
+        formik.setFieldValue("LocationName",positionDetails.LocationName);
     }, [positionDetails]);
 
 
@@ -186,12 +189,12 @@ const PropertyAd = ({ setShowMessage }) => {
                                             ...params.InputProps,
                                             type: 'search',
                                             endAdornment: (
-                                                < InputAdornment position="end" >
+                                                <InputAdornment position="end" >
                                                     <LocationOnOutlined
                                                         aria-label="toggle password visibility"
                                                         edge="end"
                                                         size="large"
-                                                        onClick={handleOpen}
+                                                        onClick={() => dispatch(setShowMapModal({ showMapModal: true }))}
                                                         onMouseDown={handleMouseDownPassword}
                                                     >
 
@@ -474,6 +477,12 @@ const PropertyAd = ({ setShowMessage }) => {
                                 Privacy Policy
                             </Link>
                         </Typography>
+
+                        {formik.touched.termcondition && formik.errors.termcondition && (
+                            <FormHelperText error id="helper-text-firstname-signup">
+                                {formik.errors.termcondition}
+                            </FormHelperText>
+                        )}
                     </Grid>
                     {formik.errors.submit && (
                         <Grid item xs={12}>
@@ -482,7 +491,7 @@ const PropertyAd = ({ setShowMessage }) => {
                     )}
                     <Grid item xs={12}>
                         <AnimateButton>
-                            <LoadingButton loading={loading} disabled={!formik.values.termcondition && !formik.values.LocationName && !formik.values.PropertyTypeId && !formik.values.RentAmount} fullWidth size="large" type="submit" variant="contained" sx={{ bgcolor: "action.main" }}>
+                            <LoadingButton loading={loading}  fullWidth size="large" type="submit" variant="contained" sx={{ bgcolor: "action.main" }}>
                                 { loading?"disabled":"Publish"}
                             </LoadingButton>
                         </AnimateButton>

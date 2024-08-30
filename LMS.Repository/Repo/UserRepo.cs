@@ -38,12 +38,24 @@ namespace LMS.Repo.Repository
             }
         }
 
-     
+
 
         public async Task<Result> SaveUser(User user)
         {
             UserResult result = await QueryFirstOrDefaultAsync<UserResult>("SP_SaveUser", new { UserId = 0, Mobile = user.Mobile });
             return await SentEmail(result.OTP);
+        }
+
+        public async Task<Result> SaveMessage(Messages message)
+        {
+            UserResult result = await QueryFirstOrDefaultAsync<UserResult>("SP_SaveMessage", new { UserId = message.UserId, Message = message.Message });
+            return result;
+        }
+
+        public async Task<string> GetMessages(long UserId)
+        {
+            string result = await QueryFirstOrDefaultAsync<string>("SP_GetMessage", new { UserId = UserId });
+            return result;
         }
 
         public async Task<UserViewModel> UpdateUser(User user, IFormFile formFile, string ServerPath)
@@ -73,7 +85,7 @@ namespace LMS.Repo.Repository
             {
                 MailMessage message = new MailMessage();
                 message.From = new MailAddress("aliusman9760@gmail.com");
-                message.To.Add("imran13189@gmail.com");
+                message.To.Add("pervez21289@gmail.com");
                 message.Subject = "OTP Verification #";
                 message.IsBodyHtml = true;
                 message.Body = "<div>" + OTP + "</div>";
@@ -162,7 +174,7 @@ namespace LMS.Repo.Repository
             }
         }
 
-
+       
         #region Common Methods
         public async Task SaveFiles(IFormFile file, long? Id, string fileId,string filepath)
         {

@@ -20,6 +20,10 @@ namespace LMS.Core.Interfaces
         public Task<UserViewModel> ValidateOTP(User user);
         public Task<Result> PasswordReset(User user);
         public Task<UserViewModel> UpdateUser(User user, IFormFile formFile, string ServerPath);
+        public Task<Result> SaveMessage(Messages message);
+
+        public Task<string> GetMessages(long UserId);
+
 
     }
 }
