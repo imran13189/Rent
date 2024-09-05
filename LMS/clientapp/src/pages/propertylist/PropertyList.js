@@ -19,9 +19,8 @@ import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ProperyService from './../../services/PropertyService';
-import { fetchWishList, setShowMessageBox } from "./../../store/reducers/users";
-import MessageBox from './../propertyactions/MessageBox';
-import AlertBox from './../../components/AlertBox';
+import { fetchWishList, setShowMessageBox, setShowContactBox } from "./../../store/reducers/users";
+import { isMobile } from 'react-device-detect';
 // custom component
 
 
@@ -57,7 +56,7 @@ const PropertyList = () => {
             {properties?.map((item) => (
                 <Grid key={item.propertyId} item xs={12} sm={10} md={5} lg={6}>
                     <Card sx={{ maxWidth: '100%' }}>
-                        <CardActionArea target="_blank" href={item.propertyUrl}>
+                        <CardActionArea target={isMobile?"":"_blank"} href={item.propertyUrl}>
                             <CardMedia
                                 sx={{ height: 140 }}
                                 image={item.filePath}
@@ -128,7 +127,7 @@ const PropertyList = () => {
                                 <IconButton aria-label="share">
                                     <ShareIcon sx={{ color: 'action.default' }} />
                                 </IconButton>
-                                <IconButton aria-label="call">
+                            <IconButton aria-label="call" onClick={() => dispatch(setShowContactBox({ showContactBox: true, PropertyUserId:item.userId }))} >
                                     <PhoneInTalkOutlinedIcon sx={{ color: 'action.default' }} />
                             </IconButton>
                             <IconButton aria-label="message" onClick={() => dispatch(setShowMessageBox({ showMessageBox:true }))}>
@@ -139,8 +138,7 @@ const PropertyList = () => {
                     </Card>
                 </Grid>
             ))}
-            <MessageBox></MessageBox>
-            <AlertBox></AlertBox>
+         
         </Grid>
     );
 };

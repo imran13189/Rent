@@ -7,14 +7,20 @@ import {
 
 import Gallery from './gallery';
 import Details from './details';
-
+import MessageBox from './../propertyactions/MessageBox';
+import ContactBox from './../propertyactions/ContactBox';
+import AlertBox from './../../components/AlertBox';
+import MetaTags from './metatags';
 const Index = () => {
 
     return (
         <Container maxWidth="lg">
+            <MetaTags></MetaTags>
             <Gallery></Gallery>
             <Details></Details>
-          
+            <MessageBox></MessageBox>
+            <ContactBox></ContactBox>
+            <AlertBox></AlertBox>
         </Container>
     );
 }

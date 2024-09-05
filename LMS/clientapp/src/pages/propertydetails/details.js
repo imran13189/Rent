@@ -7,10 +7,12 @@ import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import UserService from "./../../services/UserService";
 import { useParams } from "react-router-dom";
-import { setSelectedPosition } from "./../../store/reducers/property";
+import { setSelectedPosition, fetchProperties } from "./../../store/reducers/property";
 import DraggableMarker from './../property/DraggableMarker';
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProperties } from "./../../store/reducers/property";
+
+import { fetchWishList, setShowMessageBox, setShowContactBox } from "./../../store/reducers/users";
+
 const Details = () => {
     let params = useParams();
     /* const { properties } = useSelector((state) => state.property);*/
@@ -111,7 +113,7 @@ const Details = () => {
 
                 <Grid item xs={12} sm={10} md={5} lg={12} mt={5}>
                     <Grid item xs={12}>
-                            <Button fullWidth size="large" type="submit" variant="contained" sx={{ bgcolor: "action.main" }}>
+                        <Button onClick={() => dispatch(setShowContactBox({ showContactBox: true, PropertyUserId: item.userId }))} fullWidth size="large" type="submit" variant="contained" sx={{ bgcolor: "action.main" }}>
                                Contact for more details
                             </Button>
                     </Grid>

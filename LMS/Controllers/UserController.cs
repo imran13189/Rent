@@ -129,6 +129,13 @@ namespace LMS.Controllers
             return await _user.GetMessages(UserId);
         }
 
+        [HttpGet]
+        [Route("api/GetUser")]
+        public async Task<string> GetUser(long UserId)
+        {
+            return await _user.GetUser(UserId);
+        }
+
 
         [HttpGet]
         [Route("api/GetPropertyFiles")]

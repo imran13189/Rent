@@ -3,7 +3,7 @@ import Config from "./config";
 import Auth from "./Auth";
 const url = Config.baseurl;
 
-class UserService {
+class MasterService {
     constructor() { }
 
     getLocations = async (event) => {
@@ -20,4 +20,4 @@ class UserService {
     
 }
 
-export default new UserService();
+export default new MasterService();

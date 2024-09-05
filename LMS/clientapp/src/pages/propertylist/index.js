@@ -10,6 +10,9 @@ import PropertyList from './PropertyList';
 import { fetchProperties, locationSearch } from "./../../store/reducers/property";
 // ================================|| REGISTER ||================================ //
 import { useDispatch, useSelector } from "react-redux";
+import MessageBox from './../propertyactions/MessageBox';
+import ContactBox from './../propertyactions/ContactBox';
+import AlertBox from './../../components/AlertBox';
 
 const Index = () => {
 
@@ -73,6 +76,9 @@ const Index = () => {
                 </Box>
 
             )}
+            <MessageBox></MessageBox>
+            <ContactBox></ContactBox>
+            <AlertBox></AlertBox>
         </Container>
     );
 }

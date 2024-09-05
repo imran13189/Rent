@@ -26,6 +26,11 @@ namespace LMS.Repo.Repository
             return await Query<UserViewModel>("SP_GetUsers");
         }
 
+        public async Task<string> GetUser(long UserId)
+        {
+            return await QueryFirstOrDefaultAsync<string>("SP_GetUser", new {UserId=UserId});
+        }
+
         public async Task<IEnumerable<Role>> GetRoles()
         {
             try

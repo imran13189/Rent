@@ -40,7 +40,7 @@ const property = createSlice({
 
             if (action.payload.showMapModal !== undefined)
                 state.showMapModal = action.payload.showMapModal;
-            debugger;
+           
             if (action.payload.positionDetails)
                 state.positionDetails = action.payload.positionDetails;
 
@@ -67,7 +67,7 @@ const property = createSlice({
             state.params = action.payload;
         },
         setShowMapModal(state, action) {
-            debugger;
+           
             state.showMapModal = action.payload.showMapModal;
         }
     },

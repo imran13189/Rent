@@ -31,6 +31,11 @@ class UserService {
         return res.data;
     };
 
+    getUser = async (userId) => {
+        const res = await axios.get(`${url}GetUser?UserId=${userId}`);
+        return res.data;
+    };
+
     getProperty = async (propertyId) => {
         const res = await axios.get(`${url}GetProperty?propertyId=${propertyId}`);
         return res.data;

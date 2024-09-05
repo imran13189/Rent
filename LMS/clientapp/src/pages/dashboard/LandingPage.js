@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link as RouterLink } from 'react-router-dom';
 // material-ui
 import {
@@ -13,14 +13,40 @@ import {
 
 
 import Search from "./Search";
-
-
+import { fetchProperties, locationSearch } from "./../../store/reducers/property";
+import { useDispatch, useSelector } from "react-redux";
 // ==============================|| DASHBOARD - DEFAULT ||============================== //
 
 const LandingPage = () => {
     const [value, setValue] = useState("today");
     const [slot, setSlot] = useState("week");
     const [selectedValue, setSelectedValue] = useState();
+    const { properties } = useSelector((state) => state.property);
+    const dispatch = new useDispatch();
+    const getLocation = () => {
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                 
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+                    console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+
+                    dispatch(fetchProperties({ page: 0, Long: longitude, Lat: latitude }));
+                },
+                (error) => {
+                    console.error(`Error: ${error.message}`);
+                }
+            );
+        } else {
+            console.log("Geolocation is not supported by this browser.");
+        }
+    }
+
+    useEffect(() => {
+        getLocation();
+    }, [])
     
     return (
         <Grid container Spacing={3} mt={10 }>
@@ -65,8 +91,8 @@ const LandingPage = () => {
                         mt={1}
                     >
                         <Typography variant="body2" sx={{ color: "text.primary" }}>
-                            <FormLabel sx={{ color: "text.secondary", fontSize: "0.9rem" }}> <b>Top Localities:</b></FormLabel> <Link sx={{ color: "text.secondary", fontSize: "0.9rem" }}>Turner Road, </Link>
-                            <Link component={RouterLink} to="/list" sx={{ color: "text.secondary", fontSize: "0.9rem"  }}>Majra</Link>
+                            <FormLabel sx={{ color: "text.secondary", fontSize: "0.9rem" }}> <b>Top Localities: </b></FormLabel>
+                            {properties.map((item,i) => <Link key={i} component={RouterLink} to="/list" sx={{ color: "text.secondary", fontSize: "0.9rem" }}>{item.locationName?.split(" ")[0] +", " }</Link>) }
                         </Typography>
                     </Grid>
                 </Grid>

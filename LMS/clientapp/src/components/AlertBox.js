@@ -39,10 +39,7 @@ const AlertBox = () => {
     const { alertBox } = useSelector((state) => state.users);
     const handleClose = () => dispatch(setShowAlertBox({ show: false }));
 
-    useEffect(() => {
-        debugger;
-        var dsfsdf = alertBox;
-    }, [alertBox]);
+
     return (
         <div>
 

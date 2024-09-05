@@ -31,6 +31,7 @@ namespace LMS.Core.Entities
 
         public string PropertyUrl { get; set; }
         public string AvailableFor { get; set; }
+        public long UserId { get; set; }
 
     }
    

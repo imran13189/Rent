@@ -42,7 +42,7 @@ export default function SignUp() {
         if (pic) {
             formData.append('formFiles', pic);
         }
-        debugger;
+      
         const result = await UserService.updateUser(formData);
         if (result) {
             dispatch(setUserDetails({ userDetails: result }));

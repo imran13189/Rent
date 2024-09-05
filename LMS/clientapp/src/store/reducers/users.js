@@ -15,7 +15,9 @@ const initialState = {
     messages:[],
     showContact: false,
     showMessageBox: false,
-    alertBox:null
+    alertBox: null,
+    showContactBox: false,
+    PropertyUserId:null
 };
 
 export const fetchWishList = createAsyncThunk('wishListData/fetchWishList', async (userId,{ getState }) => {
@@ -58,9 +60,15 @@ const users = createSlice({
 
         },
         setShowAlertBox(state, action) {
-            debugger;
+           
             //state.showMessageBox = action.payload.showMessageBox;
             return { ...state, alertBox: action.payload, showMessageBox: action.payload.showMessageBox };
+        },
+        setShowContactBox(state, action) {
+
+            state.PropertyUserId = action.payload.PropertyUserId
+            state.showContactBox = action.payload.showContactBox;
+
         }
     },
     extraReducers: (builder) => {
@@ -84,4 +92,4 @@ const users = createSlice({
 
 export default users.reducer;
 
-export const { setUserDetails, setShowContact, setShowMessageBox, setShowAlertBox } = users.actions;
+export const { setUserDetails, setShowContact, setShowMessageBox, setShowAlertBox, setShowContactBox } = users.actions;

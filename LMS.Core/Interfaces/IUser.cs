@@ -23,6 +23,7 @@ namespace LMS.Core.Interfaces
         public Task<Result> SaveMessage(Messages message);
 
         public Task<string> GetMessages(long UserId);
+        public Task<string> GetUser(long UserId);
 
 
     }

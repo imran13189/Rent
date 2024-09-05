@@ -26,13 +26,15 @@ import ReportAreaChart from './ReportAreaChart';
 import SalesColumnChart from './SalesColumnChart';
 import MainCard from 'components/MainCard';
 import AnalyticEcommerce from 'components/cards/statistics/AnalyticEcommerce';
-
+import { fetchProperties, locationSearch } from "./../../store/reducers/property";
+import { useDispatch, useSelector } from "react-redux";
 // assets
 import { GiftOutlined, MessageOutlined, SettingOutlined } from '@ant-design/icons';
 import avatar1 from 'assets/images/users/avatar-1.png';
 import avatar2 from 'assets/images/users/avatar-2.png';
 import avatar3 from 'assets/images/users/avatar-3.png';
 import avatar4 from 'assets/images/users/avatar-4.png';
+import { useEffect } from 'react';
 
 // avatar style
 const avatarSX = {
@@ -71,7 +73,10 @@ const status = [
 
 const DashboardDefault = () => {
   const [value, setValue] = useState('today');
-  const [slot, setSlot] = useState('week');
+    const [slot, setSlot] = useState('week');
+    const dispatch = new useDispatch();
+
+
 
   return (
     <Grid container rowSpacing={4.5} columnSpacing={2.75}>
