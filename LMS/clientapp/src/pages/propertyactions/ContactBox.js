@@ -97,17 +97,22 @@ export default function ContactBox() {
                                     {userData?.Name?.charAt(0)}
                                 </Avatar>
                             }
-                            action={
-                                <IconButton aria-label="call" onClick={() => dispatch(setShowContactBox({ showContactBox: true }))} >
-                                    <PhoneInTalkOutlinedIcon sx={{ color: green[500] }} />
-                                </IconButton>
-                            }
+                           
                             title={userData?.Name}
                             subheader={userData?.Mobile }
                         />
-                        <CardActions disableSpacing>
+                        <CardActions disableSpacing sx={{
+                                    alignSelf: "stretch",
+                                    display: "flex",
+                                    justifyContent: "flex-end",
+                                    alignItems: "flex-start",
+                                    p: 0,
+                                }}>
                             <IconButton aria-label="share">
                                 <ShareIcon sx={{ color: 'action.main' }} />
+                            </IconButton>
+                            <IconButton aria-label="call" onClick={() => window.location.href = "tel:" + userData?.Mobile} >
+                                <PhoneInTalkOutlinedIcon sx={{ color: green[500] }} />
                             </IconButton>
                         </CardActions>
                     </Card>

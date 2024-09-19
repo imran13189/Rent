@@ -32,6 +32,14 @@ const Search = () => {
 
     }
 
+    useEffect(() => {
+        debugger;
+        if (selectedLocation) {
+            const dd = 0;
+        }
+
+    }, [selectedLocation]);
+
 
     return (
         <Autocomplete
@@ -48,7 +56,7 @@ const Search = () => {
             disableClearable
             options={options}
             onChange={(event, value) => {
-              
+                debugger;
                 if (!(location.pathname.indexOf("list") > -1)) {
                     onClickHandler(value);
                     dispatch(locationSearch({ ...value, page: 0 }));
@@ -63,6 +71,7 @@ const Search = () => {
                 <TextField
                     {...params}
                     placeholder="Search location"
+                    
                     onChange={handleLocations}
                     InputProps={{
                         style: { padding: location.pathname.indexOf("list") > -1?4:9 },

@@ -12,6 +12,7 @@ import DraggableMarker from './../property/DraggableMarker';
 import { useDispatch, useSelector } from "react-redux";
 
 import { fetchWishList, setShowMessageBox, setShowContactBox } from "./../../store/reducers/users";
+import MetaTags from './metatags';
 
 const Details = () => {
     let params = useParams();
@@ -127,6 +128,8 @@ const Details = () => {
                     <DraggableMarker></DraggableMarker>
                 </Grid>
             </Grid>
+
+            <MetaTags property={item}></MetaTags>
         </>
     );
 };

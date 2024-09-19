@@ -39,7 +39,7 @@ const MainRoutes = {
         element: <PropertyList />
       },
       
-      {
+      {      name:'detailpage',
           path: '/:url/:id',
           element: <PropertyDetails />
       }

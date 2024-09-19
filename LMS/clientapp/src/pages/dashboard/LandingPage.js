@@ -16,6 +16,7 @@ import Search from "./Search";
 import { fetchProperties, locationSearch } from "./../../store/reducers/property";
 import { useDispatch, useSelector } from "react-redux";
 // ==============================|| DASHBOARD - DEFAULT ||============================== //
+const processedNumbers = [];
 
 const LandingPage = () => {
     const [value, setValue] = useState("today");
@@ -92,7 +93,9 @@ const LandingPage = () => {
                     >
                         <Typography variant="body2" sx={{ color: "text.primary" }}>
                             <FormLabel sx={{ color: "text.secondary", fontSize: "0.9rem" }}> <b>Top Localities: </b></FormLabel>
-                            {properties.map((item,i) => <Link key={i} component={RouterLink} to="/list" sx={{ color: "text.secondary", fontSize: "0.9rem" }}>{item.locationName?.split(" ")[0] +", " }</Link>) }
+                            {properties.filter((value, index, self) =>
+                                index === self.findIndex((obj) => obj.locationName === value.locationName)
+                            ).map((item, i) => <Link key={i} component={RouterLink} to={"/list/"+item.locationName } sx={{ color: "text.secondary", fontSize: "0.9rem" }}>{item.locationName?.split(" ")[0] +", " }</Link>) }
                         </Typography>
                     </Grid>
                 </Grid>

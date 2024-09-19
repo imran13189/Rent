@@ -8,6 +8,7 @@ import {
 import SearchProperty from './SearchProperty';
 import PropertyList from './PropertyList';
 import { fetchProperties, locationSearch } from "./../../store/reducers/property";
+import { useParams } from "react-router-dom";
 // ================================|| REGISTER ||================================ //
 import { useDispatch, useSelector } from "react-redux";
 import MessageBox from './../propertyactions/MessageBox';
@@ -15,7 +16,7 @@ import ContactBox from './../propertyactions/ContactBox';
 import AlertBox from './../../components/AlertBox';
 
 const Index = () => {
-
+    let params = useParams();
     const [loading, setLoading] = useState(false);
     const dispatch = new useDispatch();
     const { selectedLocation, properties } = useSelector((state) => state.property);
@@ -38,8 +39,17 @@ const Index = () => {
 
     useEffect(() => {
 
-        if (!selectedLocation) {
-            dispatch(fetchProperties(selectedLocation));
+        if (params.location) {
+            debugger;
+          dispatch(locationSearch({
+              ...selectedLocation,
+                    page: 0,
+                    LocationId: null,
+                    LocationName: params.location,
+                    Long: null,
+                    Lat: null
+                }));
+            
         }
 
     }, []);
