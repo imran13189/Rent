@@ -17,7 +17,8 @@ const initialState = {
     showMessageBox: false,
     alertBox: null,
     showContactBox: false,
-    PropertyUserId:null
+    PropertyUserId: null,
+    showLoginModal:false
 };
 
 export const fetchWishList = createAsyncThunk('wishListData/fetchWishList', async (userId,{ getState }) => {
@@ -49,14 +50,23 @@ const users = createSlice({
         },
         setShowContact(state, action) {
 
-           
-            state.showContact = action.payload.showContact;
+            if (state.userDetails == null) {
+                state.showLoginModal = true;
+            }
+            else {
+                state.showContact = action.payload.showContact;
+            }
           
 
         },
         setShowMessageBox(state, action) {
-
-            state.showMessageBox = action.payload.showMessageBox;
+            if (state.userDetails == null) {
+                state.showLoginModal = true;
+            }
+            else {
+                state.PropertyUserId = action.payload.PropertyUserId
+                state.showMessageBox = action.payload.showMessageBox;
+            }
 
         },
         setShowAlertBox(state, action) {
@@ -65,11 +75,21 @@ const users = createSlice({
             return { ...state, alertBox: action.payload, showMessageBox: action.payload.showMessageBox };
         },
         setShowContactBox(state, action) {
+         
+            if (state.userDetails == null) {
+                state.showLoginModal = true;
+            }
+            else {
+                state.PropertyUserId = action.payload.PropertyUserId
+                state.showContactBox = action.payload.showContactBox;
+            }
 
-            state.PropertyUserId = action.payload.PropertyUserId
-            state.showContactBox = action.payload.showContactBox;
+        },
+        setShowLoginModal(state, action) {
 
-        }
+            state.showLoginModal = action.payload.showLoginModal;
+
+        },
     },
     extraReducers: (builder) => {
         // Add reducers for additional action types here, and handle loading state as needed
@@ -92,4 +112,4 @@ const users = createSlice({
 
 export default users.reducer;
 
-export const { setUserDetails, setShowContact, setShowMessageBox, setShowAlertBox, setShowContactBox } = users.actions;
+export const { setUserDetails, setShowContact, setShowMessageBox, setShowAlertBox, setShowContactBox, setShowLoginModal } = users.actions;

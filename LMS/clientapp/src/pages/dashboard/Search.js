@@ -32,13 +32,6 @@ const Search = () => {
 
     }
 
-    useEffect(() => {
-        debugger;
-        if (selectedLocation) {
-            const dd = 0;
-        }
-
-    }, [selectedLocation]);
 
 
     return (
@@ -55,8 +48,15 @@ const Search = () => {
             id="free-solo-2-demo"
             disableClearable
             options={options}
-            onChange={(event, value) => {
-                debugger;
+            key={(key) => {
+               
+                const data = key;
+
+            }}
+            onChange={(event, value, reason) => {
+
+             
+
                 if (!(location.pathname.indexOf("list") > -1)) {
                     onClickHandler(value);
                     dispatch(locationSearch({ ...value, page: 0 }));
@@ -71,7 +71,7 @@ const Search = () => {
                 <TextField
                     {...params}
                     placeholder="Search location"
-                    
+                    defaultValue={selectedLocation?.LocationName}
                     onChange={handleLocations}
                     InputProps={{
                         style: { padding: location.pathname.indexOf("list") > -1?4:9 },

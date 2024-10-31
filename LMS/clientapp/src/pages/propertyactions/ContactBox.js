@@ -33,7 +33,7 @@ const style = {
     transform: 'translate(-50%, -50%)',
     //width: 800,
     bgcolor: '#fff',
-    border: '2px solid #000',
+    borderRadius: '5px',
    
     p: 4,
 };

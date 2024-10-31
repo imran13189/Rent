@@ -26,7 +26,6 @@ import ReportAreaChart from './ReportAreaChart';
 import SalesColumnChart from './SalesColumnChart';
 import MainCard from 'components/MainCard';
 import AnalyticEcommerce from 'components/cards/statistics/AnalyticEcommerce';
-import { fetchProperties, locationSearch } from "./../../store/reducers/property";
 import { useDispatch, useSelector } from "react-redux";
 // assets
 import { GiftOutlined, MessageOutlined, SettingOutlined } from '@ant-design/icons';

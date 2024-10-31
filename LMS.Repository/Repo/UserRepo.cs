@@ -11,6 +11,7 @@ using System.Reflection;
 using Microsoft.AspNetCore.Http;
 using System.Drawing.Imaging;
 using System.Drawing;
+using Amazon.Runtime.Internal.Endpoints.StandardLibrary;
 
 namespace LMS.Repo.Repository
 {
@@ -48,12 +49,15 @@ namespace LMS.Repo.Repository
         public async Task<Result> SaveUser(User user)
         {
             UserResult result = await QueryFirstOrDefaultAsync<UserResult>("SP_SaveUser", new { UserId = 0, Mobile = user.Mobile });
-            return await SentEmail(result.OTP);
-        }
+            Task<Result> taskEmail = SentEmail(result.OTP);
+            Task taskSMS = SendSMS(result.OTP,user.Mobile);
+            await Task.WhenAll(taskSMS,taskEmail);
+            return taskEmail.Result;
+        }                      
 
         public async Task<Result> SaveMessage(Messages message)
         {
-            UserResult result = await QueryFirstOrDefaultAsync<UserResult>("SP_SaveMessage", new { UserId = message.UserId, Message = message.Message });
+            UserResult result = await QueryFirstOrDefaultAsync<UserResult>("SP_SaveMessage", new {SentTo=message.SentTo, UserId = message.UserId, Message = message.Message });
             return result;
         }
 
@@ -113,7 +117,22 @@ namespace LMS.Repo.Repository
             }
         }
 
+        public async Task SendSMS(string OTP,string Mobile)
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    string url = string.Format("https://www.fast2sms.com/dev/bulkV2?authorization={0}&route=otp&variables_values={1}&flash=0&numbers={2}", "Qx7ZkSVpfemUTbNuJ9Hrh2LXPn3OF1cW0gDtjodGEsi4az8MCYPvrS4fYJ7kslEnaAFLTm0ZXcqg6oGN", OTP, Mobile);
+                    HttpResponseMessage response = await client.GetAsync(url);
+                }
 
+            }
+            catch
+            {
+
+            }
+        }
         public async Task<Result> SentUpdate(User user)
         {
             try

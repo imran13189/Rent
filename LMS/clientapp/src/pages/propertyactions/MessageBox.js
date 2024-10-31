@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState} from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import IconButton from '@mui/material/IconButton';
@@ -23,6 +23,7 @@ import * as Yup from 'yup';
 import { useEffect } from 'react';
 import MasterService from './../../services/MasterService';
 import UserService from './../../services/UserService';
+import createSignalRConnection from "./../../signalr/signalRService";
 
 const style = {
     position: 'absolute',
@@ -30,8 +31,8 @@ const style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     //width: 800,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
+    bgcolor: '#fff',
+    borderRadius: '5px',
     boxShadow: 24,
     p: 4,
 };
@@ -39,10 +40,14 @@ const style = {
 
 export default function MessageBox() {
 
-    const [options, setOptions] = React.useState([]);
+    const [options, setOptions] = useState([]);
+    const [connection, setConnection] = useState(null);
+    const [message, setMessage] = useState('');
+    const [messages, setMessages] = useState([]);
+
     const handleClose = () => dispatch(setShowMessageBox({ showMessageBox: false }));
     const dispatch = useDispatch();
-    const { showMessageBox, userDetails } = useSelector((state) => state.users);
+    const { showMessageBox, userDetails, PropertyUserId} = useSelector((state) => state.users);
 
     const SignupSchema = Yup.object().shape({
         Message: Yup.string().required("Please enter message."),
@@ -50,9 +55,45 @@ export default function MessageBox() {
     });
 
     useEffect(() => {
-      
+        const connect = async () => {
+            const newConnection = createSignalRConnection();
 
+            newConnection.on("ReceiveMessage", (user, message) => {
+                debugger;
+                if (userDetails?.userId === user) {
+                    dispatch(fetchMessages());
+                }
+            });
+
+            await newConnection
+                .start()
+                .then(() => console.log("Connected to SignalR"))
+                .catch((error) => console.error("Connection failed: ", error));
+
+            setConnection(newConnection);
+        };
+
+        connect();
+
+        // Cleanup on unmount
+        return () => {
+            if (connection) {
+                connection.stop();
+            }
+        };
     }, []);
+
+    const sendMessage = async (userMessage) => {
+        debugger;
+        if (connection && userMessage) {
+            try {
+                await connection.invoke("SendMessage", userMessage.SentTo, userMessage.Message);
+                setUserMessage("");
+            } catch (error) {
+                console.error("Message send failed: ", error);
+            }
+        }
+    };
     return (
         <div>
 
@@ -84,10 +125,11 @@ export default function MessageBox() {
                         validationSchema={SignupSchema}
                         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
                             try {
-                                const message = { UserId: userDetails?.userId, Message: values.Message };
+                                const message = { UserId: userDetails?.userId, Message: values.Message, SentTo: PropertyUserId };
                                 const result = await UserService.SaveMessage(message);
                                 dispatch(setShowAlertBox({ showMessageBox:false, show: true, message: result?.message, color:'success.light' }))
-                                dispatch(fetchMessages());
+                               
+                                sendMessage(message);
                                 setSubmitting(false);
                             } catch (err) {
                                 console.error(err);

@@ -38,7 +38,8 @@ function PropertyFiles({setFormFiles }) {
     const [files, setFiles] = useState([]);
     const { getRootProps, getInputProps } = useDropzone({
         accept: {
-            'image/*': []
+            'image/png': ['.png'],
+            'image/jpeg': ['.jpeg'],
         },
         onDrop: acceptedFiles => {
            

@@ -12,7 +12,7 @@ const initialState = {
     showLocation: false,
     showMapModal:false,
     search: '',
-    selectedLocation: { page :0},
+    selectedLocation: { page :0,ptype:0},
     selectedMainLocation: null,
     params: {},
     properties: []
@@ -52,7 +52,7 @@ const property = createSlice({
             return { ...state, search: action.payload.search };
         },
         locationSearch(state, action) {
-           
+        
             state.selectedLocation = { ...state.selectedLocation, ...action.payload };
 
             /*return { ...state, {...payload.selectedLocation, ...action.payload } }*/

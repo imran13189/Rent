@@ -14,7 +14,7 @@ const MainLayout = () => {
 
     return (
         <Box sx={{ display: 'flex', width: '100%' }}>
-            {!(isMobile && match) && < Header open={false} handleDrawerToggle={false} />}
+            <Header open={false} handleDrawerToggle={false} />
             <Drawer open={false} handleDrawerToggle={false} />
             <Box component="main" sx={{ width: '100%', flexGrow: 1, p: { xs: 2, sm: 3 } }}>
                 <Outlet />

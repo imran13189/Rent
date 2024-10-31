@@ -8,6 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.AspNetCore.SignalR;
+using LMS.ChatHub;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,8 +20,8 @@ builder.Services.AddCors(options =>
         policy =>
         {
             policy.WithOrigins("http://localhost:3000",
-                                "https://localhost", "https://imeshma.com").AllowAnyHeader()
-                                                  .AllowAnyMethod();
+                                "https://localhost").AllowAnyHeader()
+                                                  .AllowAnyMethod().AllowCredentials();
         });
 });
 
@@ -58,6 +60,8 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+builder.Services.AddSignalR();
+
 var app = builder.Build();
 
 BaseRepository.ConnectionString = app.Configuration.GetConnectionString("Value");
@@ -75,9 +79,18 @@ app.UseStaticFiles(new StaticFileOptions()
     FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath, "Files")),
     RequestPath = "/Files"
 });
+
+
+
 app.UseCors();
 app.UseAuthentication();
+app.UseRouting();
 app.UseAuthorization();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapHub<ChatHub>("/chathub");
+});
 
 app.MapControllers();
 app.MapFallbackToFile("index.html");

@@ -19,7 +19,7 @@ import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ProperyService from './../../services/PropertyService';
-import { fetchWishList, setShowMessageBox, setShowContactBox } from "./../../store/reducers/users";
+import { fetchWishList, setShowMessageBox, setShowContactBox, setShowLoginModal } from "./../../store/reducers/users";
 
 // custom component
 
@@ -115,7 +115,7 @@ const PropertyList = () => {
                                     p: 0,
                                 }}
                         >
-                            <IconButton aria-label="add to favorites" onClick={() => updateWishList(item?.propertyId)}>
+                            <IconButton aria-label="add to favorites" onClick={() => userDetails == null ? dispatch(setShowLoginModal({ showLoginModal: true })): updateWishList(item?.propertyId)}>
 
                                     {wishList.some(x => x.propertyId ===item.propertyId) ? (
                                         <FavoriteIcon sx={{ color: 'action.main' }} />
@@ -130,7 +130,7 @@ const PropertyList = () => {
                             <IconButton aria-label="call" onClick={() => dispatch(setShowContactBox({ showContactBox: true, PropertyUserId:item.userId }))} >
                                     <PhoneInTalkOutlinedIcon sx={{ color: 'action.default' }} />
                             </IconButton>
-                            <IconButton aria-label="message" onClick={() => dispatch(setShowMessageBox({ showMessageBox:true }))}>
+                            <IconButton aria-label="message" onClick={() => dispatch(setShowMessageBox({ showMessageBox: true, PropertyUserId: item.userId }))}>
                                     <MessageOutlinedIcon sx={{ color: 'action.default' }} />
                                 </IconButton>
                             </CardActions>

@@ -25,5 +25,6 @@ namespace LMS.Core.Entities
     {
         public long UserId { get; set;}
         public string Message { get; set;}
+        public long SentTo { get; set; }
     }
 }

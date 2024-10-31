@@ -21,7 +21,7 @@ import {
 // third party
 import * as Yup from "yup";
 import { Formik } from "formik";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import AnimateButton from "components/@extended/AnimateButton";
 
@@ -29,7 +29,7 @@ import AnimateButton from "components/@extended/AnimateButton";
 import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
 
 import UserService from "../../../services/UserService";
-import { setUserDetails } from "./../../../store/reducers/users";
+import { setUserDetails, setShowLoginModal } from "./../../../store/reducers/users";
 // ============================|| FIREBASE - LOGIN ||============================ //
 
 const AuthLogin = () => {
@@ -39,6 +39,7 @@ const AuthLogin = () => {
     const dispatch = useDispatch();
 
     const redirectToHome = () => navigate(`/`);
+    const { showLoginModal } = useSelector((state) => state.users);
 
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
@@ -101,14 +102,18 @@ const AuthLogin = () => {
                                 window.localStorage.setItem('user', JSON.stringify(result));
                                 window.localStorage.setItem('userDetails', JSON.stringify(result.userData));
                                 dispatch(setUserDetails({ userDetails: result.userData }));
-                                redirectToHome();
+                              
+                                if (showLoginModal) 
+                                    dispatch(setShowLoginModal({ showLoginModal: false }))
+                                else
+                                    redirectToHome();
                             }
                             else {
                                 setOTPError(true);
                             }
                         }
                         else {
-                            const result = await UserService.SaveUser(values);
+                            const result =  UserService.SaveUser(values);
                             setOTPSent(true);
                             setSubmitting(false);
                            

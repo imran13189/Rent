@@ -10,7 +10,7 @@ import {
     MenuItem,
     TextField,
     Autocomplete,
-    Button,
+  
     Divider,
 
     FormHelperText,
@@ -25,7 +25,7 @@ import {
 
 // third party
 import * as Yup from 'yup';
-import { Formik, useFormik } from 'formik';
+import { useFormik } from 'formik';
 
 // project import
 
@@ -38,7 +38,6 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import dayjs from 'dayjs';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 // assets
-import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 import PropertyFiles from './PropertyFiles';
 import MapModal from './MapModal';
 import NewLocationModal from './NewLocationModal';
@@ -80,7 +79,7 @@ const PropertyAd = ({ setShowMessage }) => {
     const { userDetails } = useSelector((state) => state.users);
 
 
-    const handleOpen = () => dispatch(true);
+   
 
     const digitsOnly = (value) => /^\d*[.{1}\d*]\d*$/.test(value);
 
@@ -272,9 +271,9 @@ const PropertyAd = ({ setShowMessage }) => {
                             <InputLabel htmlFor="company-signup">Available From:</InputLabel>
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <MobileDatePicker name="AvailableFrom" onChange={(value) => {
-                                    
+
                                     formik.setFieldValue('AvailableFrom', value.$d.toISOString());
-                                }} defaultValue={dayjs(new Date())} />
+                                }} defaultValue={dayjs(new Date())} minDate={dayjs(new Date())} />
                             </LocalizationProvider>
                             {formik.touched.company && formik.errors.company && (
                                 <FormHelperText error id="helper-text-company-signup">

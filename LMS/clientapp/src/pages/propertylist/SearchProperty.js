@@ -38,25 +38,25 @@ const SearchProperty = () => {
 
     const dispatch = new useDispatch();
 
-  
+
    
     return (
         <Grid container spacing={3} mt={10} justifyContent="flex-end">
-            <Grid item xs={12} lg={4}>
+            <Grid item xs={12} lg={3}>
                 <Stack spacing={1}>
                     <Search ></Search>
                 </Stack>
             </Grid>
 
-            <Grid item xs={6} lg={1}>
+            <Grid item xs={6} lg={2}>
                 <Stack spacing={1}>
                     <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         onChange={(evt) => dispatch(locationSearch({ ...selectedLocation, ptype: evt.target.value }))}
                         label="Age"
-                        name="PropertyTypeId"
-                      
+                        name="ptype"
+                        value={selectedLocation?.ptype}
                         displayEmpty
                     >
                         <MenuItem value={0}>

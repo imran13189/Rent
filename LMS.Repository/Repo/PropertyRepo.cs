@@ -107,7 +107,8 @@ namespace LMS.Repository.Repo
 
         public async Task<PropertyModel> GetProperty(long PropertyId)
         {
-            return await QueryFirstOrDefaultAsync<PropertyModel>("SP_GetProperty", new {PropertyId= PropertyId });
+            var data= await QueryFirstOrDefaultAsync<PropertyModel>("SP_GetProperty", new {PropertyId= PropertyId });
+            return data;
         }
 
 

@@ -1,6 +1,7 @@
 const Env = {
     baseurl: process.env.REACT_APP_API_URL,
     appUrl: process.env.REACT_APP_APP_URL,
+    chatUrl: process.env.REACT_APP_CHAT_URL,
 
     //baseurl: "https://imeshma.com/api/",
     //appUrl: "https://imeshma.com",

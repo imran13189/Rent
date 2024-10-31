@@ -68,7 +68,7 @@ namespace LMS.Repo.Repository
             {
                 if (conn.State == ConnectionState.Closed)
                 {
-                    conn.Open();
+                    await conn.OpenAsync();
                 }
                 else if (conn.State == ConnectionState.Broken || conn.State == ConnectionState.Connecting || conn.State == ConnectionState.Executing || conn.State == ConnectionState.Fetching)
                 {

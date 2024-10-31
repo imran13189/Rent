@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import MessageBox from './../propertyactions/MessageBox';
 import ContactBox from './../propertyactions/ContactBox';
 import AlertBox from './../../components/AlertBox';
+import LoginModal from './../propertyactions/LoginModal';
 
 const Index = () => {
     let params = useParams();
@@ -28,6 +29,8 @@ const Index = () => {
     };
 
 
+
+
     useEffect(() => {
 
         if (selectedLocation) {
@@ -38,9 +41,8 @@ const Index = () => {
 
 
     useEffect(() => {
-
+       
         if (params.location) {
-            debugger;
           dispatch(locationSearch({
               ...selectedLocation,
                     page: 0,
@@ -53,8 +55,6 @@ const Index = () => {
         }
 
     }, []);
-
-
 
 
     return (
@@ -89,6 +89,7 @@ const Index = () => {
             <MessageBox></MessageBox>
             <ContactBox></ContactBox>
             <AlertBox></AlertBox>
+            <LoginModal />
         </Container>
     );
 }
