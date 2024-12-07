@@ -22,11 +22,11 @@ const ProfileTab = ({ handleLogout }) => {
 
   return (
     <List component="nav" sx={{ p: 0, '& .MuiListItemIcon-root': { minWidth: 32, color: theme.palette.grey[500] } }}>
-      <ListItemButton selected={selectedIndex === 0} onClick={(event) => handleListItemClick(event, 0)}>
+          <ListItemButton selected={selectedIndex === 0} component={Link} to="wishlist">
         <ListItemIcon>
           <EditOutlined />
         </ListItemIcon>
-        <ListItemText primary="Edit Profile" />
+        <ListItemText primary="Wishlist" />
       </ListItemButton>
           <ListItemButton selected={selectedIndex === 1} component={Link} to="profile">
              

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Config from "./../../services/config";
+
 // material-ui components
 import {
     Grid, Stack, Card, CardActionArea, Paper, Box, CardHeader, CardMedia, CardContent,
@@ -18,6 +18,7 @@ import MessageOutlinedIcon from '@mui/icons-material/MessageOutlined';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import ProperyService from './../../services/PropertyService';
 import { fetchWishList, setShowMessageBox, setShowContactBox, setShowLoginModal } from "./../../store/reducers/users";
 
@@ -37,12 +38,9 @@ const ExpandMore = styled((props) => {
     }),
 }));
 
-const PropertyList = () => {
-    const [value, setValue] = useState("today");
-    const [slot, setSlot] = useState("week");
-    const { properties } = useSelector((state) => state.property);
+const WishList = () => {
+
     const { wishList, userDetails } = useSelector((state) => state.users);
-    const [expanded, setExpanded] = useState(false);
     const dispatch = new useDispatch();
     const updateWishList = async (propertyId) => {
       
@@ -53,13 +51,13 @@ const PropertyList = () => {
 
     return (
         <Grid container spacing={3}>
-            {properties?.map((item) => (
+            {wishList?.map((item) => (
                 <Grid key={item.propertyId} item xs={12} sm={10} md={5} lg={6}>
                     <Card sx={{ maxWidth: '100%' }}>
-                        <CardActionArea target="_blank" href={Config.appUrl +item.propertyUrl}>
+                        <CardActionArea target="_blank" href={item.propertyUrl}>
                             <CardMedia
                                 sx={{ height: 140 }}
-                                image={Config.appUrl +item.filePath}
+                                image={item.filePath}
                                 title="green iguana"
                             />
                             <CardContent>
@@ -115,13 +113,9 @@ const PropertyList = () => {
                                     p: 0,
                                 }}
                         >
-                            <IconButton aria-label="add to favorites" onClick={() => userDetails == null ? dispatch(setShowLoginModal({ showLoginModal: true })): updateWishList(item?.propertyId)}>
+                            <IconButton aria-label="add to favorites" onClick={() => updateWishList(item?.propertyId)}>
 
-                                    {wishList.some(x => x.propertyId ===item.propertyId) ? (
-                                        <FavoriteIcon sx={{ color: 'action.main' }} />
-                                    ) : (
-                                            <FavoriteBorderOutlinedIcon sx={{ color: 'action.default' }} />
-                                    )}
+                                <DeleteForeverIcon sx={{ color: 'action.main' }}></DeleteForeverIcon>
                                     
                                 </IconButton>
                                 <IconButton aria-label="share">
@@ -143,4 +137,4 @@ const PropertyList = () => {
     );
 };
 
-export default PropertyList;
+export default WishList;

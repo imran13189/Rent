@@ -59,7 +59,7 @@ export default function MessageBox() {
             const newConnection = createSignalRConnection();
 
             newConnection.on("ReceiveMessage", (user, message) => {
-                debugger;
+             
                 if (userDetails?.userId === user) {
                     dispatch(fetchMessages());
                 }
@@ -84,7 +84,7 @@ export default function MessageBox() {
     }, []);
 
     const sendMessage = async (userMessage) => {
-        debugger;
+     
         if (connection && userMessage) {
             try {
                 await connection.invoke("SendMessage", userMessage.SentTo, userMessage.Message);

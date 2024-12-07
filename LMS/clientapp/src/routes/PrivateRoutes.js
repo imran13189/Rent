@@ -8,7 +8,7 @@ import PrivateLayout from 'layout/PrivateLayout';
 const ViewProfile = Loadable(lazy(() => import('pages/authentication/ViewProfile')));
 
 const PropertyForm = Loadable(lazy(() => import('pages/property/Index')));
-
+import Wishlist from './../pages/wishlist';
 // ==============================|| Private ROUTING ||============================== //
 
 const PrivateRoutes = {
@@ -22,6 +22,10 @@ const PrivateRoutes = {
       {
           path: 'property',
           element: <PropertyForm />
+      },
+      {
+          path: 'wishlist',
+          element: <Wishlist />
       }
   ]
 };

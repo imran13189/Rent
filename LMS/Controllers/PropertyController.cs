@@ -88,10 +88,13 @@ namespace LMS.Controllers
 
         [HttpGet]
         [Route("api/GetWishList")]
-        public async Task<IEnumerable<WishListModel>> GetWishList(long userId)
+        public async Task<IEnumerable<PropertyModel>> GetWishList(long userId)
         {
             return await _property.GetWishList(userId);
         }
+
+      
+
 
 
 

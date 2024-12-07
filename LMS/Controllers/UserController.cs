@@ -143,28 +143,31 @@ namespace LMS.Controllers
         {
             string folderPath =Path.Combine(_hostingEnvironment.ContentRootPath, "Files", Convert.ToString(propertyId));
             List<FileModel> fileList = new();
-            if (Directory.Exists(folderPath))
+            await Task.Run(() =>
             {
-                DirectoryInfo directoryInfo = new DirectoryInfo(folderPath);
-                var filesData = directoryInfo.GetFiles();
-                var request = HttpContext.Request;
-                var baseUrl = $"{request.Scheme}://{request.Host}{request.PathBase}/Files/{Convert.ToString(propertyId)}/";
-                for (int i = 0; i < filesData.Count(); i++)
+                if (Directory.Exists(folderPath))
                 {
-                    fileList.Add(new FileModel()
+                    DirectoryInfo directoryInfo = new DirectoryInfo(folderPath);
+                    var filesData = directoryInfo.GetFiles();
+                    var request = HttpContext.Request;
+                    var baseUrl = $"{request.Scheme}://{request.Host}{request.PathBase}/Files/{Convert.ToString(propertyId)}/";
+                    for (int i = 0; i < filesData.Count(); i++)
                     {
-                        Id = i,
-                        title = filesData[i].Name,
-                        img = baseUrl + filesData[i].Name,
-                        rows=i==0?4:2,
-                        cols = i == 0 ? 2 : 1,
-                    });
+                        fileList.Add(new FileModel()
+                        {
+                            Id = i,
+                            title = filesData[i].Name,
+                            img = baseUrl + filesData[i].Name,
+                            rows = i == 0 ? 4 : 2,
+                            cols = i == 0 ? 2 : 1,
+                        });
+                    }
                 }
-            }
-            else
-            {
-                throw new DirectoryNotFoundException($"The directory at path {folderPath} does not exist.");
-            }
+                else
+                {
+                    throw new DirectoryNotFoundException($"The directory at path {folderPath} does not exist.");
+                }
+            });
             return fileList;
         }
 

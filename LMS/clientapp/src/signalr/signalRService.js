@@ -5,7 +5,7 @@ import { HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
 
 
 const createSignalRConnection = () => {
-    debugger;
+  
     const chatUrl = Config.chatUrl;
     const connection = new HubConnectionBuilder()
         .withUrl(chatUrl) // URL to your SignalR hub
