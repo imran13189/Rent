@@ -12,6 +12,7 @@ namespace LMS.Core.Interfaces
         Task<List<StorageObject>> GetStorageObjectsAsync(string path);
         Task<PropertyModel> GetProperty(long propertyId);
         public Task<Result> SaveWishList(long UserId, long PropertyId);
-        Task<IEnumerable<WishListModel>> GetWishList(long userId);
+        Task<IEnumerable<PropertyModel>> GetWishList(long userId);
+        Task<IEnumerable<PropertyModel>> GetUserProperties(long userId);
     }
 }

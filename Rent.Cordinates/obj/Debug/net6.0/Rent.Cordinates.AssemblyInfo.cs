@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Rent.Cordinates")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+eef171904f6f9d1b5a5498892b257158d43fec21")]
 [assembly: System.Reflection.AssemblyProductAttribute("Rent.Cordinates")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Rent.Cordinates")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

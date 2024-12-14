@@ -12,32 +12,34 @@ import { EditOutlined, ProfileOutlined, LogoutOutlined, UserOutlined, WalletOutl
 
 const ProfileTab = ({ handleLogout }) => {
   const theme = useTheme();
-    
+
   const [selectedIndex, setSelectedIndex] = useState(0);
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
   };
 
-
-
   return (
     <List component="nav" sx={{ p: 0, '& .MuiListItemIcon-root': { minWidth: 32, color: theme.palette.grey[500] } }}>
-          <ListItemButton selected={selectedIndex === 0} component={Link} to="wishlist">
+      <ListItemButton selected={selectedIndex === 0} component={Link} to="wishlist">
         <ListItemIcon>
           <EditOutlined />
         </ListItemIcon>
         <ListItemText primary="Wishlist" />
-      </ListItemButton>
-          <ListItemButton selected={selectedIndex === 1} component={Link} to="profile">
-             
+          </ListItemButton>
+          <ListItemButton selected={selectedIndex === 1} component={Link} to="mylisting">
+              <ListItemIcon>
+                  <EditOutlined />
+              </ListItemIcon>
+              <ListItemText primary="My Listing" />
+          </ListItemButton>
+      <ListItemButton selected={selectedIndex === 2} component={Link} to="profile">
         <ListItemIcon>
           <UserOutlined />
         </ListItemIcon>
         <ListItemText primary="View Profile" />
       </ListItemButton>
 
-    
-      <ListItemButton selected={selectedIndex === 2} onClick={handleLogout}>
+      <ListItemButton selected={selectedIndex === 3} onClick={handleLogout}>
         <ListItemIcon>
           <LogoutOutlined />
         </ListItemIcon>

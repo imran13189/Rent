@@ -93,7 +93,12 @@ namespace LMS.Controllers
             return await _property.GetWishList(userId);
         }
 
-      
+        [HttpGet]
+        [Route("api/GetUserProperties")]
+        public async Task<IEnumerable<PropertyModel>> GetUserProperties(long userId)
+        {
+            return await _property.GetUserProperties(userId);
+        }
 
 
 

@@ -124,9 +124,14 @@ namespace LMS.Repository.Repo
             }
         }
 
-        public async Task<IEnumerable<WishListModel>> GetWishList(long userId)
+        public async Task<IEnumerable<PropertyModel>> GetWishList(long userId)
         {
-            return await QueryAsync<WishListModel>("SP_GetWishList", new { UserId = userId });
+            return await QueryAsync<PropertyModel>("SP_GetWishList", new { UserId = userId });
+        }
+
+        public async Task<IEnumerable<PropertyModel>> GetUserProperties(long userId)
+        {
+            return await QueryAsync<PropertyModel>("SP_GetUserProperties", new { UserId = userId });
         }
 
         public async Task<List<StorageObject>> GetStorageObjectsAsync(string path)
