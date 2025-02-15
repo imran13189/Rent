@@ -4,8 +4,8 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 -->
 <Project>
   <PropertyGroup>
-    <_PublishTargetUrl>C:\Publish</_PublishTargetUrl>
-    <History>True|2024-01-21T15:32:25.7688492Z;True|2024-01-21T20:56:28.9602589+05:30;True|2024-01-21T20:51:31.1553010+05:30;True|2024-01-21T20:47:49.5237436+05:30;</History>
+    <_PublishTargetUrl>\\192.168.1.6\sipaz</_PublishTargetUrl>
+    <History>True|2025-02-10T15:24:35.9255762Z||;True|2025-01-10T21:17:06.0491897+05:30||;True|2025-01-09T13:21:34.0832632+05:30||;True|2025-01-08T18:05:20.8030560+05:30||;True|2024-01-21T21:02:25.7688492+05:30||;True|2024-01-21T20:56:28.9602589+05:30||;True|2024-01-21T20:51:31.1553010+05:30||;True|2024-01-21T20:47:49.5237436+05:30||;</History>
     <LastFailureDetails />
   </PropertyGroup>
 </Project>

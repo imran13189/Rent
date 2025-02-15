@@ -6,6 +6,8 @@ import { useSelector, useDispatch } from "react-redux";
 import UserService from './../../services/UserService'
 import { useEffect } from 'react';
 import { useState } from 'react';
+import IconButton from '@mui/material/IconButton';
+import ClearIcon from '@mui/icons-material/Clear';
 import {
 
     useParams
@@ -36,6 +38,7 @@ export default function Gallery() {
     const [files, setFiles] = useState([{}]);
     const params = useParams();
     const dispatch = new useDispatch();
+   
 
 
     useEffect(() => {
@@ -48,7 +51,7 @@ export default function Gallery() {
             fetchData();
         }
 
-    }, [])
+    }, [params])
 
     return (
         <>
@@ -80,6 +83,24 @@ export default function Gallery() {
                                 height: '100%',
                                 textAlign: 'center', // Center the text
                             }}
+
+                            actionIcon={
+                                 <IconButton
+                                    sx={{
+                                        position: 'absolute',
+                                        top: '5%',
+                                        left: '80%',
+                                        transform: 'translate(-50%, -50%)',
+                                        color: 'white',
+                                        transition: 'opacity 0.3s ease-in-out'
+                                    }}
+                                   
+                                         >
+                                    <ClearIcon />
+                                 </IconButton>
+                               
+                            }
+                            actionPosition="left"
                         />
 
 
@@ -90,7 +111,7 @@ export default function Gallery() {
 
             </ImageList>
 
-            <ImageModal files={files}></ImageModal>
+            <ImageModal files={files} setFiles={setFiles} ></ImageModal>
         </>
     );
 }

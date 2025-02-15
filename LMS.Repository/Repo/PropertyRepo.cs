@@ -39,25 +39,33 @@ namespace LMS.Repository.Repo
         {
             Result taskdb = await QueryFirstOrDefaultAsync<Result>("SP_SaveProperty", property);
 
-            string dirpath = Convert.ToString(taskdb.Id);
-            Task[] tasks = new Task[formFiles.Count];
-
-            for (int i = 0; i < formFiles.Count; i++)
+            int fileCount=0,TotalFiles= formFiles.Count;//= Convert.ToString(taskdb.Id);
+            if (property.PropertyId > 0)
             {
-
+                string folderPath = Path.Combine(FilePath, "Files", property.PropertyId.ToString());
+                fileCount = Directory.GetFiles(folderPath).Length;
                
-                tasks[i] = SaveFiles(formFiles[i], taskdb.Id,i, FilePath);
             }
 
-            await Task.WhenAll(tasks);
+            List<Task> taskList = new List<Task>();
+
+            foreach(IFormFile file in formFiles) 
+            {
+                taskList.Add(Task.Run(async ()=> await SaveFiles(file, taskdb.Id, fileCount, FilePath)));
+                fileCount++;
+            }
+
+            await Task.WhenAll(taskList);
 
             return taskdb;
         }
 
-     
+      
 
 
-        public async Task SaveFiles(IFormFile file,long? Id,int fileId,string filepath)
+
+
+        public  async Task SaveFiles(IFormFile file,long? Id,int fileId,string filepath)
         {
             
             string pp = Convert.ToString(Id);

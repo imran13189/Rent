@@ -6,6 +6,7 @@ using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
+using Amazon.Runtime.Internal;
 
 namespace LMS.Controllers
 {
@@ -151,16 +152,19 @@ namespace LMS.Controllers
                     var filesData = directoryInfo.GetFiles();
                     var request = HttpContext.Request;
                     var baseUrl = $"{request.Scheme}://{request.Host}{request.PathBase}/Files/{Convert.ToString(propertyId)}/";
-                    for (int i = 0; i < filesData.Count(); i++)
+                    int i = 0;
+                    foreach (FileInfo file in filesData)
                     {
                         fileList.Add(new FileModel()
                         {
                             Id = i,
-                            title = filesData[i].Name,
-                            img = baseUrl + filesData[i].Name,
+                            title = file.Name,
+                            img = baseUrl + file.Name,
                             rows = i == 0 ? 4 : 2,
-                            cols = i == 0 ? 2 : 1,
+                            cols = i == 0 ? 2 : 1,   
+                            PropertyId=propertyId
                         });
+                        i++;
                     }
                 }
                 else
@@ -170,6 +174,37 @@ namespace LMS.Controllers
             });
             return fileList;
         }
+
+        [HttpGet]
+        [Route("api/DeletePhoto")]
+        public async Task<string> DeletePhoto(string ImageUrl)
+        {
+            try
+            {
+                var request = HttpContext.Request;
+                var baseUri = new Uri($"{request.Scheme}://{request.Host}{request.PathBase}/Files/");
+                Uri fileUri = new Uri(ImageUrl);
+                string relativePath = baseUri.MakeRelativeUri(fileUri).ToString();
+
+                string filePath = Path.Combine(_hostingEnvironment.ContentRootPath, "Files", relativePath);
+
+                if (System.IO.File.Exists(filePath))
+                {
+                    System.IO.File.Delete(filePath);
+                    return "File deleted successfully.";
+                }
+                else
+                {
+                    return "File does not exist.";
+                }
+            }
+            catch
+            {
+                throw;
+            }
+
+        }
+
 
         [Authorize]
         [HttpPost]

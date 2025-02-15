@@ -3,23 +3,21 @@ import { createSlice } from '@reduxjs/toolkit';
 
 // initial state
 const initialState = {
- 
-  imageModalOpen:false
+  imageModalOpen: false
 };
 
 // ==============================|| SLICE - MENU ||============================== //
 
 const propertydetails = createSlice({
-    name: 'propertydetails',
+  name: 'propertydetails',
   initialState,
   reducers: {
-    
-      openImageModal(state, action) {
-          state.imageModalOpen = action.payload.imageModalOpen;
-      }
+    openImageModal(state, action) {
+      state.imageModalOpen = action.payload.imageModalOpen;
+    }
   }
 });
 
 export default propertydetails.reducer;
 
-export const {  openImageModal } = propertydetails.actions;
+export const { openImageModal } = propertydetails.actions;

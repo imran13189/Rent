@@ -21,6 +21,10 @@ const PrivateRoutes = {
       element: <PropertyForm />
     },
     {
+      path: 'property/:id',
+      element: <PropertyForm />
+    },
+    {
       path: 'wishlist',
       element: <Wishlist />
     },

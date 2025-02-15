@@ -33,7 +33,15 @@ namespace LMS.Core.Entities
         public string AvailableFor { get; set; }
         public long UserId { get; set; }
 
-    }
+        
+            public byte ParkingId { get; set; }
+            public byte FurnishedId { get; set; }
+            public byte AvailableForId { get; set; }
+            public decimal SecurityAmount { get; set; }
+
+        public int Area { get; set; }
+
+        }
    
     public class LocationModel
     {
@@ -54,6 +62,7 @@ namespace LMS.Core.Entities
         public string title { get; set; }
         public int rows { get; set; }
         public int cols { get; set; }
+        public long PropertyId { get; set; }
     }
 
     public class WishListModel

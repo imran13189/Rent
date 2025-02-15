@@ -10,17 +10,11 @@ import AuthWrapper from "./AuthWrapper";
 // ================================|| LOGIN ||================================ //
 
 const Login = () => {
-
-
     return (
         <Grid container >
-            <Grid item xs={12} lg={12} sx={{ ml: 3, mt: 3 }}>
-                <Logo />
-            </Grid>
             <Grid  sm={7} md={7} lg={7} sx={{ mt:0}}>
                 <div className="login">&nbsp;</div>
             </Grid>
-            
             <Grid  xs={12} sm={5} lg={5} sx={{ mt: 0 }}>
                 <AuthWrapper>
                     <Grid container spacing={3}>

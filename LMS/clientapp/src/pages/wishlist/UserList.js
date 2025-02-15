@@ -1,7 +1,7 @@
-/* eslint-disable prettier/prettier */
+
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
+import { Link, useNavigate } from 'react-router-dom';
 // material-ui components
 import {
     Grid, Stack, Card, CardActionArea, Paper, Box, CardHeader, CardMedia, CardContent,
@@ -112,7 +112,7 @@ const UserList = () => {
                                 p: 0,
                             }}
                         >
-                            <IconButton aria-label="add to favorites" onClick={() => updateWishList(item?.propertyId)}>
+                            <IconButton aria-label="add to favorites" component={Link} to={"/property/" + item?.propertyId}>
                                 <EditCalendarOutlinedIcon sx={{ color: 'action.default' }}></EditCalendarOutlinedIcon>
                             </IconButton>
                             <IconButton aria-label="share">
