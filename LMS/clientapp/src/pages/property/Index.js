@@ -38,7 +38,7 @@ const Register = () => {
         <Grid item xs={12}>
           <Stack className={`${showMessage ? 'show' : 'hide'}`} sx={{ width: '100%' }} spacing={2}>
             <Button
-              onClick={() => navigate(0)}
+                          onClick={() => navigate(0)}
               variant="contained"
               title="Post new Ad"
               sx={{ color: 'common.white', bgcolor: 'action.main' }}

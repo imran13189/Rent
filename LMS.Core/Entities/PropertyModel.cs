@@ -60,6 +60,7 @@ namespace LMS.Core.Entities
         public int? Id { get; set;}
         public string? img { get; set; }   
         public string title { get; set; }
+        public string src { get; set; }
         public int rows { get; set; }
         public int cols { get; set; }
         public long PropertyId { get; set; }

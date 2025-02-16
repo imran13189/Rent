@@ -14,5 +14,6 @@ namespace LMS.Core.Interfaces
         public Task<Result> SaveWishList(long UserId, long PropertyId);
         Task<IEnumerable<PropertyModel>> GetWishList(long userId);
         Task<IEnumerable<PropertyModel>> GetUserProperties(long userId);
+        Task<Result> SavePhoto(Property property, List<IFormFile> formFiles, string FilePath);
     }
 }

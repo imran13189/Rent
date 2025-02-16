@@ -18,7 +18,8 @@ const initialState = {
   alertBox: null,
   showContactBox: false,
   PropertyUserId: null,
-  showLoginModal: false
+    showLoginModal: false,
+    userProperty: {}
 };
 
 export const fetchWishList = createAsyncThunk('wishListData/fetchWishList', async (userId, { getState }) => {
@@ -78,7 +79,8 @@ const users = createSlice({
     },
     setShowLoginModal(state, action) {
       state.showLoginModal = action.payload.showLoginModal;
-    }
+      }
+      
   },
   extraReducers: (builder) => {
     // Add reducers for additional action types here, and handle loading state as needed

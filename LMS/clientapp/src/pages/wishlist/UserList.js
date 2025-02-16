@@ -118,12 +118,6 @@ const UserList = () => {
                             <IconButton aria-label="share">
                                 <ShareIcon sx={{ color: 'action.default' }} />
                             </IconButton>
-                            <IconButton aria-label="call" onClick={() => dispatch(setShowContactBox({ showContactBox: true, PropertyUserId: item.userId }))} >
-                                <PhoneInTalkOutlinedIcon sx={{ color: 'action.default' }} />
-                            </IconButton>
-                            <IconButton aria-label="message" onClick={() => dispatch(setShowMessageBox({ showMessageBox: true, PropertyUserId: item.userId }))}>
-                                <MessageOutlinedIcon sx={{ color: 'action.default' }} />
-                            </IconButton>
                         </CardActions>
 
                     </Card>

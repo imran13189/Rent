@@ -4,49 +4,23 @@ import { Grid, Box, Typography, Button, IconButton } from '@mui/material';
 import PhoneInTalkOutlinedIcon from '@mui/icons-material/PhoneInTalkOutlined';
 import MessageOutlinedIcon from '@mui/icons-material/MessageOutlined';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
-import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
-import UserService from './../../services/UserService';
-import { useParams } from 'react-router-dom';
-import { setSelectedPosition, fetchProperties } from './../../store/reducers/property';
+import { useSelector} from "react-redux";
 import DraggableMarker from './../property/DraggableMarker';
-import { useDispatch, useSelector } from 'react-redux';
 
 import { fetchWishList, setShowMessageBox, setShowContactBox } from './../../store/reducers/users';
 import MetaTags from './metatags';
 
 const Details = () => {
-  let params = useParams();
-  /* const { properties } = useSelector((state) => state.property);*/
-  const [item, setProperty] = useState({});
-  const dispatch = useDispatch();
+    const { userProperty } = useSelector((state) => state.property);
 
-  useEffect(() => {
-    if (params.id) {
-      const fetchData = async () => {
-        const property = await UserService.getProperty(params.id);
-        setProperty(property);
-        dispatch(setSelectedPosition({ positionDetails: { lat: property.lat, lng: property.long, LocationName: property.locationName } }));
 
-        dispatch(
-          fetchProperties({
-            page: 0,
-            LocationId: property?.locationId,
-            LocationName: null,
-            Long: property.long,
-            Lat: property.lat
-          })
-        );
-      };
-      fetchData();
-    }
-  }, []);
 
   return (
     <>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={10} md={5} lg={12}>
           <Typography variant="h1" color="text.primary">
-            {item.description}
+                      {userProperty.description}
           </Typography>
 
           <Box display="flex" flexDirection="row" alignItems="center" justifyContent="flex-start" sx={{ ml: -1, maxWidth: '100%' }}>
@@ -54,7 +28,7 @@ const Details = () => {
               <LocationOnOutlinedIcon></LocationOnOutlinedIcon>
             </IconButton>
             <Typography variant="h5" color="text.secondary">
-              {item.locationName}
+                          {userProperty.locationName}
             </Typography>
           </Box>
         </Grid>
@@ -63,7 +37,7 @@ const Details = () => {
             Rent
           </Typography>
           <Typography variant="h4" color="text.primary">
-            &#8377; {item.rentAmount}
+                      &#8377; {userProperty.rentAmount}
           </Typography>
         </Grid>
         <Grid item xs={6} sm={10} md={5} lg={4}>
@@ -71,7 +45,7 @@ const Details = () => {
             Type
           </Typography>
           <Typography variant="h4" color="text.primary">
-            {item.isFurnished}
+                      {userProperty.isFurnished}
           </Typography>
         </Grid>
         <Grid item xs={6} sm={10} md={5} lg={4}>
@@ -79,7 +53,7 @@ const Details = () => {
             Available from
           </Typography>
           <Typography variant="h4" color="text.primary">
-            {item.availableFrom}
+                      {userProperty.availableFrom}
           </Typography>
         </Grid>
 
@@ -88,7 +62,7 @@ const Details = () => {
             Parking
           </Typography>
           <Typography variant="h4" color="text.primary">
-            {item.parking}
+                      {userProperty.parking}
           </Typography>
         </Grid>
         <Grid item xs={6} sm={10} md={5} lg={4}>
@@ -96,7 +70,7 @@ const Details = () => {
             Bathroom
           </Typography>
           <Typography variant="h4" color="text.primary">
-            {item.bathrooms}
+                      {userProperty.bathrooms}
           </Typography>
         </Grid>
         <Grid item xs={6} sm={10} md={5} lg={4}>
@@ -104,14 +78,14 @@ const Details = () => {
             Available for
           </Typography>
           <Typography variant="h4" color="text.primary">
-            {item.availableFor}
+                      {userProperty.availableFor}
           </Typography>
         </Grid>
 
         <Grid item xs={12} sm={10} md={5} lg={12} mt={5}>
           <Grid item xs={12}>
             <Button
-              onClick={() => dispatch(setShowContactBox({ showContactBox: true, PropertyUserId: item.userId }))}
+                          onClick={() => dispatch(setShowContactBox({ showContactBox: true, PropertyUserId: userProperty.userId }))}
               fullWidth
               size="large"
               type="submit"
@@ -131,7 +105,7 @@ const Details = () => {
         </Grid>
       </Grid>
 
-      <MetaTags property={item}></MetaTags>
+          <MetaTags property={userProperty}></MetaTags>
     </>
   );
 };

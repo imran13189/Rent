@@ -6,8 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import UserService from './../../services/UserService'
 import { useEffect } from 'react';
 import { useState } from 'react';
-import IconButton from '@mui/material/IconButton';
-import ClearIcon from '@mui/icons-material/Clear';
+import PhotoModal from "./../property/PhotoModal"
 import {
 
     useParams
@@ -36,22 +35,24 @@ const ImageListItemWithStyle = styled(ImageListItem)(({ theme }) => ({
 export default function Gallery() {
 
     const [files, setFiles] = useState([{}]);
+    const [openPhotoModal, setPhotoModal] = useState(false);
     const params = useParams();
     const dispatch = new useDispatch();
-   
+    const { userDetails } = useSelector((state) => state.users);
+    const { userProperty } = useSelector((state) => state.property);
 
 
     useEffect(() => {
-
-        if (params.id) {
+        debugger;
+        if (userProperty.propertyId) {
             const fetchData = async () => {
-                const filesdata = await UserService.getPropertyFiles(params.id);
+                const filesdata = await UserService.getPropertyFiles(userProperty.propertyId);
                 setFiles(filesdata);
             }
             fetchData();
         }
 
-    }, [params])
+    }, [userProperty])
 
     return (
         <>
@@ -61,7 +62,7 @@ export default function Gallery() {
                 cols={4}
                 rowHeight={100}
             >
-                {files.slice(0, 5).map((item, i) => (
+                {files.slice(0, 3).map((item, i) => (
                     <ImageListItemWithStyle onClick={() => dispatch(openImageModal({ imageModalOpen: true }))} key={item.id} cols={item.cols || 1} rows={item.rows || 1}>
                         <img
                             {...srcset(item.img, 500, item.rows, item.cols)}
@@ -84,23 +85,7 @@ export default function Gallery() {
                                 textAlign: 'center', // Center the text
                             }}
 
-                            actionIcon={
-                                 <IconButton
-                                    sx={{
-                                        position: 'absolute',
-                                        top: '5%',
-                                        left: '80%',
-                                        transform: 'translate(-50%, -50%)',
-                                        color: 'white',
-                                        transition: 'opacity 0.3s ease-in-out'
-                                    }}
-                                   
-                                         >
-                                    <ClearIcon />
-                                 </IconButton>
-                               
-                            }
-                            actionPosition="left"
+                           
                         />
 
 
@@ -108,10 +93,34 @@ export default function Gallery() {
 
                 ))}
 
+                {(userDetails?.userId == userProperty?.userId) && <ImageListItemWithStyle onClick={() => setPhotoModal(true)} cols={2 || 1} rows={2 || 1}>
+                    <img
+                        {...srcset("http://localhost:3000/Files/4/0.jpg", 500, 4, 4)}
+                        alt="ok"
+                        loading="lazy"
+                    />
+                    <ImageListItemBar
+                        title="Add More"
+                        sx={{
+                            position: 'absolute',
+                            top: '50%',
+                            left: '50%',
+                            transform: 'translate(-50%, -50%)',
+                            background: 'rgba(0, 0, 0, 0.5)',
+
+                            //transition: 'opacity 0.3s ease-in-out', // Smooth transition
+                            width: '100%', // Optional: Adjust width as needed
+                            height: '100%',
+                            textAlign: 'center', // Center the text
+                        }}
+
+                    />
+                </ImageListItemWithStyle>}
 
             </ImageList>
 
-            <ImageModal files={files} setFiles={setFiles} ></ImageModal>
+            <ImageModal files={files} setFiles={setFiles}></ImageModal>
+            <PhotoModal open={openPhotoModal} setOpen={setPhotoModal} propertyId={params.id} setFiles={setFiles }> </PhotoModal>
         </>
     );
 }

@@ -13,11 +13,13 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function ImageModal({ files, setFiles }) {
+export default function ImageModal({ files, setFiles}) {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [currentIndex, setCurrentIndex] = useState(0);
     const { imageModalOpen } = useSelector((state) => state.propertydetails);
     const dispatch = new useDispatch();
+    const { userDetails } = useSelector((state) => state.users);
+    const { userProperty } = useSelector((state) => state.property);
 
     const handleClose = () => {
         dispatch(openImageModal({ imageModalOpen: false }))
@@ -26,7 +28,7 @@ export default function ImageModal({ files, setFiles }) {
     const deletePhoto = async () => {
      
         const file = files[currentIndex];
-        await UserService.deletePhoto(file.img);
+        await UserService.deletePhoto(file.src);
         const filesdata = await UserService.getPropertyFiles(file.propertyId);
         debugger;
         setFiles(filesdata);
@@ -58,9 +60,9 @@ export default function ImageModal({ files, setFiles }) {
                         <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
                            
                         </Typography>
-                        <Button autoFocus color="inherit" onClick={deletePhoto}>
-                            Delete Photo
-                        </Button>
+                        {(userDetails?.userId === userProperty?.userId) && <Button sx={{ color: 'common.white', bgcolor: 'action.main' }} color="inherit" onClick={deletePhoto} >    Delete Photo</Button>}
+                        
+                       
                         <IconButton aria-label="share">
                             <ShareIcon sx={{ color: 'action.default' }} />
                         </IconButton>

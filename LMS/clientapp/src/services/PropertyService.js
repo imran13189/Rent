@@ -36,7 +36,13 @@ class PropertyService {
     };
 
 
-    
+    SavePhoto = async (property) => {
+
+        const res = await axios.post(`${url}SavePhoto`, property, {
+            headers: Auth.getHeader()
+        });
+        return res.data;
+    };
 
 }
 

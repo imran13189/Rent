@@ -17,6 +17,7 @@ using System.IO;
 using Rent.BunnyNet;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualBasic.FileIO;
+using System.Text.RegularExpressions;
 
 namespace LMS.Repository.Repo
 {
@@ -40,18 +41,13 @@ namespace LMS.Repository.Repo
             Result taskdb = await QueryFirstOrDefaultAsync<Result>("SP_SaveProperty", property);
 
             int fileCount=0,TotalFiles= formFiles.Count;//= Convert.ToString(taskdb.Id);
-            if (property.PropertyId > 0)
-            {
-                string folderPath = Path.Combine(FilePath, "Files", property.PropertyId.ToString());
-                fileCount = Directory.GetFiles(folderPath).Length;
-               
-            }
+           
 
             List<Task> taskList = new List<Task>();
 
             foreach(IFormFile file in formFiles) 
             {
-                taskList.Add(Task.Run(async ()=> await SaveFiles(file, taskdb.Id, fileCount, FilePath)));
+                taskList.Add( SaveFiles(file, taskdb.Id, fileCount, FilePath,""));
                 fileCount++;
             }
 
@@ -60,21 +56,57 @@ namespace LMS.Repository.Repo
             return taskdb;
         }
 
-      
+
+        public async Task<Result> SavePhoto(Property property, List<IFormFile> formFiles, string FilePath)
+        {
+           
+            int fileCount = 0, TotalFiles = formFiles.Count;//= Convert.ToString(taskdb.Id);
+            if (property.PropertyId > 0)
+            {
+                string folderPath = Path.Combine(FilePath, "Files", property.PropertyId.ToString());
+
+                if (!Directory.Exists(folderPath))
+                    Directory.CreateDirectory(folderPath);
+                //fileCount = Directory.GetFiles(folderPath).Length;
+                var file = Directory.GetFiles(folderPath).OrderByDescending(f => int.Parse(Regex.Match(Path.GetFileNameWithoutExtension(f), @"\d+").Value)).FirstOrDefault();
+
+                if (file != null)
+                {
+                    fileCount = Convert.ToInt32(Path.GetFileNameWithoutExtension(file));
+                }
+            }
+
+            List<Task<int>> taskList = new List<Task<int>>();
+            string defaultFile = Path.Combine(FilePath, "Files", property.PropertyId.ToString(),"0.jpg");
+            foreach (IFormFile file in formFiles)
+            {
+                fileCount = fileCount + 1;
+                taskList.Add(SaveFiles(file, property.PropertyId, fileCount, FilePath, defaultFile));
+            }
+
+            await Task.WhenAll(taskList);
+
+            return new Result() { IsSuccess=true};
+        }
 
 
 
 
-        public  async Task SaveFiles(IFormFile file,long? Id,int fileId,string filepath)
+
+
+
+        public async Task<int> SaveFiles(IFormFile file,long? Id,int fileId,string filepath,string defaultFile)
         {
             
-            string pp = Convert.ToString(Id);
-            filepath = Path.Combine(filepath, "Files",pp);
+           
             using (Bitmap postedImage = new Bitmap(file.OpenReadStream()))
             {
 
                 try
                 {
+                    string pp = Convert.ToString(Id);
+                    filepath = Path.Combine(filepath, "Files", pp);
+
                     if (!Directory.Exists(filepath))
                         Directory.CreateDirectory(filepath);
 
@@ -93,10 +125,24 @@ namespace LMS.Repository.Repo
                     {
                         postedImage.Save(memoryStream, myImageCodecInfo, myEncoderParameters);
                         byte[] data = memoryStream.ToArray();
-                        await System.IO.File.WriteAllBytesAsync(filepath, data);
                        
+                        if (!string.IsNullOrEmpty(defaultFile))
+                        {
+                            if (System.IO.File.Exists(defaultFile))
+                            {
+                                await System.IO.File.WriteAllBytesAsync(filepath, data);
+                            }
+                            else
+                            {
+                                await System.IO.File.WriteAllBytesAsync(defaultFile, data);
+                            }
+                        }
+                        else
+                        {
+                            await System.IO.File.WriteAllBytesAsync(filepath, data);
+                        }
                     }
-
+                    return fileId;
                 }
                 catch (Exception ex)
                 {
@@ -151,15 +197,16 @@ namespace LMS.Repository.Repo
 
         private static ImageCodecInfo GetEncoderInfo(String mimeType)
         {
-            int j;
-            ImageCodecInfo[] encoders;
-            encoders = ImageCodecInfo.GetImageEncoders();
-            for (j = 0; j < encoders.Length; ++j)
-            {
-                if (encoders[j].MimeType == mimeType)
-                    return encoders[j];
-            }
-            return null;
+            //int j;
+            //ImageCodecInfo[] encoders;
+            //encoders = ImageCodecInfo.GetImageEncoders();
+            //for (j = 0; j < encoders.Length; ++j)
+            //{
+            //    if (encoders[j].MimeType == mimeType)
+            //        return encoders[j];
+            //}
+            //return null;
+            return ImageCodecInfo.GetImageEncoders().FirstOrDefault(codec => codec.MimeType == mimeType);
         }
         private static void Compress(Bitmap srcBitmap, Stream destStream, long level)
         {

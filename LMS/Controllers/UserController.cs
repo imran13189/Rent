@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
 using Amazon.Runtime.Internal;
+using System.Drawing;
 
 namespace LMS.Controllers
 {
@@ -159,7 +160,8 @@ namespace LMS.Controllers
                         {
                             Id = i,
                             title = file.Name,
-                            img = baseUrl + file.Name,
+                            img = baseUrl + file.Name+"?v="+DateTime.Now.Ticks,
+                            src = baseUrl + file.Name,
                             rows = i == 0 ? 4 : 2,
                             cols = i == 0 ? 2 : 1,   
                             PropertyId=propertyId
@@ -167,10 +169,7 @@ namespace LMS.Controllers
                         i++;
                     }
                 }
-                else
-                {
-                    throw new DirectoryNotFoundException($"The directory at path {folderPath} does not exist.");
-                }
+               
             });
             return fileList;
         }
@@ -190,7 +189,20 @@ namespace LMS.Controllers
 
                 if (System.IO.File.Exists(filePath))
                 {
+                   
                     System.IO.File.Delete(filePath);
+                    string fileName=Path.GetFileName(filePath);
+                    if (fileName=="0.jpg")
+                    {
+                        string dirPath=Path.GetDirectoryName(filePath);
+                        var sourcefile = Directory.GetFiles(dirPath).FirstOrDefault();
+                        if(sourcefile != null)
+                        {
+                            string destinationFile = Path.Combine(dirPath, "0.jpg");
+                            System.IO.File.Move(sourcefile, destinationFile);
+                        }
+                    }
+                    
                     return "File deleted successfully.";
                 }
                 else
@@ -203,6 +215,22 @@ namespace LMS.Controllers
                 throw;
             }
 
+        }
+
+        [HttpPost]
+        [Route("api/SavePhoto")]
+        [DisableRequestSizeLimit]
+        public async Task<Result> SavePhoto([FromForm] Property property, List<IFormFile> formFiles)
+        {
+            try
+            {
+                string path = _hostingEnvironment.ContentRootPath;
+                return await _property.SavePhoto(property, formFiles, path);
+            }
+            catch (Exception)
+            {
+                return new Result() { IsSuccess = false };
+            }
         }
 
 

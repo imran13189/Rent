@@ -41,10 +41,11 @@ import NewLocationModal from './NewLocationModal';
 import { useDispatch, useSelector } from 'react-redux';
 import MasterService from './../../services/MasterService';
 import PropertyService from './../../services/PropertyService';
-import { setSelectedPosition, setShowMapModal, fetchProperties } from './../../store/reducers/property';
+import { setSelectedPosition, setShowMapModal, fetchProperties, setUserProperty } from './../../store/reducers/property';
 import LoadingButton from '@mui/lab/LoadingButton';
 import UserService from './../../services/UserService';
 import Gallery from './../propertydetails/gallery';
+import {  fetchUserList } from './../../store/reducers/users';
 
 // ============================|| FIREBASE - REGISTER ||============================ //
 
@@ -121,7 +122,8 @@ const PropertyAd = ({ setShowMessage }) => {
         const result = await PropertyService.SaveProperty(formData);
         setStatus({ success: false });
         setSubmitting(false);
-        setShowMessage(true);
+          setShowMessage(true);
+          dispatch(fetchUserList());
       } catch (err) {
         console.error(err);
         setStatus({ success: false });
@@ -149,7 +151,8 @@ const PropertyAd = ({ setShowMessage }) => {
       const fetchData = async () => {
         const property = await UserService.getProperty(params.id);
         debugger;
-     
+        dispatch(setUserProperty({ userProperty: property }));
+
         setInitialValues({
           LocationName: property.locationName,
           Bathrooms: property.bathrooms,
