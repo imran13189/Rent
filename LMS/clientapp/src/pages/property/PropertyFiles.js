@@ -75,7 +75,7 @@ function PropertyFiles({setFormFiles }) {
         <section className="container">
             <div {...getRootProps({ className: 'dropzone' })}>
                 <input {...getInputProps()} />
-                <p>Add atleat 3 files here.</p>
+                <p>Add images here.</p>
             </div>
             <aside style={thumbsContainer}>
                 {thumbs}

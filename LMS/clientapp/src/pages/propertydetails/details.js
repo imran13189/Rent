@@ -13,10 +13,8 @@ import MetaTags from './metatags';
 const Details = () => {
     const { userProperty } = useSelector((state) => state.property);
 
-
-
-  return (
-    <>
+    return userProperty && (
+       <>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={10} md={5} lg={12}>
           <Typography variant="h1" color="text.primary">
@@ -105,7 +103,7 @@ const Details = () => {
         </Grid>
       </Grid>
 
-          <MetaTags property={userProperty}></MetaTags>
+      <MetaTags property={userProperty}></MetaTags>
     </>
   );
 };

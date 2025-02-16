@@ -16,7 +16,7 @@ const initialState = {
   selectedMainLocation: null,
   params: {},
   properties: [],
-  userProperty: {}
+  userProperty: null
 };
 
 export const fetchProperties = createAsyncThunk('propertiesData/fetchProperties', async (params) => {

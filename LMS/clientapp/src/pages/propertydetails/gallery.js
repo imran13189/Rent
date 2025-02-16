@@ -44,9 +44,9 @@ export default function Gallery() {
 
     useEffect(() => {
         debugger;
-        if (userProperty.propertyId) {
+        if (userProperty?.propertyId) {
             const fetchData = async () => {
-                const filesdata = await UserService.getPropertyFiles(userProperty.propertyId);
+                const filesdata = await UserService.getPropertyFiles(userProperty?.propertyId);
                 setFiles(filesdata);
             }
             fetchData();
@@ -95,7 +95,7 @@ export default function Gallery() {
 
                 {(userDetails?.userId == userProperty?.userId) && <ImageListItemWithStyle onClick={() => setPhotoModal(true)} cols={2 || 1} rows={2 || 1}>
                     <img
-                        {...srcset("http://localhost:3000/Files/4/0.jpg", 500, 4, 4)}
+                        {...srcset("https://sipaz.in/Files/4/0.jpg", 500, 4, 4)}
                         alt="ok"
                         loading="lazy"
                     />

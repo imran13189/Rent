@@ -23,7 +23,7 @@ import {
 // third party
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 // project import
 
 import AnimateButton from 'components/@extended/AnimateButton';
@@ -43,28 +43,25 @@ import MasterService from './../../services/MasterService';
 import PropertyService from './../../services/PropertyService';
 import { setSelectedPosition, setShowMapModal, fetchProperties, setUserProperty } from './../../store/reducers/property';
 import LoadingButton from '@mui/lab/LoadingButton';
-import UserService from './../../services/UserService';
 import Gallery from './../propertydetails/gallery';
 import {  fetchUserList } from './../../store/reducers/users';
 
 // ============================|| FIREBASE - REGISTER ||============================ //
 
 const PropertyAd = ({ setShowMessage }) => {
-  let params = useParams();
+    let params = useParams();
+    const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [options, setOptions] = useState([]);
   const [open, setOpen] = useState(false);
   const [files, setFormFiles] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [initialValues, setInitialValues] = useState({
-    LocationName: '',
-    Bathrooms: 1,
-    termcondition: false,
-    submit: null,
-    AvailableFrom: dayjs(new Date()),
-    PropertyTypeId: 0,
-    RentAmount: ''
-  });
+    const [initialValues, setInitialValues] = useState({
+            LocationName: '',
+            AvailableFrom: dayjs(new Date()),
+            PropertyTypeId: 0,
+            PropertyId: 0
+    });
   const dispatch = useDispatch();
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -74,7 +71,7 @@ const PropertyAd = ({ setShowMessage }) => {
     event.preventDefault();
   };
 
-  const { positionDetails } = useSelector((state) => state.property);
+    const { positionDetails, userProperty } = useSelector((state) => state.property);
   const { userDetails } = useSelector((state) => state.users);
 
   const digitsOnly = (value) => /^\d*[.{1}\d*]\d*$/.test(value);
@@ -122,8 +119,13 @@ const PropertyAd = ({ setShowMessage }) => {
         const result = await PropertyService.SaveProperty(formData);
         setStatus({ success: false });
         setSubmitting(false);
-          setShowMessage(true);
+        setShowMessage(true);
           dispatch(fetchUserList());
+          if (values?.PropertyId > 0) {
+              dispatch(setUserProperty({ userProperty: null }));
+              navigate("/mylisting");
+          }
+
       } catch (err) {
         console.error(err);
         setStatus({ success: false });
@@ -146,47 +148,43 @@ const PropertyAd = ({ setShowMessage }) => {
     formik.setFieldValue('LocationName', positionDetails.LocationName);
   }, [positionDetails]);
 
-  useEffect(() => {
-    if (params.id) {
-      const fetchData = async () => {
-        const property = await UserService.getProperty(params.id);
-        debugger;
-        dispatch(setUserProperty({ userProperty: property }));
+    useEffect(() => {
+        debugger
 
-        setInitialValues({
-          LocationName: property.locationName,
-          Bathrooms: property.bathrooms,
-          termcondition: false,
-          AvailableFrom: dayjs(property.availableFrom),
-          PropertyTypeId: property.propertyTypeId,
-          RentAmount: property.rentAmount,
-          Area: property.area,
-          SecurityAmount: property.securityAmount,
-          Description: property.description,
-          Parking: property.parkingId,
-          IsFurnished: property.furnishedId,
-            AvailableFor: property.availableForId,
-            PropertyId:property.propertyId
+        if (userProperty) {
+            setInitialValues({
+                LocationName: userProperty.locationName,
+                Bathrooms: userProperty.bathrooms,
+                termcondition: false,
+                AvailableFrom: dayjs(userProperty.availableFrom),
+                PropertyTypeId: userProperty.propertyTypeId,
+                RentAmount: userProperty.rentAmount,
+                Area: userProperty.area,
+                SecurityAmount: userProperty.securityAmount,
+                Description: userProperty.description,
+                Parking: userProperty.parkingId,
+                IsFurnished: userProperty.furnishedId,
+                AvailableFor: userProperty.availableForId,
+                PropertyId: userProperty.propertyId
 
-        });
+            });
+            formik.resetForm();
+        } else {
+            setInitialValues({
+                LocationName: '',
+                Bathrooms: 1,
+                termcondition: false,
+                submit: null,
+                AvailableFrom: dayjs(new Date()),
+                PropertyTypeId: 0,
+                RentAmount: '',
+                PropertyId: 0
 
-        dispatch(setSelectedPosition({ positionDetails: { lat: property.lat, lng: property.long, LocationName: property.locationName, LocationId: property.locationId } }));
-        formik.resetForm();
-        dispatch(
-          fetchProperties({
-            page: 0,
-            LocationId: property?.locationId,
-            LocationName: null,
-            Long: property.long,
-            Lat: property.lat
-          })
-        );
-      };
-      fetchData();
-      }
+            });
+            formik.resetForm();
+        }
 
-      console.log(params);
-  }, []);
+    }, [userProperty]);
 
   return (
     <>

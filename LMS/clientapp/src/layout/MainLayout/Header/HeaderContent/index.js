@@ -1,7 +1,7 @@
 // material-ui
 import { Box, Button, useMediaQuery } from '@mui/material';
 import { GithubOutlined } from '@ant-design/icons';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 // project import
 import Search from './Search';
 import Profile from './Profile';
@@ -10,13 +10,21 @@ import MobileSection from './MobileSection';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchWishList, fetchMessages, fetchUserList } from './../../../../store/reducers/users';
+import { setUserProperty } from './../../../../store/reducers/property';
 // ==============================|| HEADER - CONTENT ||============================== //
 
 const HeaderContent = () => {
   const matchesXs = useMediaQuery((theme) => theme.breakpoints.down('md'));
   const { userDetails } = useSelector((state) => state.users);
-  const location = useLocation();
-  const dispatch = new useDispatch();
+    const location = useLocation();
+    const navigate = new useNavigate();
+
+    const dispatch = new useDispatch();
+    const handlePost = () => {
+        debugger;
+        dispatch(setUserProperty({ userProperty: null }));
+        navigate("/property");
+    }
 
   useEffect(() => {
     if (userDetails) {
@@ -46,8 +54,7 @@ const HeaderContent = () => {
       {!(location.pathname.indexOf('property') > -1) && (
         <Box sx={{ ml: 1 }}>
           <Button
-            component={Link}
-            to={userDetails ? 'property' : 'login'}
+                      onClick={handlePost}
             variant="contained"
             title="Download Free Version"
             sx={{ color: 'common.white', bgcolor: 'action.main' }}

@@ -13,7 +13,15 @@ import AnimateButton from 'components/@extended/AnimateButton';
 import { useDispatch, useSelector } from "react-redux";
 import UserService from "../../services/UserService";
 import { setUserDetails } from "./../../store/reducers/users";
+import MasterService from './../../services/MasterService';
 
+import {
+   
+    InputLabel,
+  
+    Autocomplete,
+   
+} from '@mui/material';
 
 
 
@@ -23,11 +31,13 @@ export default function SignUp() {
     const dispatch = useDispatch();
     const { userDetails } = useSelector((state) => state.users);
     const [formData, setFormData] = useState({});
-
+    const [options, setOptions] = useState([]);
+    const [cities, setCities] = useState([]);
     const [message, setMessage] = useState('');
 
     const handleChange = (e) => {
         const { name, value } = e.target;
+        debugger;
         setFormData({
             ...formData,
             [name]: value,
@@ -37,13 +47,15 @@ export default function SignUp() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         setLoading(true);
-        const formData = new FormData(event.currentTarget);
-        formData.append("UserId", userDetails.userId);
+    
+        const formDatas = new FormData(event.currentTarget);
+        formDatas.append("UserId", userDetails.userId);
+        formDatas.append("CityId", formData.cityId);
         if (pic) {
-            formData.append('formFiles', pic);
+            formDatas.append('formFiles', pic);
         }
       
-        const result = await UserService.updateUser(formData);
+        const result = await UserService.updateUser(formDatas);
         if (result) {
             dispatch(setUserDetails({ userDetails: result }));
             window.localStorage.setItem('userDetails', JSON.stringify(result));
@@ -57,19 +69,41 @@ export default function SignUp() {
         setPic(evt.currentTarget.files[0])
     }
 
+    const handleLocations = (event) => {
+        debugger;
+        setOptions([]);
+        if (event.target.value.length > 2) {
+            const filteredCities = cities.filter(user => user.city_name.toLowerCase().indexOf(event.target.value.toLowerCase()) > -1);
+                setOptions(filteredCities);
+        } else {
+            setOptions([]);
+        }
+    };
+
+    useEffect(() => {
+        MasterService.getCities().then((data) => {
+            setCities(data);
+            setOptions(data);
+        });
+
+    }, []);
+
 
     useEffect(() => {
         if (userDetails) {
+            setOptions(cities);
             setFormData({
                 name: userDetails?.name,
                 email: userDetails?.email,
-                password: userDetails?.password,
+                cityId: userDetails?.cityId,
+                city_name: userDetails?.city_name,
                 mobile: userDetails?.mobile
             })
         }
 
     }, [userDetails]);
-   
+
+
 
     return (
        
@@ -146,16 +180,30 @@ export default function SignUp() {
                                 />
                             </Grid>
                             <Grid item xs={12}>
-                                <TextField
-                                    required
-                                    fullWidth
-                                    name="password"
-                                    label="Password"
-                                    type="password"
-                                    id="password"
-                                autoComplete="new-password"
-                                onChange={handleChange}
-                                />
+                                <InputLabel htmlFor="firstname-signup">Select City*</InputLabel>
+                                            <Autocomplete
+                                disableClearable
+                                freeSolo
+                                includeInputInList
+                                autoComplete
+                                                id="combo-box-demo"
+                                options={options}
+                                defaultValue={userDetails.city_name}
+                                name="city_name"
+                                getOptionLabel={(option) => (typeof option === 'string' ? option : option.city_name)}
+                                onChange={(evt, values) => {
+                                    const e = { target: { name: "cityId", value: values.city_id } };
+                                    handleChange(e);
+                                }}
+                                renderInput={(params) => (
+                                    <TextField {...params}  onChange={handleLocations} InputProps={{
+                                        style: { padding: 5 },
+                                        ...params.InputProps,
+                                        type: 'search'
+                                       
+                                    }} />
+                                                )}
+                                            />
                             </Grid>
 
 
