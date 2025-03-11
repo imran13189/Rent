@@ -15,6 +15,6 @@ namespace LMS.Core.Entities
         public string? Email { get; set; } = "";
         public string? Mobile { get; set; }
         public string? OTP{get; set; } = "";
-        
+        public int? CityId { get; set; }
     }
 }

@@ -15,9 +15,10 @@ namespace LMS.Core.Entities
         public int?   RoleId { get; set; }
         public string Email { get; set; } = "";
         public string? Mobile { get; set; }
-        public string? City { get; set; }
+        public string? city_name { get; set; }
         public string? ZipCode { get; set; }
         public string? ImagePath { get; set; }
+        public string? CityId { get; set; }
 
     }
 

@@ -78,9 +78,9 @@ namespace LMS.Repository.Repo
             {
                 return await QueryFirstOrDefaultAsync<Result>("SP_UpdateContact", contact);
             }
-            catch (Exception ex)
+            catch 
             {
-                throw ex;
+                throw;
             }
         }
         public async Task<string> GetContacts(long? UserId)

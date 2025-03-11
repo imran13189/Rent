@@ -17,9 +17,9 @@ namespace LMS.Repository.Repo
             {
                 return await QueryFirstOrDefaultAsync<Result>("SP_SaveAccount", accounts);
             }
-            catch(Exception ex)
+            catch
             {
-                throw ex;
+                throw;
             }
         }
         public async Task<IEnumerable<AccountsViewModel>> GetAccount(long? UserId)

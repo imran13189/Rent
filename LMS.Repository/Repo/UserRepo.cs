@@ -75,7 +75,8 @@ namespace LMS.Repo.Repository
                 Name = user.Name,
                 Password = user.Password,
                 Email = user.Email,
-                Mobile = user.Mobile
+                Mobile = user.Mobile,
+                CityId=user.CityId
             };
             Task<UserViewModel> updateUser =  QueryFirstOrDefaultAsync<UserViewModel>("SP_SaveUser",  userData );
             Task saveFile = Task.CompletedTask;

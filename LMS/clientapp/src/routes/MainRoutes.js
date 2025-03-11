@@ -10,8 +10,6 @@ import PropertyList from './../pages/propertylist';
 
 import PropertyDetails from './../pages/propertydetails';
 
-// render - sample page
-const SamplePage = Loadable(lazy(() => import('pages/extra-pages/SamplePage')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
