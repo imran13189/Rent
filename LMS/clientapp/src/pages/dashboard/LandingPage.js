@@ -13,7 +13,7 @@ import {
 
 
 import Search from "./Search";
-import { fetchProperties, locationSearch } from "./../../store/reducers/property";
+import { fetchPropertyBreadCrum, locationSearch } from "./../../store/reducers/property";
 import { useDispatch, useSelector } from "react-redux";
 // ==============================|| DASHBOARD - DEFAULT ||============================== //
 const processedNumbers = [];
@@ -22,7 +22,7 @@ const LandingPage = () => {
     const [value, setValue] = useState("today");
     const [slot, setSlot] = useState("week");
     const [selectedValue, setSelectedValue] = useState();
-    const { properties } = useSelector((state) => state.property);
+    const { bProperties } = useSelector((state) => state.property);
     const dispatch = new useDispatch();
     const getLocation = () => {
 
@@ -34,7 +34,7 @@ const LandingPage = () => {
                     const longitude = position.coords.longitude;
                     console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
 
-                    dispatch(fetchProperties({ page: 0, Long: longitude, Lat: latitude }));
+                    dispatch(fetchPropertyBreadCrum({ page: 0, Long: longitude, Lat: latitude }));
                 },
                 (error) => {
                     console.error(`Error: ${error.message}`);
@@ -93,7 +93,7 @@ const LandingPage = () => {
                     >
                         <Typography variant="body2" sx={{ color: "text.primary" }}>
                             <FormLabel sx={{ color: "text.secondary", fontSize: "0.9rem" }}> <b>Top Localities: </b></FormLabel>
-                            {properties.filter((value, index, self) =>
+                            {bProperties.filter((value, index, self) =>
                                 index === self.findIndex((obj) => obj.locationName === value.locationName)
                             ).map((item, i) => <Link key={i} component={RouterLink} to={"/list/"+item.locationName } sx={{ color: "text.secondary", fontSize: "0.9rem" }}>{item.locationName?.split(" ")[0] +", " }</Link>) }
                         </Typography>

@@ -16,7 +16,7 @@ export const HeaderContent = () => {
     const navigate = new useNavigation();
 
     const handlePost = () => {
-        debugger;
+     
         dispatch(setUserProperty({ userProperty: {} }));
         navigate("/property");
     }

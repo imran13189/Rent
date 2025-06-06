@@ -1,18 +1,15 @@
-// src/services/signalRService.js
+// signalRConnection.js
+import * as signalR from "@microsoft/signalr";
 import Config from "./../services/config";
-import { HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
+let connection = null;
 
-
-
-const createSignalRConnection = () => {
-  
-    const chatUrl = Config.chatUrl;
-    const connection = new HubConnectionBuilder()
-        .withUrl(chatUrl) // URL to your SignalR hub
-        .configureLogging(LogLevel.Information)
-        .build();
-
+export function getSignalRConnection() {
+    if (!connection) {
+        const chatUrl = Config.chatUrl;
+        connection = new signalR.HubConnectionBuilder()
+            .withUrl(chatUrl)
+            .withAutomaticReconnect()
+            .build();
+    }
     return connection;
-};
-
-export default createSignalRConnection;
+}

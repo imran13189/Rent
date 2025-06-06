@@ -4,7 +4,7 @@ import { Grid, Box, Typography, Button, IconButton } from '@mui/material';
 import PhoneInTalkOutlinedIcon from '@mui/icons-material/PhoneInTalkOutlined';
 import MessageOutlinedIcon from '@mui/icons-material/MessageOutlined';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
-import { useSelector} from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import DraggableMarker from './../property/DraggableMarker';
 
 import { fetchWishList, setShowMessageBox, setShowContactBox } from './../../store/reducers/users';
@@ -12,6 +12,7 @@ import MetaTags from './metatags';
 
 const Details = () => {
     const { userProperty } = useSelector((state) => state.property);
+    const dispatch = useDispatch();
 
     return userProperty && (
        <>

@@ -13,6 +13,8 @@ import {
 } from "react-router-dom";
 
 import ImageModal from './imagemodal';
+import ImageNotSupportedIcon from '@mui/icons-material/ImageNotSupported';
+
 
 function srcset(image, size, rows = 1, cols = 1) {
     return {
@@ -43,7 +45,7 @@ export default function Gallery() {
 
 
     useEffect(() => {
-        debugger;
+       
         if (userProperty?.propertyId) {
             const fetchData = async () => {
                 const filesdata = await UserService.getPropertyFiles(userProperty?.propertyId);
@@ -62,7 +64,7 @@ export default function Gallery() {
                 cols={4}
                 rowHeight={100}
             >
-                {files.slice(0, 3).map((item, i) => (
+                {files.length>0?files.slice(0, 3).map((item, i) => (
                     <ImageListItemWithStyle onClick={() => dispatch(openImageModal({ imageModalOpen: true }))} key={item.id} cols={item.cols || 1} rows={item.rows || 1}>
                         <img
                             {...srcset(item.img, 500, item.rows, item.cols)}
@@ -91,7 +93,10 @@ export default function Gallery() {
 
                     </ImageListItemWithStyle>
 
-                ))}
+                )) : (
+                        <ImageListItemWithStyle >
+                        </ImageListItemWithStyle>
+                ) }
 
                 {(userDetails?.userId == userProperty?.userId) && <ImageListItemWithStyle onClick={() => setPhotoModal(true)} cols={2 || 1} rows={2 || 1}>
                     <img

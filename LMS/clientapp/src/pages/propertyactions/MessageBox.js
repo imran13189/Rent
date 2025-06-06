@@ -23,7 +23,7 @@ import * as Yup from 'yup';
 import { useEffect } from 'react';
 import MasterService from './../../services/MasterService';
 import UserService from './../../services/UserService';
-import createSignalRConnection from "./../../signalr/signalRService";
+import { getSignalRConnection } from "./../../signalr/signalRService";
 
 const style = {
     position: 'absolute',
@@ -55,24 +55,42 @@ export default function MessageBox() {
     });
 
     useEffect(() => {
+       
         const connect = async () => {
-            const newConnection = createSignalRConnection();
+           
 
-            newConnection.on("ReceiveMessage", (user, message) => {
-             
-                if (userDetails?.userId === user) {
-                    dispatch(fetchMessages());
-                }
-            });
+            const newConnection = getSignalRConnection();
 
-            await newConnection
-                .start()
-                .then(() => console.log("Connected to SignalR"))
-                .catch((error) => console.error("Connection failed: ", error));
 
-            setConnection(newConnection);
+            if (newConnection && newConnection.state === "Connected") {
+                // Already connected, do nothing
+                console.log("Already connected:", newConnection.state);
+                return;
+            }
+
+           
+           /* const newConnection = createSignalRConnection();*/
+            if (newConnection.state === "Disconnected") {
+                newConnection.on("ReceiveMessage", (user, message) => {
+
+                    if (userDetails?.userId === user) {
+                        dispatch(fetchMessages());
+                    }
+                });
+
+                await newConnection
+                    .start()
+                    .then(() => console.log("Connected to SignalR"))
+                    .catch((error) => console.error("Connection failed: ", error));
+
+                setConnection(newConnection);
+            } else {
+                console.log("SignalR connection already in state:", newConnection.state);
+               
+            }
         };
 
+       
         connect();
 
         // Cleanup on unmount
@@ -88,7 +106,7 @@ export default function MessageBox() {
         if (connection && userMessage) {
             try {
                 await connection.invoke("SendMessage", userMessage.SentTo, userMessage.Message);
-                setUserMessage("");
+                //setUserMessage("");
             } catch (error) {
                 console.error("Message send failed: ", error);
             }

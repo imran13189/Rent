@@ -21,7 +21,7 @@ const HeaderContent = () => {
 
     const dispatch = new useDispatch();
     const handlePost = () => {
-        debugger;
+       
         dispatch(setUserProperty({ userProperty: null }));
         navigate("/property");
     }

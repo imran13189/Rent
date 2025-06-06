@@ -1,16 +1,16 @@
 // material-ui
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Box, TextField, InputAdornment, Autocomplete, Stack } from '@mui/material';
 import { useNavigate, useLocation } from "react-router-dom"
 // assets
 import LocationOnOutlined from '@mui/icons-material/LocationOnOutlined';
 import { useDispatch, useSelector } from "react-redux";
 import MasterService from './../../services/MasterService'
+import { fetchProperties, locationSearch } from "./../../store/reducers/property";
 
-import { locationSearch } from "./../../store/reducers/property";
 
 const Search = () => {
-
+    const isFirstRender = useRef(true);
     const [options, setOptions] = useState([]);
     const location = useLocation();
     const navigate = useNavigate()
@@ -31,6 +31,16 @@ const Search = () => {
         }
 
     }
+
+    useEffect(() => {
+
+        if (selectedLocation.LocationName) {
+         
+            dispatch(fetchProperties(selectedLocation));
+        }
+
+    }, [selectedLocation.LocationName, selectedLocation.ptype]);
+   
 
 
 

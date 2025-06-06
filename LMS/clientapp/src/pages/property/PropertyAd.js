@@ -149,14 +149,16 @@ const PropertyAd = ({ setShowMessage }) => {
   }, [positionDetails]);
 
     useEffect(() => {
-        debugger
+       
 
         if (userProperty) {
+            console.log("property", dayjs(userProperty.availableFrom));
+            debugger;
             setInitialValues({
                 LocationName: userProperty.locationName,
                 Bathrooms: userProperty.bathrooms,
                 termcondition: false,
-                AvailableFrom: dayjs(userProperty.availableFrom),
+                AvailableFrom: userProperty.availableFrom,
                 PropertyTypeId: userProperty.propertyTypeId,
                 RentAmount: userProperty.rentAmount,
                 Area: userProperty.area,
@@ -175,7 +177,7 @@ const PropertyAd = ({ setShowMessage }) => {
                 Bathrooms: 1,
                 termcondition: false,
                 submit: null,
-                AvailableFrom: dayjs(new Date()),
+                AvailableFrom: new Date(),
                 PropertyTypeId: 0,
                 RentAmount: '',
                 PropertyId: 0
@@ -302,7 +304,7 @@ const PropertyAd = ({ setShowMessage }) => {
                   onChange={(value) => {
                     formik.setFieldValue('AvailableFrom', value.$d.toISOString());
                   }}
-                  defaultValue={dayjs(new Date())}
+                                  value={formik.values.AvailableFrom ? dayjs(formik.values.AvailableFrom) : null}
                   minDate={dayjs(new Date())}
                 />
               </LocalizationProvider>

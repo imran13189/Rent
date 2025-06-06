@@ -37,7 +37,7 @@ export default function SignUp() {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        debugger;
+       
         setFormData({
             ...formData,
             [name]: value,
@@ -70,7 +70,7 @@ export default function SignUp() {
     }
 
     const handleLocations = (event) => {
-        debugger;
+       
         setOptions([]);
         if (event.target.value.length > 2) {
             const filteredCities = cities.filter(user => user.city_name.toLowerCase().indexOf(event.target.value.toLowerCase()) > -1);

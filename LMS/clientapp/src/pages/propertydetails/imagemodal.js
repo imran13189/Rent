@@ -30,7 +30,7 @@ export default function ImageModal({ files, setFiles}) {
         const file = files[currentIndex];
         await UserService.deletePhoto(file.src);
         const filesdata = await UserService.getPropertyFiles(file.propertyId);
-        debugger;
+       
         setFiles(filesdata);
     };
 

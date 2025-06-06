@@ -15,13 +15,19 @@ const initialState = {
   selectedLocation: { page: 0, ptype: 0 },
   selectedMainLocation: null,
   params: {},
-  properties: [],
+    properties: [],
+    bProperties: [],
   userProperty: null
 };
 
 export const fetchProperties = createAsyncThunk('propertiesData/fetchProperties', async (params) => {
   const response = await PropertyService.getProperties(params);
   return response;
+});
+
+export const fetchPropertyBreadCrum = createAsyncThunk('propertiesData/fetchPropertyBreadCrum', async (params) => {
+    const response = await PropertyService.getProperties(params);
+    return response;
 });
 
 // ==============================|| SLICE - Accounts ||============================== //
@@ -59,6 +65,10 @@ const property = createSlice({
         },
         setUserProperty(state, action) {
             state.userProperty = action.payload.userProperty;
+        },
+        setProperties(state, action) {
+            state.properties = action.payload.properties;
+            state.selectedLocation = { page: 0, ptype: 0 };
         }
     },
     extraReducers: (builder) => {
@@ -68,9 +78,12 @@ const property = createSlice({
                 state.properties = action.payload;
             } else return { ...state, properties: [...state.properties, ...action.payload] };
         });
+        builder.addCase(fetchPropertyBreadCrum.fulfilled, (state, action) => {
+            return { ...state, bProperties: [...state.properties, ...action.payload] };
+        });
     }
 });
 
 export default property.reducer;
 
-export const { setSelectedPosition, setSearch, locationSearch, locationMainSearch, setShowMapModal, setUserProperty } = property.actions;
+export const { setSelectedPosition, setSearch, locationSearch, locationMainSearch, setShowMapModal, setUserProperty, setProperties } = property.actions;
